@@ -88,22 +88,19 @@ public class Main5Activity extends AppCompatActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main5);
 
-        TextView currentCeleb = findViewById(R.id.textViewCurrentCeleb);
         listview = findViewById(R.id.listView);
         customAdapter = new CustomAdapter(this);
         listview.setAdapter(customAdapter);
-
+        ImageView imageViewPortrait = findViewById(R.id.imageViewPortrait);
         spinner = findViewById(R.id.spinner);
         Intent intent = getIntent();
         currentButton = intent.getIntExtra("currentButton", -1);
         switch (currentButton) {
             case 0:
-                currentCeleb.setText(Main4Activity.theRockTitle.getText().toString());
-                currentCeleb.setTextSize(44);
+
                 break;
             case 1:
-                currentCeleb.setText(Main4Activity.prattTitle.getText().toString());
-                currentCeleb.setTextSize(42);
+                imageViewPortrait.setImageResource(R.drawable.starlord_portrait);
                 for(int i = 0; i < Main4Activity.prattWorkout.length; i ++){
                     customAdapter.list.add(new singlerow(prattImages[0][i],Main4Activity.prattWorkout[0][i][0],Main4Activity.prattWorkout[0][i][1]));
                 }
@@ -113,10 +110,7 @@ public class Main5Activity extends AppCompatActivity implements AdapterView.OnIt
                         R.array.chrisPratt, android.R.layout.simple_spinner_item);
                 break;
             case 2:
-                //set currentCeleb(Text View) to Celeb. Name
-                currentCeleb.setText(Main4Activity.efronTitle.getText().toString());
-                currentCeleb.setTextSize(45);
-                //listView gets data from default Efron i.e. efronWorkout(0)
+                imageViewPortrait.setImageResource(R.drawable.zacefron_portrait);
                 String[][] efronWorkout = Main4Activity.efronWorkout[0];
                 //spinner set to the starting workout for efron listView
 
@@ -124,7 +118,6 @@ public class Main5Activity extends AppCompatActivity implements AdapterView.OnIt
                         R.array.zacEfron, android.R.layout.simple_spinner_item);
                 break;
             default:
-                currentCeleb.setText("Error in (int)Current Button");
         }
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
