@@ -3,10 +3,13 @@ package com.binyamin.hollywoodgainz;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -16,24 +19,28 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class Main4Activity extends AppCompatActivity{
-private LinearLayout linearLayout;
-private ConstraintLayout cLayout1;
-private ConstraintLayout cLayout2;
-private ConstraintLayout cLayout3;
-static TextView theRockTitle;
-static TextView prattTitle;
-static TextView efronTitle;
-static String[][][] theRockWorkout;
-static String[][][] prattWorkout;
-static String[][][] efronWorkout;
-int currentButton;
-int width;
-Button nextButton;
-HorizontalScrollView scrollView;
+public class Main4Activity extends AppCompatActivity {
+    private LinearLayout linearLayout;
+    private ConstraintLayout cLayout1;
+    private ConstraintLayout cLayout2;
+    private ConstraintLayout cLayout3;
+    static TextView theRockTitle;
+    static TextView prattTitle;
+    static TextView efronTitle;
+    static String[][][] theRockWorkout;
+    static String[][][] prattWorkout;
+    static String[][][] efronWorkout;
+    int currentButton;
+    int width;
+    Button nextButton;
+    Button previousButton;
+    HorizontalScrollView scrollView;
+    Boolean isScrollable = false;
 
-    public void scrollScreen(final View v){
+    public void scrollScreen(final View v) {
+        isScrollable = true;
         scrollView.post(new Runnable() {
             @Override
             public void run() {
@@ -41,9 +48,9 @@ HorizontalScrollView scrollView;
                     if (v.getId() == R.id.nextButton) {
                         scrollView.smoothScrollBy(width + 100, 0);
                     } else if (v.getId() == R.id.previousButton) {
-                        scrollView.smoothScrollBy(- width - 100, 0);
+                        scrollView.smoothScrollBy(-width - 100, 0);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -51,7 +58,7 @@ HorizontalScrollView scrollView;
     }
 
 
-   public static int getScreenWidth(Context context) {
+    public static int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
@@ -59,14 +66,15 @@ HorizontalScrollView scrollView;
         return dm.widthPixels;
     }
 
-   public void seeMore(View v){
+    public void seeMore(View v) {
         currentButton = Integer.valueOf(v.getTag().toString());
-        Log.i("currentButton","" + currentButton);
-        Intent intent = new Intent(getApplicationContext(),Main5Activity.class);
-        intent.putExtra("currentButton",currentButton);
+        Log.i("currentButton", "" + currentButton);
+        Intent intent = new Intent(getApplicationContext(), Main5Activity.class);
+        intent.putExtra("currentButton", currentButton);
         startActivity(intent);
 
-   }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,30 +91,36 @@ HorizontalScrollView scrollView;
         width = getScreenWidth(Main4Activity.this);
 
         nextButton = findViewById(R.id.nextButton);
+        previousButton = findViewById(R.id.previousButton);
         scrollView = findViewById(R.id.horizontalScrollView);
-        scrollView.setSmoothScrollingEnabled(true);
+        scrollView.setOnTouchListener( new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
         int childCount = linearLayout.getChildCount();
-        Log.i("childCount",Integer.toString(childCount));
+        Log.i("childCount", Integer.toString(childCount));
 
-        for (int i=0;i<childCount;i++) {
-                ConstraintLayout cl = (ConstraintLayout) linearLayout.getChildAt(i);
-                cl.setMinWidth(width);
-                cl.setMaxWidth(width);
-                switch(i){
-                    case 1:
-                        TextView tv1 = (TextView) cLayout1.getChildAt(0);
-                        tv1.setWidth(width);
-                        break;
-                    case 2:
-                        TextView tv2 = (TextView) cLayout2.getChildAt(0);
-                        tv2.setWidth(width);
-                        break;
-                    case 3:
-                        TextView tv3 = (TextView) cLayout3.getChildAt(0);
-                        tv3.setWidth(width);
-                        break;
-                }
+        for (int i = 0; i < childCount; i++) {
+            ConstraintLayout cl = (ConstraintLayout) linearLayout.getChildAt(i);
+            cl.setMinWidth(width);
+            cl.setMaxWidth(width);
+            switch (i) {
+                case 1:
+                    TextView tv1 = (TextView) cLayout1.getChildAt(0);
+                    tv1.setWidth(width);
+                    break;
+                case 2:
+                    TextView tv2 = (TextView) cLayout2.getChildAt(0);
+                    tv2.setWidth(width);
+                    break;
+                case 3:
+                    TextView tv3 = (TextView) cLayout3.getChildAt(0);
+                    tv3.setWidth(width);
+                    break;
+            }
         }
 
         theRockTitle = findViewById(R.id.titleTxtRock);
@@ -132,7 +146,8 @@ HorizontalScrollView scrollView;
         efronBody.setText("* An overview of movie star Zac Efron's 3-day, gym, workout split, with a good amount of abs included every day.\n\n* Level: Challenging");
 
     }
-    public class GetValues extends AsyncTask<String,String,String>{
+
+    public class GetValues extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... strings) {
@@ -199,6 +214,5 @@ HorizontalScrollView scrollView;
             return null;
         }
     }
-
 
 }

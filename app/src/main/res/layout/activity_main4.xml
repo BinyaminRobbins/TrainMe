@@ -4,39 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#757575  "
+    android:background="@android:color/white"
     tools:context=".Main4Activity">
 
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="39dp"
-        android:layout_marginBottom="42dp"
-        android:fontFamily="@font/alfa_slab_one"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/allerta_stencil"
         android:gravity="center_horizontal"
         android:shadowColor="@android:color/white"
         android:shadowRadius="20"
         android:text="Select A Workout"
         android:textColor="@android:color/black"
-        android:textSize="33sp"
+        android:textSize="35sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="75dp"
-        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="80dp"
+        android:fillViewport="true"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -121,11 +123,9 @@
                     android:id="@+id/select0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/custom_button2"
                     android:fontFamily="@font/alfa_slab_one"
@@ -215,10 +215,8 @@
                     android:id="@+id/select1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/custom_button2"
                     android:fontFamily="@font/alfa_slab_one"
@@ -308,10 +306,8 @@
                     android:id="@+id/select2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/custom_button2"
                     android:fontFamily="@font/alfa_slab_one"
@@ -330,45 +326,85 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:alpha="0.9"
-        android:background="@drawable/custom_shift_buttons"
-        android:fontFamily="@font/allerta_stencil"
-        android:onClick="scrollScreen"
-        android:text="See Next"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/previousButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="10dp"
-        android:alpha="0.9"
-        android:background="@drawable/custom_shift_buttons"
-        android:fontFamily="@font/allerta_stencil"
-        android:onClick="scrollScreen"
-        android:text="See Previous"
-        android:textColor="@android:color/white"
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/nextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:alpha="0.9"
+                android:background="@drawable/custom_shift_buttons"
+                android:fontFamily="@font/allerta_stencil"
+                android:foregroundGravity="center_vertical"
+                android:gravity="center"
+                android:onClick="scrollScreen"
+                android:text="See Next"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/previousButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:alpha="0.9"
+                android:background="@drawable/custom_shift_buttons"
+                android:fontFamily="@font/allerta_stencil"
+                android:foregroundGravity="center_vertical"
+                android:gravity="center"
+                android:onClick="scrollScreen"
+                android:text="See Previous"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.003"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/favoritesButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/custom_shift_buttons"
+                android:text="Your Favorites"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/nextButton"
+                app:layout_constraintStart_toEndOf="@+id/previousButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
