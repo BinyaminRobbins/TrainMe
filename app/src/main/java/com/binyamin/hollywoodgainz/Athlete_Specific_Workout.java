@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -18,18 +17,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
-public class Main5Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class Athlete extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     ListView listview;
     ArrayAdapter<CharSequence> spinnerAdapter;
     Spinner spinner;
     CustomAdapter customAdapter;
     int currentButton;
     int[][] prattImages = {gifs.prattWarmups,gifs.prattArms, gifs.prattCircuit};
-    int[][] efronImages = {gifs.prattWarmups,gifs.prattArms, gifs.prattCircuit};
+    int[][] lebronImages = {gifs.prattWarmups,gifs.prattArms, gifs.prattCircuit};
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -41,36 +38,36 @@ public class Main5Activity extends AppCompatActivity implements AdapterView.OnIt
             } else if (currentButton == 1) {
                 switch (position) {
                     case 0:
-                        for (int i = 0; i < Main4Activity.prattWorkout[0].length; i++) {
-                            customAdapter.list.add(new singlerow(prattImages[0][i], Main4Activity.prattWorkout[0][i][0], Main4Activity.prattWorkout[0][i][1]));
+                        for (int i = 0; i < Select_A_Workout.prattWorkout[0].length; i++) {
+                            customAdapter.list.add(new singlerow(prattImages[0][i], Select_A_Workout.prattWorkout[0][i][0], Select_A_Workout.prattWorkout[0][i][1]));
                         }
                         break;
                     case 1:
-                        for (int i = 0; i < Main4Activity.prattWorkout[1].length; i++) {
-                            customAdapter.list.add(new singlerow(prattImages[1][i], Main4Activity.prattWorkout[1][i][0], Main4Activity.prattWorkout[1][i][1]));
+                        for (int i = 0; i < Select_A_Workout.prattWorkout[1].length; i++) {
+                            customAdapter.list.add(new singlerow(prattImages[1][i], Select_A_Workout.prattWorkout[1][i][0], Select_A_Workout.prattWorkout[1][i][1]));
                         }
                         break;
                     case 2:
-                        for (int i = 0; i < Main4Activity.prattWorkout[2].length; i++) {
-                            customAdapter.list.add(new singlerow(prattImages[2][i], Main4Activity.prattWorkout[2][i][0], Main4Activity.prattWorkout[2][i][1]));
+                        for (int i = 0; i < Select_A_Workout.prattWorkout[2].length; i++) {
+                            customAdapter.list.add(new singlerow(prattImages[2][i], Select_A_Workout.prattWorkout[2][i][0], Select_A_Workout.prattWorkout[2][i][1]));
                         }
                         break;
                 }
             } else if (currentButton == 2) {
                 switch (position) {
                     case 0:
-                        for (int i = 0; i < Main4Activity.efronWorkout[0].length; i++) {
-                            customAdapter.list.add(new singlerow(efronImages[0][i], Main4Activity.efronWorkout[0][i][0], Main4Activity.efronWorkout[0][i][1]));
+                        for (int i = 0; i < Select_A_Workout.lebronWorkout[0].length; i++) {
+                            customAdapter.list.add(new singlerow(lebronImages[0][i], Select_A_Workout.lebronWorkout[0][i][0], Select_A_Workout.lebronWorkout[0][i][1]));
                         }
                         break;
                     case 1:
-                        for (int i = 0; i < Main4Activity.efronWorkout[1].length; i++) {
-                            customAdapter.list.add(new singlerow(efronImages[1][i], Main4Activity.efronWorkout[1][i][0], Main4Activity.efronWorkout[1][i][1]));
+                        for (int i = 0; i < Select_A_Workout.lebronWorkout[1].length; i++) {
+                            customAdapter.list.add(new singlerow(lebronImages[1][i], Select_A_Workout.lebronWorkout[1][i][0], Select_A_Workout.lebronWorkout[1][i][1]));
                         }
                         break;
                     case 2:
-                        for (int i = 0; i < Main4Activity.efronWorkout[2].length; i++) {
-                            customAdapter.list.add(new singlerow(efronImages[2][i], Main4Activity.efronWorkout[2][i][0], Main4Activity.efronWorkout[2][i][1]));
+                        for (int i = 0; i < Select_A_Workout.lebronWorkout[2].length; i++) {
+                            customAdapter.list.add(new singlerow(lebronImages[2][i], Select_A_Workout.lebronWorkout[2][i][0], Select_A_Workout.lebronWorkout[2][i][1]));
                         }
                         break;
                 }
@@ -86,7 +83,7 @@ public class Main5Activity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main5);
+        setContentView(R.layout.activity_main3);
 
         listview = findViewById(R.id.listView);
         customAdapter = new CustomAdapter(this);
@@ -101,21 +98,21 @@ public class Main5Activity extends AppCompatActivity implements AdapterView.OnIt
                 break;
             case 1:
                 imageViewPortrait.setImageResource(R.drawable.starlord_portrait);
-                for(int i = 0; i < Main4Activity.prattWorkout.length; i ++){
-                    customAdapter.list.add(new singlerow(prattImages[0][i],Main4Activity.prattWorkout[0][i][0],Main4Activity.prattWorkout[0][i][1]));
+                for(int i = 0; i < Select_A_Workout.prattWorkout.length; i ++){
+                    customAdapter.list.add(new singlerow(prattImages[0][i], Select_A_Workout.prattWorkout[0][i][0], Select_A_Workout.prattWorkout[0][i][1]));
                 }
                 customAdapter.notifyDataSetChanged();
-                //spinner set to the starting workout for efron listView
+                //spinner set to the starting workout for lebron listView
                 spinnerAdapter = ArrayAdapter.createFromResource(this,
                         R.array.chrisPratt, android.R.layout.simple_spinner_item);
                 break;
             case 2:
-                imageViewPortrait.setImageResource(R.drawable.zacefron_portrait);
-                String[][] efronWorkout = Main4Activity.efronWorkout[0];
-                //spinner set to the starting workout for efron listView
+                imageViewPortrait.setImageResource(R.drawable.lebron_portrait);
+                String[][] lebronWorkout = Select_A_Workout.lebronWorkout[0];
+                //spinner set to the starting workout for lebron listView
 
                 spinnerAdapter = ArrayAdapter.createFromResource(this,
-                        R.array.zacEfron, android.R.layout.simple_spinner_item);
+                        R.array.lebron, android.R.layout.simple_spinner_item);
                 break;
             default:
         }

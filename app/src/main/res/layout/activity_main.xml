@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:alpha="1"
-    tools:context=".MainActivity">
+    tools:context=".HomeScreen">
 
     <ImageView
         android:id="@+id/imageView"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/the_rock" />
+        app:srcCompat="@drawable/lebron" />
 
     <TextView
         android:id="@+id/textView"
@@ -33,7 +33,7 @@
         android:inputType="textMultiLine|textCapSentences|textCapWords"
         android:shadowColor="@android:color/white"
         android:shadowRadius="10"
-        android:text="Workouts used by athletes and celebritites"
+        android:text="Workouts by the World's Top Athletes"
         android:textColor="#FC070303"
         android:textSize="35sp"
         android:textStyle="italic"
@@ -56,7 +56,7 @@
         android:gravity="center"
         android:inputType="textMultiLine"
         android:singleLine="false"
-        android:text="Containing proven workouts used by your favorite athletes and celebrities - now at your complete disposal!"
+        android:text="Containing proven workouts used by your favorite athletes - now at your complete disposal!"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="normal|bold"

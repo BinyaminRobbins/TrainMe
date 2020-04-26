@@ -8,15 +8,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity {
     View myView;
     SharedPreferences sharedPreferences;
     int arrayPos = 0;
-    int[] bgImgs = { R.drawable.the_rock,R.drawable.starlord, R.drawable.tom_brady, R.drawable.zlatan, R.drawable.zacefron, R.drawable.aaron_judge, R.drawable.lebron, R.drawable.conor_mcgregor };
+    int[] bgImgs = { R.drawable.starlord, R.drawable.tom_brady, R.drawable.zlatan, R.drawable.aaron_judge, R.drawable.lebron, R.drawable.conor_mcgregor };
 
 
     @Override
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         myView = findViewById(R.id.include);
         myView.setOnClickListener(new View.OnClickListener() {
-            final ProgressButton progressButton = new ProgressButton(MainActivity.this,myView);
+            final ProgressButton progressButton = new ProgressButton(HomeScreen.this,myView);
             @Override
             public void onClick(View v) {
                 progressButton.buttonActivated();
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(getApplicationContext(),Main4Activity.class);
+                        Intent intent = new Intent(getApplicationContext(), Select_A_Workout.class);
                         startActivity(intent);
                     }
                 },300);

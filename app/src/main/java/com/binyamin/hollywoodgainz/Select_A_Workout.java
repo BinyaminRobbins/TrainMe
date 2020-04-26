@@ -3,13 +3,10 @@ package com.binyamin.hollywoodgainz;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,19 +16,17 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Main4Activity extends AppCompatActivity {
+public class Select_A_Workout extends AppCompatActivity {
     private LinearLayout linearLayout;
     private ConstraintLayout cLayout1;
     private ConstraintLayout cLayout2;
     private ConstraintLayout cLayout3;
     static TextView theRockTitle;
     static TextView prattTitle;
-    static TextView efronTitle;
-    static String[][][] theRockWorkout;
+    static TextView lebronTitle;
     static String[][][] prattWorkout;
-    static String[][][] efronWorkout;
+    static String[][][] lebronWorkout;
     int currentButton;
     int width;
     Button nextButton;
@@ -69,7 +64,7 @@ public class Main4Activity extends AppCompatActivity {
     public void seeMore(View v) {
         currentButton = Integer.valueOf(v.getTag().toString());
         Log.i("currentButton", "" + currentButton);
-        Intent intent = new Intent(getApplicationContext(), Main5Activity.class);
+        Intent intent = new Intent(getApplicationContext(), Athlete.class);
         intent.putExtra("currentButton", currentButton);
         startActivity(intent);
 
@@ -78,7 +73,7 @@ public class Main4Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main4);
+        setContentView(R.layout.activity_main2);
 
         GetValues task = new GetValues();
         task.execute();
@@ -88,7 +83,7 @@ public class Main4Activity extends AppCompatActivity {
         cLayout3 = findViewById(R.id.cLayout3);
 
         linearLayout = findViewById(R.id.linearLayout);
-        width = getScreenWidth(Main4Activity.this);
+        width = getScreenWidth(Select_A_Workout.this);
 
         nextButton = findViewById(R.id.nextButton);
         previousButton = findViewById(R.id.previousButton);
@@ -138,12 +133,12 @@ public class Main4Activity extends AppCompatActivity {
         TextView prattBody = findViewById(R.id.prattBody);
         prattBody.setText("* Containing \"StarLord's\" 2 part gym workout, that he used to get in shape for Guardians of the Galaxy + warmup.\n\n * Level: Moderate");
 
-        efronTitle = findViewById(R.id.titleTextEfron);
-        efronTitle.setText("Zac Efron");
-        TextView efronDescription = findViewById(R.id.efronDescription);
-        efronDescription.setText("(Gym Workout)");
-        TextView efronBody = findViewById(R.id.efronBody);
-        efronBody.setText("* An overview of movie star Zac Efron's 3-day, gym, workout split, with a good amount of abs included every day.\n\n* Level: Challenging");
+        lebronTitle = findViewById(R.id.titleTextlebron);
+        lebronTitle.setText("Zac lebron");
+        TextView lebronDescription = findViewById(R.id.lebronDescription);
+        lebronDescription.setText("(Gym Workout)");
+        TextView lebronBody = findViewById(R.id.lebronBody);
+        lebronBody.setText("* An overview of movie star Zac lebron's 3-day, gym, workout split, with a good amount of abs included every day.\n\n* Level: Challenging");
 
     }
 
@@ -152,7 +147,6 @@ public class Main4Activity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-            // Pratt's 2 part + Warm-Up (no Api / too much work to download from js page)
             //Warmup
             String[][] prattWarmup = {
                     {"Run", "10 min"},
@@ -180,7 +174,7 @@ public class Main4Activity extends AppCompatActivity {
             };
             prattWorkout = new String[][][]{prattWarmup, prattArms, prattCircuit};
 
-            String[][] efronArms = {
+            String[][] lebronArms = {
                     {"Straight Arm Pull-Down", "3 x 12"},
                     {"Ab Wheel Roll-Out", "3 x 10"},
                     {"Seated Cable Row", "3 x 10"},
@@ -190,7 +184,7 @@ public class Main4Activity extends AppCompatActivity {
                     {"Dumbbell Bicep Curls", "3 x 12"},
             };
             //Legs
-            String[][] efronLegs = {
+            String[][] lebronLegs = {
                     {"Leg Press", "3 x 10"},
                     {"Jump Squat", "3 x 10"},
                     {"Reverse Walking Lunge", "3 x 10"},
@@ -199,7 +193,7 @@ public class Main4Activity extends AppCompatActivity {
                     {"Kickbutts", "3 x 20"},
             };
             //Shoulders, Chest, & Arms
-            String[][] efronChest = {
+            String[][] lebronChest = {
                     {"Push Ups", "3 x 12"},
                     {"Dumbbell Front Raises", "3 x 8"},
                     {"Cross Body Cable Raise", "3 x 10"},
@@ -210,7 +204,7 @@ public class Main4Activity extends AppCompatActivity {
                     {"One-Arm Press-Down", "3 x 8"},
                     {"Bicep Curls", "3 x 12"},
             };
-            efronWorkout = new String[][][]{efronArms, efronLegs, efronChest};
+            lebronWorkout = new String[][][]{lebronArms, lebronLegs, lebronChest};
             return null;
         }
     }
