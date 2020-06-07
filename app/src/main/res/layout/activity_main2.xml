@@ -26,318 +26,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="80dp"
-        android:fillViewport="true"
-        android:scrollbars="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-        app:layout_constraintVertical_bias="0.0">
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:foregroundGravity="center_horizontal"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cLayout1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/the_rock"
-                android:foregroundGravity="center_horizontal">
-
-                <TextView
-                    android:id="@+id/titleTxtRock"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="506dp"
-                    android:fontFamily="@font/alfa_slab_one"
-                    android:foregroundGravity="center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:shadowColor="@android:color/black"
-                    android:shadowRadius="10"
-                    android:text="TextView"
-                    android:textColor="@android:color/white"
-                    android:textSize="38sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/theRockDescription"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/alfa_slab_one"
-                    android:gravity="center"
-                    android:shadowColor="@android:color/black"
-                    android:shadowRadius="10"
-                    android:text="TextView"
-                    android:textColor="@android:color/white"
-                    android:textSize="22sp"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/titleTxtRock"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/theRockBody"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/allerta_stencil"
-                    android:shadowColor="@android:color/black"
-                    android:shadowRadius="15"
-                    android:text=" textview textview textview textview textview textview"
-                    android:textColor="@android:color/white"
-                    android:textSize="23sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/theRockDescription"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <Button
-                    android:id="@+id/select0"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/custom_button2"
-                    android:fontFamily="@font/alfa_slab_one"
-                    android:onClick="seeMore"
-                    android:tag="0"
-                    android:text="Select"
-                    android:textColor="@android:color/white"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/theRockBody"
-                    app:layout_constraintVertical_bias="1.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cLayout2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="50dp"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/starlord">
-
-                <TextView
-                    android:id="@+id/titleTextPratt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="506dp"
-                    android:fontFamily="@font/alfa_slab_one"
-                    android:foregroundGravity="center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:shadowColor="@android:color/black"
-                    android:shadowRadius="10"
-                    android:text="TextView"
-                    android:textColor="@android:color/white"
-                    android:textSize="31sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/prattDescription"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/alfa_slab_one"
-                    android:gravity="center"
-                    android:shadowColor="@android:color/black"
-                    android:shadowRadius="10"
-                    android:text="TextView"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/titleTextPratt"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/prattBody"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/allerta_stencil"
-                    android:shadowColor="@android:color/black"
-                    android:shadowRadius="15"
-                    android:text=" textview textview textview textview textview textview"
-                    android:textColor="@android:color/white"
-                    android:textSize="19.5sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/prattDescription"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <Button
-                    android:id="@+id/select1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/custom_button2"
-                    android:fontFamily="@font/alfa_slab_one"
-                    android:onClick="seeMore"
-                    android:tag="1"
-                    android:text="Select"
-                    android:textColor="@android:color/white"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cLayout3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@drawable/zacefron"
-                android:foregroundGravity="center">
-
-                <TextView
-                    android:id="@+id/titleTextEfron"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="506dp"
-                    android:fontFamily="@font/alfa_slab_one"
-                    android:foregroundGravity="center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:shadowColor="@android:color/black"
-                    android:shadowRadius="10"
-                    android:text="TextView"
-                    android:textColor="@android:color/white"
-                    android:textSize="38sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/efronDescription"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/alfa_slab_one"
-                    android:gravity="center"
-                    android:shadowColor="@android:color/black"
-                    android:shadowRadius="20"
-                    android:text="TextView"
-                    android:textColor="@android:color/white"
-                    android:textSize="28sp"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/titleTextEfron"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/efronBody"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/allerta_stencil"
-                    android:shadowColor="@android:color/black"
-                    android:shadowRadius="15"
-                    android:text=" textview textview textview textview textview textview"
-                    android:textColor="@android:color/white"
-                    android:textSize="23sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/efronDescription"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <Button
-                    android:id="@+id/select2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/custom_button2"
-                    android:fontFamily="@font/alfa_slab_one"
-                    android:onClick="seeMore"
-                    android:tag="2"
-                    android:text="Select"
-                    android:textColor="@android:color/white"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-    </HorizontalScrollView>
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="70dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        app:layout_constraintVertical_bias="1.0">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -350,7 +51,7 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp"
                 android:alpha="0.9"
-                android:background="@drawable/custom_shift_buttons"
+                android:background="@drawable/button_custom_shift"
                 android:fontFamily="@font/allerta_stencil"
                 android:foregroundGravity="center_vertical"
                 android:gravity="center"
@@ -372,7 +73,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:alpha="0.9"
-                android:background="@drawable/custom_shift_buttons"
+                android:background="@drawable/button_custom_shift"
                 android:fontFamily="@font/allerta_stencil"
                 android:foregroundGravity="center_vertical"
                 android:gravity="center"
@@ -394,7 +95,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/custom_shift_buttons"
+                android:background="@drawable/button_custom_shift"
                 android:text="Your Favorites"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
