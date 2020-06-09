@@ -30,5 +30,12 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    //ViewPager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    //Circle Image View
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //Rounded Image View (so as not to create custom layout
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
 
 }

@@ -167,7 +167,7 @@ public class _2_Signup_RecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(context,_Page1_HomeScreen.class);
+                    Intent intent = new Intent(context,_Page3_SelectWorkout.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }

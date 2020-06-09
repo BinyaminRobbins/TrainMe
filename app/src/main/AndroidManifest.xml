@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="._Page2_UserDetails"></activity>
+        <activity android:name="._Page3_SelectWorkout"></activity>
+        <activity android:name="._Page2_UserDetails" />
         <activity android:name=".Athlete" />
         <activity android:name=".Select_A_Workout" />
         <activity android:name="._Page1_HomeScreen">
