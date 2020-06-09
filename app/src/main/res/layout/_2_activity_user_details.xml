@@ -122,7 +122,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:progressDrawable="@drawable/_2_progressbar"/>
+        android:progressDrawable="@drawable/_2_progressbar">
+    </ProgressBar>
+
+    <ImageView
+        android:id="@+id/checkmark"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/check"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+        app:layout_constraintStart_toStartOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

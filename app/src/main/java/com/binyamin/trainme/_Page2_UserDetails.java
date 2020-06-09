@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,9 @@ import android.widget.ProgressBar;
 public class _Page2_UserDetails extends AppCompatActivity {
     static RecyclerView recyclerView;
     static ProgressBar progressBar;
+    static ImageView checkmark;
+    static Context context;
+
 
     private void intitRecyclerView(){
         Log.i("Layout","Initiated");
@@ -38,6 +42,8 @@ public class _Page2_UserDetails extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,11 @@ public class _Page2_UserDetails extends AppCompatActivity {
         cv.setBackgroundResource(R.drawable.background_custom_cardview);
 
         progressBar = findViewById(R.id.progressBar);
+
+         checkmark = findViewById(R.id.checkmark);
+
+         context = getApplicationContext();
+
 
 
         intitRecyclerView();

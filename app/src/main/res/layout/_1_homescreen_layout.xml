@@ -70,7 +70,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/customlayout_progressbutton"
+        layout="@layout/customlayout_1_progressbutton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
