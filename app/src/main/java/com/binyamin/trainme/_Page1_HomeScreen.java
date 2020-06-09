@@ -50,6 +50,7 @@ public class _Page1_HomeScreen extends AppCompatActivity {
                     public void run() {
                         Intent intent = new Intent(getApplicationContext(), _Page2_UserDetails.class);
                         startActivity(intent);
+                        finish();
                         try {
                             Thread.sleep(500);
                             progressButton.endAnimation();

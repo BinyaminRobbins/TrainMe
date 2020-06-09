@@ -6,9 +6,11 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 public class _Page3_SelectWorkout extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private Handler sliderHandler = new Handler();
+    int backButtonCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +56,10 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 sliderHandler.removeCallbacks(sliderRunnable);
-                sliderHandler.postDelayed(sliderRunnable,2000);
+                sliderHandler.postDelayed(sliderRunnable,3000);
             }
         });
+        backButtonCount= 0;
     }
     private Runnable sliderRunnable = new Runnable() {
         @Override
@@ -74,5 +78,24 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         sliderHandler.postDelayed(sliderRunnable,2000);
+        backButtonCount = 0;
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if(backButtonCount >= 1)
+        {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this, "Press Again to Close Application", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+    }
+
 }
