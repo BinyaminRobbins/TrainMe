@@ -1,5 +1,6 @@
 package com.binyamin.trainme;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -58,10 +60,13 @@ public class _Page2_UserDetails extends AppCompatActivity {
 
          context = getApplicationContext();
 
-
-
         intitRecyclerView();
 
+    }
 
+    @Override
+    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState, persistentState);
+        _Page1_HomeScreen.progressButton.endAnimation();
     }
 }

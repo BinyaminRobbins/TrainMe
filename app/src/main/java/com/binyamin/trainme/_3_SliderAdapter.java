@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
         holder.setImage(sliderItems.get(position));
+        holder.setTextViewHeader(sliderItems.get(position));
         if(position == sliderItems.size() - 2){
             viewPager2.post(runnable);
         }
@@ -54,15 +56,20 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     public class SliderViewHolder extends RecyclerView.ViewHolder{
 
         private RoundedImageView imageView;
+        private TextView textViewHeader;
 
         SliderViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageSlide);
+            textViewHeader = itemView.findViewById(R.id.textViewHeader);
         }
         void setImage(_3_SliderItem sliderItem){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setImageResource(sliderItem.getImage());
 
+        }
+        void setTextViewHeader(_3_SliderItem sliderItem){
+            textViewHeader.setText(sliderItem.getAthleteName());
         }
     }
     private Runnable runnable = new Runnable() {

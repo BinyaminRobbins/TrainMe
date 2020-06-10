@@ -1,6 +1,7 @@
 package com.binyamin.trainme;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.CompositePageTransformer;
@@ -10,16 +11,22 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+
 public class _Page3_SelectWorkout extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private Handler sliderHandler = new Handler();
     int backButtonCount;
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +37,11 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
 
         //preparing list of images from drawable folder
         final List<_3_SliderItem> sliderItems = new ArrayList<>();
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_brady));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_lebron));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_conormcgregor));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_aaronjudge));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_zlatan));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_brady,"Tom Brady"));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_lebron,"Lebron James"));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_conormcgregor,"Connor McGregor"));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_aaronjudge,"Aaron Judge"));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_zlatan,"Zlatan Ibrah."));
 
         viewPager2.setAdapter(new _3_SliderAdapter(sliderItems, viewPager2));
         viewPager2.setClipToPadding(false);
@@ -62,8 +69,9 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
         });
         backButtonCount= 0;
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
     }
     private Runnable sliderRunnable = new Runnable() {
         @Override

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.binyamin.trainme"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -36,6 +36,9 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //Rounded Image View (so as not to create custom layout
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    //Bottom Tool Bar
+    implementation 'com.google.android.material:material:1.0.0'
+
 
 
 }
