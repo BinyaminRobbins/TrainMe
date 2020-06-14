@@ -8,6 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
+    <style name="AppTheme2" parent="Theme.MaterialComponents.Light.NoActionBar"/>
 
 </resources>

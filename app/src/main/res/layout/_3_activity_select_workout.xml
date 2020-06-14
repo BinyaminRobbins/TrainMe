@@ -4,24 +4,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="._Page3_SelectWorkout">
+    tools:context="._Page3_SelectWorkout"
+    android:theme="@style/AppTheme2">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/_2_toolbar"
-        />
+    <TextView
+        android:id="@+id/textViewAppName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="@font/font_fox"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/app_name"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/ImageSlider"
         android:layout_width="match_parent"
         android:layout_height="480dp"
+        android:layout_marginTop="15dp"
         android:paddingStart="55dp"
         android:paddingEnd="55dp"
+        app:layout_constraintBottom_toTopOf="@+id/conLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAppName" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/conLayout"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="vertical"
+        android:theme="@style/AppTheme2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-       />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bar"
+            style="@style/AppTheme2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:theme="@style/AppTheme2"
+            app:fabAlignmentMode="center"
+            app:menu="@menu/bottom_navbar_menu"
+            app:navigationIcon="@drawable/ic_action_settings" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_search"
+           android:backgroundTint="@color/colorAccentBlue"
+            app:elevation="20dp"
+            app:fabSize="auto"
+            app:layout_anchor="@id/bar"
+            app:layout_anchorGravity="center" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
 
 
 

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.binyamin.trainme"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -38,7 +38,6 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     //Bottom Tool Bar
     implementation 'com.google.android.material:material:1.0.0'
-
 
 
 }
