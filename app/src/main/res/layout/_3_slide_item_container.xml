@@ -39,7 +39,7 @@
                 android:layout_width="40dp"
                 android:layout_height="35dp"
                 android:elevation="40dp"
-                app:layout_constraintBottom_toTopOf="@+id/button"
+                app:layout_constraintBottom_toTopOf="@+id/startButton"
                 app:layout_constraintEnd_toEndOf="@id/imageSlide"
                 app:layout_constraintStart_toStartOf="@+id/imageSlide"
                 app:layout_constraintTop_toTopOf="@+id/imageSlide"
@@ -49,7 +49,7 @@
 
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/startButton"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="15dp"

@@ -1,11 +1,17 @@
 package com.binyamin.trainme;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.IpSecManager;
+import android.nfc.Tag;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,11 +21,11 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
-public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder> {
+public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder> implements View.OnClickListener {
     private List<_3_SliderItem> sliderItems;
     private ViewPager2 viewPager2;
 
-    _3_SliderAdapter(List<_3_SliderItem> sliderItems, ViewPager2 viewPager2) {
+    public _3_SliderAdapter(List<_3_SliderItem> sliderItems, ViewPager2 viewPager2) {
         this.sliderItems = sliderItems;
         this.viewPager2 = viewPager2;
     }
@@ -44,9 +50,25 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         holder.setLockedImage(sliderItems.get(position));
         holder.setImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
+        holder.startButton.setTag(position);
+        holder.startButton.setOnClickListener(this);
+
         if(position == sliderItems.size() - 2){
             viewPager2.post(runnable);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        Context context = _Page3_SelectWorkout.context;
+        if(v.getId() == R.id.startButton){
+            Toast.makeText(context,"Button Tag is : " + v.getTag(),Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context,_Page4_AthleteWorkout.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("tag",v.getTag().toString());
+            context.startActivity(intent);
+        }
+
     }
 
     @Override
@@ -59,12 +81,14 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         private RoundedImageView imageView;
         private TextView textViewHeader;
         private ImageView lockedImage;
+        private Button startButton;
 
         SliderViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageSlide);
             textViewHeader = itemView.findViewById(R.id.textViewHeader);
             lockedImage = itemView.findViewById(R.id.lock);
+            startButton = itemView.findViewById(R.id.startButton);
         }
         void setImage(_3_SliderItem sliderItem){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

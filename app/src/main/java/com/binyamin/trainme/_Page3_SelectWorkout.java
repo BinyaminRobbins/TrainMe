@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +26,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private Handler sliderHandler = new Handler();
     int backButtonCount;
+    static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
             }
         });
 
+        context = getApplicationContext();
 
     }
     @Override
@@ -88,7 +91,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
     private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
-            viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
+                viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
         }
     };
 
@@ -118,6 +121,13 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
         else
         {
             Toast.makeText(this, "Press Again to Close Application", Toast.LENGTH_SHORT).show();
+            final Handler handler = new Handler();
+            final int delay = 5000; //milliseconds
+            handler.postDelayed(new Runnable(){
+                public void run(){
+                    backButtonCount = 0;
+                }
+            }, delay);
             backButtonCount++;
         }
     }
