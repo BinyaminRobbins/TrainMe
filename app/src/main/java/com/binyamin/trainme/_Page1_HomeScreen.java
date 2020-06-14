@@ -57,7 +57,7 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), _Page2_UserDetails.class);
+                Intent intent = new Intent(getApplicationContext(), _Page3_SelectWorkout.class);
                 startActivity(intent);
                 finish();
             }

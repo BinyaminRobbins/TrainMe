@@ -41,6 +41,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
+        holder.setLockedImage(sliderItems.get(position));
         holder.setImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
         if(position == sliderItems.size() - 2){
@@ -57,11 +58,13 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
         private RoundedImageView imageView;
         private TextView textViewHeader;
+        private ImageView lockedImage;
 
         SliderViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageSlide);
             textViewHeader = itemView.findViewById(R.id.textViewHeader);
+            lockedImage = itemView.findViewById(R.id.lock);
         }
         void setImage(_3_SliderItem sliderItem){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -70,6 +73,10 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         }
         void setTextViewHeader(_3_SliderItem sliderItem){
             textViewHeader.setText(sliderItem.getAthleteName());
+        }
+        void setLockedImage(_3_SliderItem sliderItem){
+            if(sliderItem.getIfRequiresPremium() == true)
+                lockedImage.setImageResource(R.drawable.padlock);
         }
     }
     private Runnable runnable = new Runnable() {

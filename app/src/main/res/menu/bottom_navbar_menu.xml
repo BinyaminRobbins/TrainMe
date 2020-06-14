@@ -7,15 +7,20 @@
         android:id="@+id/favorites"
         android:icon="@drawable/ic_action_favorites"
         android:title="Favorites"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         />
+
+    <item
+        android:id="@+id/Premium"
+        android:icon="@drawable/ic_action_premium"
+        android:title="Unlock Premium"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/Workouts"
         android:icon="@drawable/ic_action_workouts"
         android:title="All Workouts"
         app:actionLayout="@layout/menu_items"
-
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 
 </menu>
