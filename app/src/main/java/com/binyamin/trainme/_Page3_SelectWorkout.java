@@ -27,6 +27,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
     private Handler sliderHandler = new Handler();
     int backButtonCount;
     static Context context;
+    public static ArrayList<_3_SliderItem> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +37,16 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
         viewPager2 = findViewById(R.id.ImageSlider);
 
         //preparing list of images from drawable folder
-        final List<_3_SliderItem> sliderItems = new ArrayList<>();
+        final ArrayList<_3_SliderItem> sliderItems = new ArrayList<>();
         sliderItems.add(new _3_SliderItem(R.drawable.homescreen_brady,"Tom Brady",true));
         sliderItems.add(new _3_SliderItem(R.drawable.homescreen_lebron,"Lebron James",true));
         sliderItems.add(new _3_SliderItem(R.drawable.homescreen_conormcgregor,"Connor McGregor",false));
         sliderItems.add(new _3_SliderItem(R.drawable.homescreen_aaronjudge,"Aaron Judge",false));
         sliderItems.add(new _3_SliderItem(R.drawable.homescreen_zlatan,"Zlatan Ibrah.",true));
+
+        for(_3_SliderItem item : sliderItems){
+            list.add(item);
+        }
 
         viewPager2.setAdapter(new _3_SliderAdapter(sliderItems, viewPager2));
         viewPager2.setClipToPadding(false);

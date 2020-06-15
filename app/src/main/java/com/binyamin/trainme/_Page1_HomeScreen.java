@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClickListener {
     View myView;
     int arrayPos = 0;
-    static Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_aaronjudge, R.drawable.homescreen_zlatan};
+    Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_aaronjudge, R.drawable.homescreen_zlatan};
     static ProgressButton progressButton;
 
 
