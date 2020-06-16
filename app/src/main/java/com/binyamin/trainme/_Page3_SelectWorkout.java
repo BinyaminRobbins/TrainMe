@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -22,12 +23,13 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class _Page3_SelectWorkout extends AppCompatActivity {
+public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable {
     private ViewPager2 viewPager2;
     private Handler sliderHandler = new Handler();
     int backButtonCount;
     static Context context;
     public static ArrayList<_3_SliderItem> list = new ArrayList<>();
+    private Thread t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,5 +138,53 @@ public class _Page3_SelectWorkout extends AppCompatActivity {
             backButtonCount++;
         }
     }
+//Categories include:
+    //Mixed
+    //BodyWeight
+    //UpperBody
+        //Chest
+        //Arms
+        //Back
+    //LowerBody
+        //Legs
+        //Glutes
+    //Cardio
+    @Override
+    public void run() {
+        final ArrayList<AthleteWorkouts> lebronWorkouts = new ArrayList<>();
+        lebronWorkouts.add(new AthleteWorkouts("Mixed","Push-Ups",R.drawable.workout_pushup,"Till-Failure","3 Sets (45s Rest)"));
+        lebronWorkouts.add(new AthleteWorkouts("Mixed","Pull-Ups",R.drawable.workout_pullup,"10 Reps","3 Sets (45s Rest)"));
+        lebronWorkouts.add(new AthleteWorkouts("Mixed","Dumbbell Snatches",R.drawable.workout_pullup,"5 Reps (Per Arm)","3 Sets (45s Rest)")); //need to get gif resource for "Dumbbell Snatches"
+        lebronWorkouts.add(new AthleteWorkouts("Mixed","Single-Arm Cable Rows",R.drawable.workout_pullup,"10 Reps (Per Arm)","3 Sets (45s Rest)")); //need gif resource for "single arm cable rows"
+        lebronWorkouts.add(new AthleteWorkouts("LowerBody","Dumbbell Squats",R.drawable.workout_squat,"8-14 Reps","3 Sets (40s Rest)")); //need gid for "DUMBBELL squats"
+        lebronWorkouts.add(new AthleteWorkouts("LowerBody","Swiss Ball Hip Raises",R.drawable.workout_pullup,"10-12 Reps","3 Sets (40s Rest)")); //need gif for "Swiss Ball Hip Raises"
+        lebronWorkouts.add(new AthleteWorkouts("LowerBody","Leg Curls",R.drawable.workout_pullup,"10 - 12 Reps","3 Sets (40s Rest)")); //need gif for "Leg Curls"
+        lebronWorkouts.add(new AthleteWorkouts("LowerBody","Dumbbell Step-Ups",R.drawable.workout_pullup,"10 Reps","3 Sets (40s Rest)")); //need gif for "Dumbell StepUps"
+        lebronWorkouts.add(new AthleteWorkouts("LowerBody","Dumbbell Calf Raises",R.drawable.workout_pullup,"12 Reps (Per Leg)","3 Sets (40s Rest)")); //need gif for Dumbell Calf Raises
+        lebronWorkouts.add(new AthleteWorkouts("Cardio","Versaclimber Machine or Jump Rope",R.drawable.workout_pullup,"30 min","Once")); //need gif for "Versaclimber Machine OR Jump Rope"
+        lebronWorkouts.add(new AthleteWorkouts("UpperBody","Bench Press",R.drawable.workout_benchpress,"10 Reps","3 Sets (1m Rest)"));
+        lebronWorkouts.add(new AthleteWorkouts("UpperBody","Lat Pull-Down",R.drawable.workout_latpulldown,"10 Reps","3 Sets (1m Rest)"));
+        lebronWorkouts.add(new AthleteWorkouts("UpperBody","Shoulder Press",R.drawable.workout_pullup,"6-10 Reps (Each Side)","3 Sets (45s Rest)")); //Shoulder Press gif
+        lebronWorkouts.add(new AthleteWorkouts("UpperBody","Dumbbell-Rows",R.drawable.workout_dubbell_row,"10 Reps (Each Side)","3 Sets (40s Rest)"));
 
+
+        final ArrayList<AllWorkouts> allAthleteWorkouts = new ArrayList<>();
+        allAthleteWorkouts.add(new AllWorkouts("Lebron James",lebronWorkouts));
+
+
+    }
+    public class AllWorkouts{
+        private String athleteName;
+        private ArrayList<AthleteWorkouts> athleteWorkoutArrayList;
+        public AllWorkouts(String athleteName, ArrayList<AthleteWorkouts> athleteWorkoutArrayList){
+            this.athleteName = athleteName;
+            this.athleteWorkoutArrayList = athleteWorkoutArrayList;
+        }
+        public ArrayList<AthleteWorkouts> getAthleteWorkoutArrayList(){
+            return athleteWorkoutArrayList;
+        }
+        public String getAthleteName(){
+            return athleteName;
+        }
+    }
 }

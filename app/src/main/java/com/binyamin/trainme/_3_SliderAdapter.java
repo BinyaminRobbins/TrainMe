@@ -62,7 +62,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     public void onClick(View v) {
         Context context = _Page3_SelectWorkout.context;
         if(v.getId() == R.id.startButton){
-            Toast.makeText(context,"Button Tag is : " + v.getTag(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,"Button Tag is : " + v.getTag(),Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(context,_Page4_AthleteWorkout.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("tag",v.getTag().toString());
