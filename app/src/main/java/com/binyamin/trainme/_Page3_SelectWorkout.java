@@ -30,12 +30,15 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
     static Context context;
     public static ArrayList<_3_SliderItem> list = new ArrayList<>();
     private Thread t;
+    static ArrayList<AllWorkouts> allAthleteWorkouts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout._3_activity_select_workout);
 
+        t = new Thread(this,"DefineAthleteWorkouts");
+        t.run();
         viewPager2 = findViewById(R.id.ImageSlider);
 
         //preparing list of images from drawable folder
@@ -49,7 +52,6 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         for(_3_SliderItem item : sliderItems){
             list.add(item);
         }
-
         viewPager2.setAdapter(new _3_SliderAdapter(sliderItems, viewPager2));
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
@@ -113,6 +115,8 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         super.onResume();
         sliderHandler.postDelayed(sliderRunnable,2000);
         backButtonCount = 0;
+        t = new Thread(this,"DeclareWorkouts");
+        t.run();
     }
 
     @Override
@@ -140,6 +144,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
     }
 //Categories include:
     //Mixed
+    //FullBody
     //BodyWeight
     //UpperBody
         //Chest
@@ -151,6 +156,19 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
     //Cardio
     @Override
     public void run() {
+        final ArrayList<AthleteWorkouts> bradyWorkouts = new ArrayList<>();
+        bradyWorkouts.add(new AthleteWorkouts("FullBody","Standing Band Rows",R.drawable.workout_pushup,"10 Reps","3 Sets (30s Rest)")); //Need GIF for "Standing Resistance Band Row";
+        bradyWorkouts.add(new AthleteWorkouts("FullBody","Banded Push-Up",R.drawable.workout_pullup,"7 Reps","3 Sets (30s Rest)"));//Gif for "BANDED push-up"
+        bradyWorkouts.add(new AthleteWorkouts("FullBody","Banded Core Rotations",R.drawable.workout_pullup,"7 Reps (Each Side)","3 Sets (10s Rest)"));//"Banded core rotations" gif
+        bradyWorkouts.add(new AthleteWorkouts("FullBody","Banded Deadlifts",R.drawable.workout_pushup,"8 Reps","3 Sets (15s Rest)"));//Banded DeadLift Gif
+        bradyWorkouts.add(new AthleteWorkouts("FullBody","Banded Bicep Curl",R.drawable.workout_bandedbicepcurls,"12 Reps","3 Sets (10s Rest)"));
+        bradyWorkouts.add(new AthleteWorkouts("FullBody","Banded Tricep Extension",R.drawable.workout_bandedbicepcurls,"10 Reps","3 Sets (15s Rest)"));//need gif
+        bradyWorkouts.add(new AthleteWorkouts("FullBody","Deceleration Lunges",R.drawable.workout_pullup,"10 Reps","3 Sets (30s Rest)")); //need gif
+        bradyWorkouts.add(new AthleteWorkouts("FullBody","Banded Shoulder Press",R.drawable.workout_pullup,"10 Reps","3 Sets (10s Rest)")); //need Gif
+        bradyWorkouts.add(new AthleteWorkouts("FullBody","X Band Squat",R.drawable.workout_pullup,"10 Reps","3 Sets (10s Rest)")); //Need Gif
+
+        allAthleteWorkouts.add(new AllWorkouts("Tom Brady",bradyWorkouts));
+
         final ArrayList<AthleteWorkouts> lebronWorkouts = new ArrayList<>();
         lebronWorkouts.add(new AthleteWorkouts("Mixed","Push-Ups",R.drawable.workout_pushup,"Till-Failure","3 Sets (45s Rest)"));
         lebronWorkouts.add(new AthleteWorkouts("Mixed","Pull-Ups",R.drawable.workout_pullup,"10 Reps","3 Sets (45s Rest)"));
@@ -167,24 +185,10 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         lebronWorkouts.add(new AthleteWorkouts("UpperBody","Shoulder Press",R.drawable.workout_pullup,"6-10 Reps (Each Side)","3 Sets (45s Rest)")); //Shoulder Press gif
         lebronWorkouts.add(new AthleteWorkouts("UpperBody","Dumbbell-Rows",R.drawable.workout_dubbell_row,"10 Reps (Each Side)","3 Sets (40s Rest)"));
 
-
-        final ArrayList<AllWorkouts> allAthleteWorkouts = new ArrayList<>();
         allAthleteWorkouts.add(new AllWorkouts("Lebron James",lebronWorkouts));
 
 
+
     }
-    public class AllWorkouts{
-        private String athleteName;
-        private ArrayList<AthleteWorkouts> athleteWorkoutArrayList;
-        public AllWorkouts(String athleteName, ArrayList<AthleteWorkouts> athleteWorkoutArrayList){
-            this.athleteName = athleteName;
-            this.athleteWorkoutArrayList = athleteWorkoutArrayList;
-        }
-        public ArrayList<AthleteWorkouts> getAthleteWorkoutArrayList(){
-            return athleteWorkoutArrayList;
-        }
-        public String getAthleteName(){
-            return athleteName;
-        }
-    }
+
 }

@@ -7,19 +7,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
+import java.util.ArrayList;
 
 import pl.droidsonroids.gif.GifImageView;
 
 public class _4_RecyclerViewAdapter extends RecyclerView.Adapter<_4_RecyclerViewAdapter.ViewHolder> {
-    String exerciseName;
-    String repCount;
-    int gifLocation;
-    public _4_RecyclerViewAdapter(String exerciseName, String repCount, int gifLocation){
-        this.exerciseName = exerciseName;
-        this.repCount = repCount;
-        this.gifLocation = gifLocation;
+    ArrayList<AthleteWorkouts> arrayName;
+    public _4_RecyclerViewAdapter(ArrayList<AthleteWorkouts> arrayName){
+        this.arrayName = arrayName;
     }
     @Override
     public _4_RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -29,15 +24,15 @@ public class _4_RecyclerViewAdapter extends RecyclerView.Adapter<_4_RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull _4_RecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.gifImageView.setImageResource(R.drawable.workout_benchpress);
-        holder.titleText.setText("Bench Press");
-        holder.subTitleText.setText("10 Reps");
+        holder.gifImageView.setImageResource(arrayName.get(position).getGif());
+        holder.titleText.setText(arrayName.get(position).getWorkoutName());
+        holder.subTitleText.setText(arrayName.get(position).getRepCount());
 
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return arrayName.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

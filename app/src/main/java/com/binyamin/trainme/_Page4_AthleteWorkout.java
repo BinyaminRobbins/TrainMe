@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.binyamin.trainme._Page2_UserDetails.recyclerView;
+
 public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnClickListener {
     static final ArrayList<_3_SliderItem> list = _Page3_SelectWorkout.list;
     ImageView backButton;
@@ -49,10 +51,11 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
 
     }
     public void initRecyclerView(){
+            ArrayList<AthleteWorkouts> athleteWorkoutList = _Page3_SelectWorkout.allAthleteWorkouts.get(tagNum).getAthleteWorkoutArrayList();
             RecyclerView recyclerView = findViewById(R.id.workoutRV);
             LinearLayoutManager manager = new _2_RecyclerViewScrollSpeed(this, _2_RecyclerViewScrollSpeed.VERTICAL, false);
             recyclerView.setLayoutManager(manager);
-            _4_RecyclerViewAdapter adapter = new _4_RecyclerViewAdapter("Bench Press","30",R.drawable.workout_benchpress);
+            _4_RecyclerViewAdapter adapter = new _4_RecyclerViewAdapter(athleteWorkoutList);
             recyclerView.setAdapter(adapter);
 
     }

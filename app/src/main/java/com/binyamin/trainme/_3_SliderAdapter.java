@@ -53,9 +53,9 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         holder.startButton.setTag(position);
         holder.startButton.setOnClickListener(this);
 
-        if(position == sliderItems.size() - 2){
+        /*if(position == sliderItems.size() - 2){
             viewPager2.post(runnable);
-        }
+        }*/
     }
 
     @Override

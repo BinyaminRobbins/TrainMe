@@ -36,7 +36,7 @@ public class AthleteWorkouts {
         return repCount;
     }
     public String getSetCount(){
-        return repCount;
+        return setCount;
     }
 
 }
