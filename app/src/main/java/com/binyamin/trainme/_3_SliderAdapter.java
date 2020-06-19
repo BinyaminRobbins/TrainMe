@@ -2,16 +2,15 @@ package com.binyamin.trainme;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.IpSecManager;
-import android.nfc.Tag;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +19,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
+import java.util.zip.CheckedOutputStream;
 
 public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder> implements View.OnClickListener {
     private List<_3_SliderItem> sliderItems;
@@ -52,6 +52,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         holder.setTextViewHeader(sliderItems.get(position));
         holder.startButton.setTag(position);
         holder.startButton.setOnClickListener(this);
+        holder.star.setOnClickListener(this);
 
         /*if(position == sliderItems.size() - 2){
             viewPager2.post(runnable);
@@ -67,6 +68,10 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("tag",v.getTag().toString());
             context.startActivity(intent);
+        }else if(v.getId() == R.id.imageButton_star){
+            Log.i("STAR","CLicked");
+            v.setBackgroundResource(R.drawable.ic_action_star_clicked);
+
         }
 
     }
@@ -82,13 +87,18 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         private TextView textViewHeader;
         private ImageView lockedImage;
         private Button startButton;
+        private ImageButton star;
+        private ImageButton info;
+
 
         SliderViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageSlide);
             textViewHeader = itemView.findViewById(R.id.textViewHeader);
-            lockedImage = itemView.findViewById(R.id.lock);
+            lockedImage = itemView.findViewById(R.id.imageButton_lock);
             startButton = itemView.findViewById(R.id.startButton);
+            star = itemView.findViewById(R.id.imageButton_star);
+            info = itemView.findViewById(R.id.imageButton_info);
         }
         void setImage(_3_SliderItem sliderItem){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

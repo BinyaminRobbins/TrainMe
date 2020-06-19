@@ -4,47 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="._Page3_SelectWorkout"
-    android:theme="@style/AppTheme2">
+    android:background="@color/colorPrimary"
+    android:elevation="-5dp"
+    android:theme="@style/AppTheme2"
+    tools:context="._Page3_SelectWorkout">
 
     <TextView
         android:id="@+id/textViewAppName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:background="@color/colorPrimaryDark"
+        android:elevation="20dp"
         android:fontFamily="@font/font_fox"
         android:gravity="center"
         android:padding="15dp"
         android:text="@string/app_name"
         android:textColor="#fff"
-        android:textSize="20sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-         />
+        android:textSize="20sp" />
 
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/ImageSlider"
         android:layout_width="match_parent"
         android:layout_height="480dp"
-        android:layout_below="@id/textViewAppName"
         android:layout_above="@id/conLayout"
-        android:paddingStart="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@id/textViewAppName"
+        android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
+        android:elevation="40dp"
+        android:paddingStart="55dp"
         android:paddingEnd="55dp" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/conLayout"
         android:layout_width="match_parent"
-        android:layout_centerHorizontal="true"
         android:layout_height="90dp"
-        android:orientation="vertical"
-        android:theme="@style/AppTheme2"
         android:layout_alignParentBottom="true"
-        >
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:theme="@style/AppTheme2">
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bar"
@@ -52,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:gravity="end"
+            android:elevation="20dp"
+            android:gravity="center"
             android:theme="@style/AppTheme2"
             app:fabAlignmentMode="end"
             app:menu="@menu/bottom_navbar_menu"
@@ -64,15 +66,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_action_search"
             android:backgroundTint="@color/colorAccentBlue"
-            app:elevation="20dp"
+            android:elevation="20dp"
+            android:src="@drawable/ic_action_search"
             app:fabSize="auto"
-            app:layout_anchor="@id/bar"
-/>    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-
+            app:layout_anchor="@id/bar" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,6 +40,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
 
         t = new Thread(this,"DefineAthleteWorkouts");
         t.run();
+
         viewPager2 = findViewById(R.id.ImageSlider);
 
         //preparing list of images from drawable folder
@@ -49,9 +51,11 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         sliderItems.add(new _3_SliderItem(R.drawable.homescreen_aaronjudge,"Aaron Judge",false));
         sliderItems.add(new _3_SliderItem(R.drawable.homescreen_zlatan,"Zlatan Ibrah.",true));
 
+        list.clear();
         for(_3_SliderItem item : sliderItems){
             list.add(item);
         }
+
         viewPager2.setAdapter(new _3_SliderAdapter(sliderItems, viewPager2));
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
@@ -115,6 +119,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         super.onResume();
         sliderHandler.postDelayed(sliderRunnable,2000);
         backButtonCount = 0;
+
         t = new Thread(this,"DeclareWorkouts");
         t.run();
     }
@@ -156,7 +161,11 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
     //Cardio
     @Override
     public void run() {
+        allAthleteWorkouts.clear();
+
         final ArrayList<AthleteWorkouts> bradyWorkouts = new ArrayList<>();
+        bradyWorkouts.clear();
+
         bradyWorkouts.add(new AthleteWorkouts("FullBody","Standing Band Rows",R.drawable.workout_pushup,"10 Reps","3 Sets (30s Rest)")); //Need GIF for "Standing Resistance Band Row";
         bradyWorkouts.add(new AthleteWorkouts("FullBody","Banded Push-Up",R.drawable.workout_pullup,"7 Reps","3 Sets (30s Rest)"));//Gif for "BANDED push-up"
         bradyWorkouts.add(new AthleteWorkouts("FullBody","Banded Core Rotations",R.drawable.workout_pullup,"7 Reps (Each Side)","3 Sets (10s Rest)"));//"Banded core rotations" gif
@@ -166,10 +175,13 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         bradyWorkouts.add(new AthleteWorkouts("FullBody","Deceleration Lunges",R.drawable.workout_pullup,"10 Reps","3 Sets (30s Rest)")); //need gif
         bradyWorkouts.add(new AthleteWorkouts("FullBody","Banded Shoulder Press",R.drawable.workout_pullup,"10 Reps","3 Sets (10s Rest)")); //need Gif
         bradyWorkouts.add(new AthleteWorkouts("FullBody","X Band Squat",R.drawable.workout_pullup,"10 Reps","3 Sets (10s Rest)")); //Need Gif
+        bradyWorkouts.add(new AthleteWorkouts("Mixed","X Band Squat",R.drawable.workout_pullup,"10 Reps","3 Sets (10s Rest)")); //Need Gif
 
-        allAthleteWorkouts.add(new AllWorkouts("Tom Brady",bradyWorkouts));
+        allAthleteWorkouts.add(0,new AllWorkouts("Tom Brady",bradyWorkouts));
 
         final ArrayList<AthleteWorkouts> lebronWorkouts = new ArrayList<>();
+        lebronWorkouts.clear();
+
         lebronWorkouts.add(new AthleteWorkouts("Mixed","Push-Ups",R.drawable.workout_pushup,"Till-Failure","3 Sets (45s Rest)"));
         lebronWorkouts.add(new AthleteWorkouts("Mixed","Pull-Ups",R.drawable.workout_pullup,"10 Reps","3 Sets (45s Rest)"));
         lebronWorkouts.add(new AthleteWorkouts("Mixed","Dumbbell Snatches",R.drawable.workout_pullup,"5 Reps (Per Arm)","3 Sets (45s Rest)")); //need to get gif resource for "Dumbbell Snatches"
@@ -179,16 +191,14 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         lebronWorkouts.add(new AthleteWorkouts("LowerBody","Leg Curls",R.drawable.workout_pullup,"10 - 12 Reps","3 Sets (40s Rest)")); //need gif for "Leg Curls"
         lebronWorkouts.add(new AthleteWorkouts("LowerBody","Dumbbell Step-Ups",R.drawable.workout_pullup,"10 Reps","3 Sets (40s Rest)")); //need gif for "Dumbell StepUps"
         lebronWorkouts.add(new AthleteWorkouts("LowerBody","Dumbbell Calf Raises",R.drawable.workout_pullup,"12 Reps (Per Leg)","3 Sets (40s Rest)")); //need gif for Dumbell Calf Raises
-        lebronWorkouts.add(new AthleteWorkouts("Cardio","Versaclimber Machine or Jump Rope",R.drawable.workout_pullup,"30 min","Once")); //need gif for "Versaclimber Machine OR Jump Rope"
+        lebronWorkouts.add(new AthleteWorkouts("Cardio","Versa-Climber/Jump Rope",R.drawable.workout_pullup,"30 min","Once")); //need gif for "Versaclimber Machine OR Jump Rope"
         lebronWorkouts.add(new AthleteWorkouts("UpperBody","Bench Press",R.drawable.workout_benchpress,"10 Reps","3 Sets (1m Rest)"));
         lebronWorkouts.add(new AthleteWorkouts("UpperBody","Lat Pull-Down",R.drawable.workout_latpulldown,"10 Reps","3 Sets (1m Rest)"));
         lebronWorkouts.add(new AthleteWorkouts("UpperBody","Shoulder Press",R.drawable.workout_pullup,"6-10 Reps (Each Side)","3 Sets (45s Rest)")); //Shoulder Press gif
         lebronWorkouts.add(new AthleteWorkouts("UpperBody","Dumbbell-Rows",R.drawable.workout_dubbell_row,"10 Reps (Each Side)","3 Sets (40s Rest)"));
 
-        allAthleteWorkouts.add(new AllWorkouts("Lebron James",lebronWorkouts));
-
+        allAthleteWorkouts.add(1,new AllWorkouts("Lebron James",lebronWorkouts));
 
 
     }
-
 }
