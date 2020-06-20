@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuNavigation_workouts"
+        android:icon="@drawable/ic_action_workouts"
+        android:title="All Workouts"/>
+
+    <item
+        android:id="@+id/menuNavigation_favorites"
+        android:icon="@drawable/ic_action_star"
+        android:title=" My Favorites"/>
+
+    <item
+        android:id="@+id/menuNavigation_premium"
+        android:icon="@drawable/ic_action_premium"
+        android:title="Premium"/>
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:id="@+id/menuNavigation_settings"
+                android:icon="@drawable/ic_action_settings"
+                android:title="Settings"/>
+
+            <item
+                android:id="@+id/menuNavigation_profile"
+                android:icon="@drawable/padlock"
+                android:title="Profile"/>
+        </menu>
+    </item>
+
+
+</menu>

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import static com.binyamin.trainme._Page2_UserDetails.recyclerView;
 
 public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-    final ArrayList<_3_SliderItem> myList = _Page3_SelectWorkout.list;
+    final ArrayList<_3_SliderItem> myList = AllWorkoutsFragment.list;
     ImageView backButton;
     static int tagNum;
     Spinner spinner;

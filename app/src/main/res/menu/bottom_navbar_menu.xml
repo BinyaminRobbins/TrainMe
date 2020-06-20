@@ -4,23 +4,23 @@
 
     >
     <item
-        android:id="@+id/favorites"
+        android:id="@+id/menu_favorites"
         android:icon="@drawable/ic_action_favorites"
         android:title="Favorites"
         app:showAsAction="ifRoom"
         />
 
     <item
-        android:id="@+id/Premium"
+        android:id="@+id/menu_premium"
         android:icon="@drawable/ic_action_premium"
         android:title="Unlock Premium"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/Workouts"
+        android:id="@+id/menu_workouts"
         android:icon="@drawable/ic_action_workouts"
         android:title="All Workouts"
-        app:actionLayout="@layout/menu_items"
         app:showAsAction="ifRoom"/>
+    <!--app:actionLayout="@layout/menu_items"-->
 
 </menu>

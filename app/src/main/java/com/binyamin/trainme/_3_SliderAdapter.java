@@ -24,6 +24,7 @@ import java.util.zip.CheckedOutputStream;
 public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder> implements View.OnClickListener {
     private List<_3_SliderItem> sliderItems;
     private ViewPager2 viewPager2;
+    boolean colorChanged;
 
     public _3_SliderAdapter(List<_3_SliderItem> sliderItems, ViewPager2 viewPager2) {
         this.sliderItems = sliderItems;
@@ -46,13 +47,32 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final SliderViewHolder holder, final int position) {
         holder.setLockedImage(sliderItems.get(position));
         holder.setImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
         holder.startButton.setTag(position);
         holder.startButton.setOnClickListener(this);
-        holder.star.setOnClickListener(this);
+        holder.star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!colorChanged) {
+                    holder.star.setImageResource(R.drawable.ic_action_star_clicked);
+                    colorChanged = true;
+                    sliderItems.get(position).setAsFavorite(true);
+                } else if (colorChanged) {
+                    holder.star.setImageResource(R.drawable.ic_action_star);
+                    colorChanged = false;
+                    sliderItems.get(position).setAsFavorite(false);
+
+                }
+            }
+        });
+        if (sliderItems.get(position).getIsFavorite() == true) {
+            holder.star.setImageResource(R.drawable.ic_action_star_clicked);
+        } else {
+            holder.star.setImageResource(R.drawable.ic_action_star);
+        }
 
         /*if(position == sliderItems.size() - 2){
             viewPager2.post(runnable);
@@ -68,10 +88,6 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("tag",v.getTag().toString());
             context.startActivity(intent);
-        }else if(v.getId() == R.id.imageButton_star){
-            Log.i("STAR","CLicked");
-            v.setBackgroundResource(R.drawable.ic_action_star_clicked);
-
         }
 
     }
@@ -87,9 +103,8 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         private TextView textViewHeader;
         private ImageView lockedImage;
         private Button startButton;
-        private ImageButton star;
         private ImageButton info;
-
+        private ImageButton star;
 
         SliderViewHolder(@NonNull View itemView) {
             super(itemView);

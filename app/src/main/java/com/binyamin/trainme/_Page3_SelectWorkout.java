@@ -3,6 +3,11 @@ package com.binyamin.trainme;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
@@ -12,6 +17,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,18 +26,18 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable {
     private ViewPager2 viewPager2;
-    private Handler sliderHandler = new Handler();
     int backButtonCount;
     static Context context;
-    public static ArrayList<_3_SliderItem> list = new ArrayList<>();
     private Thread t;
     static ArrayList<AllWorkouts> allAthleteWorkouts = new ArrayList<>();
+    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,59 +47,45 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         t = new Thread(this,"DefineAthleteWorkouts");
         t.run();
 
-        viewPager2 = findViewById(R.id.ImageSlider);
 
-        //preparing list of images from drawable folder
-        final ArrayList<_3_SliderItem> sliderItems = new ArrayList<>();
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_brady,"Tom Brady",true));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_lebron,"Lebron James",true));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_conormcgregor,"Connor McGregor",false));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_aaronjudge,"Aaron Judge",false));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_zlatan,"Zlatan Ibrah.",true));
-
-        list.clear();
-        for(_3_SliderItem item : sliderItems){
-            list.add(item);
-        }
-
-        viewPager2.setAdapter(new _3_SliderAdapter(sliderItems, viewPager2));
-        viewPager2.setClipToPadding(false);
-        viewPager2.setClipChildren(false);
-        viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
-
-        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-        compositePageTransformer.addTransformer(new MarginPageTransformer(70));
-        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                float r = 1 - Math.abs(position);
-                page.setScaleY(0.85f + r * 0.15f);
-            }
-        });
-        viewPager2.setPageTransformer(compositePageTransformer);
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                sliderHandler.removeCallbacks(sliderRunnable);
-                sliderHandler.postDelayed(sliderRunnable,3000);
-            }
-        });
         backButtonCount = 0;
+
+        drawerLayout = findViewById(R.id.drawerLayout);
 
         BottomAppBar bottomAppBar = findViewById(R.id.bar);
         bottomAppBar.replaceMenu(R.menu.bottom_navbar_menu);
         setSupportActionBar(bottomAppBar);
+        bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                return true;
+                switch(item.getItemId()){
+                    case R.id.menu_favorites:
+                        Log.i("Menu Item Selected","Favorites");
+                        return true;
+                    case R.id.menu_workouts:
+                        Log.i("Menu Item Selected","Workouts");
+                        return true;
+                    case R.id.menu_premium:
+                        Log.i("Menu Item Selected","Premium");
+                        return true;
+                    default:
+                        return false;
+                }
             }
         });
 
-        context = getApplicationContext();
+        NavigationView navigationView = findViewById(R.id.navigationView);
 
+        NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
+        NavigationUI.setupWithNavController(navigationView,navController);
+
+        context = getApplicationContext();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,23 +93,24 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         inflater.inflate(R.menu.bottom_navbar_menu, menu);
         return true;
     }
+
     private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
-                viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
+               // viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
         }
     };
 
     @Override
     protected void onPause() {
         super.onPause();
-        sliderHandler.removeCallbacks(sliderRunnable);
+        //sliderHandler.removeCallbacks(sliderRunnable);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        sliderHandler.postDelayed(sliderRunnable,2000);
+        //sliderHandler.postDelayed(sliderRunnable,2000);
         backButtonCount = 0;
 
         t = new Thread(this,"DeclareWorkouts");

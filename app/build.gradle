@@ -23,10 +23,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
@@ -34,10 +34,13 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     //Circle Image View
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    //Rounded Image View (so as not to create custom layout
+    //Rounded Image View (so as not to create custom layout)
     implementation 'com.makeramen:roundedimageview:2.3.0'
     //Bottom Tool Bar
     implementation 'com.google.android.material:material:1.0.0'
+    //Navigation Components
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0-rc01'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0-rc01'
 
 
 }

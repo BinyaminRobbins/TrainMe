@@ -12,11 +12,15 @@ import android.view.View;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClickListener {
     View myView;
     int arrayPos = 0;
     Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_aaronjudge, R.drawable.homescreen_zlatan};
     static ProgressButton progressButton;
+    static ArrayList<_3_SliderItem> sliderItems = new ArrayList<>();
+
 
 
     @Override
@@ -46,6 +50,12 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
         myView.setOnClickListener(this);
 
         progressButton = new ProgressButton(_Page1_HomeScreen.this,myView);
+
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_brady,"Tom Brady",true,true));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_lebron,"Lebron James",true,true));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_conormcgregor,"Connor McGregor",false,true));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_aaronjudge,"Aaron Judge",false,false));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_zlatan,"Zlatan Ibrah.",true,false));
 
 
     }

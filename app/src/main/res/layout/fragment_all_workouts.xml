@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AllWorkoutsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/ImageSlider"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/conLayout"
+        android:layout_below="@id/textViewAppName"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="40dp"
+        android:paddingStart="55dp"
+        android:paddingEnd="55dp" />
+
+</FrameLayout>
