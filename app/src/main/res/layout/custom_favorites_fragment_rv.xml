@@ -41,30 +41,64 @@
                 android:id="@+id/athleteTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/graduate"
                 android:gravity="center"
                 android:text="Lebron James"
                 android:textColor="@android:color/black"
                 android:textSize="17sp"
-                app:layout_constraintBottom_toBottomOf="@+id/athleteImageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageButtonStar"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/athleteImageView"
-                app:layout_constraintTop_toTopOf="@+id/athleteImageView"
-                app:layout_constraintVertical_bias="0.3" />
+                app:layout_constraintTop_toBottomOf="@+id/imageButtonStar"
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageButton
                 android:id="@+id/imageButtonStar"
-                android:elevation="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_below="@id/athleteTextView"
                 android:layout_centerHorizontal="false"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
                 android:layout_toRightOf="@id/athleteImageView"
                 android:background="@drawable/ic_action_star_clicked_border"
-                app:layout_constraintBottom_toBottomOf="@+id/athleteImageView"
-                app:layout_constraintEnd_toEndOf="@+id/athleteTextView"
-                app:layout_constraintStart_toStartOf="@+id/athleteTextView"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/athleteImageView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageButton
+                android:id="@+id/imageButtonInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/ic_action_info"
+                android:backgroundTint="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButtonStar"
+                app:layout_constraintEnd_toStartOf="@+id/imageButtonStar"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/athleteImageView"
+                app:layout_constraintTop_toTopOf="@+id/imageButtonStar" />
+
+            <Button
+                android:id="@+id/buttonStartWorkout"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/button_custom_selectworkout"
+                android:fontFamily="@font/font_fox"
+                android:padding="5dp"
+                android:text="Start Workout"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageButtonStar"
+                app:layout_constraintStart_toStartOf="@+id/imageButtonInfo"
                 app:layout_constraintTop_toBottomOf="@+id/athleteTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

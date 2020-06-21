@@ -9,24 +9,39 @@
     <item
         android:id="@+id/menuNavigation_favorites"
         android:icon="@drawable/ic_action_star"
-        android:title=" My Favorites"/>
+        android:title="My Favorites"/>
 
     <item
         android:id="@+id/menuNavigation_premium"
         android:icon="@drawable/ic_action_premium"
-        android:title="Premium"/>
+        android:title="Unlock Everything"/>
+
+    <item
+        android:id="@+id/menuNavigation_profile"
+        android:icon="@drawable/ic_action_profile"
+        android:title="My Profile"/>
 
     <item android:title="Others">
         <menu>
+            <item
+                android:id="@+id/menuNavigation_free"
+                android:icon="@drawable/ic_action_free"
+                android:title="Free Workouts"/>
+
+            <item
+                android:id="@+id/menuNavigation_women"
+                android:icon="@drawable/woman"
+                android:title="Female Athletes"/>
+
             <item
                 android:id="@+id/menuNavigation_settings"
                 android:icon="@drawable/ic_action_settings"
                 android:title="Settings"/>
 
             <item
-                android:id="@+id/menuNavigation_profile"
-                android:icon="@drawable/padlock"
-                android:title="Profile"/>
+                android:id="@+id/menuNavigation_sources"
+                android:icon="@drawable/ic_action_sources"
+                android:title="Our Sources"/>
         </menu>
     </item>
 

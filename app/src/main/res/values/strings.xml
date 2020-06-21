@@ -3,4 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="descriptions">
+        <item>> 1\, Nine-Part, Band Workout - developed by Tom Brady\'s trainer and the team at TB12.\n\n> This workout is meant to be done 3 - 4 days a week. Each excersise should comprise of 3 sets.\n\n> Difficulty Level = Moderate</item>
+    </string-array>
 </resources>

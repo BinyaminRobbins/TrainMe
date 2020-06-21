@@ -1,8 +1,10 @@
 package com.binyamin.trainme;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,12 +29,21 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ViewHolderClass viewHolderClass = (ViewHolderClass) holder;
 
         viewHolderClass.athleteTextView.setText(sliderItems.get(position).getAthleteName());
         viewHolderClass.athleteImageView.setImageResource(sliderItems.get(position).getImage());
         viewHolderClass.star.setImageResource(R.drawable.ic_action_star_clicked_border);
+        viewHolderClass.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(_Page3_SelectWorkout.context,_Page4_AthleteWorkout.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("tag",String.valueOf(sliderItems.get(position).getTagNum()));
+                _Page3_SelectWorkout.context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -45,6 +56,7 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
         private ImageView athleteImageView;
         private TextView athleteTextView;
         private ImageButton star;
+        private Button button;
 
         public ViewHolderClass(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +64,7 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
             athleteImageView = itemView.findViewById(R.id.athleteImageView);
             athleteTextView = itemView.findViewById(R.id.athleteTextView);
             star = itemView.findViewById(R.id.imageButtonStar);
+            button = itemView.findViewById(R.id.buttonStartWorkout);
         }
     }
 }

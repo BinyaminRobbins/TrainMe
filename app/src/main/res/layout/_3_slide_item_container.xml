@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="5dp"
+        android:background="@color/colorPrimaryDark"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,6 +23,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
            >
 
             <com.makeramen.roundedimageview.RoundedImageView
@@ -50,7 +52,7 @@
             <Button
                 android:id="@+id/startButton"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="10dp"
@@ -58,7 +60,7 @@
                 android:fontFamily="@font/font_fox"
                 android:elevation="30dp"
                 android:text="Start Workout"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageSlide"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,6 +76,8 @@
                 android:foregroundGravity="center"
                 android:gravity="center"
                 android:text="TextView"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
                 android:elevation="20dp"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
@@ -118,6 +122,43 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageButton_star" />
+
+            <TextView
+                android:id="@+id/textViewDetails"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="25dp"
+                android:background="@color/colorPrimaryDark"
+                android:elevation="50dp"
+                android:fontFamily="@font/graduate"
+                android:padding="20dp"
+                android:text="TextView"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageSlide"
+                app:layout_constraintStart_toStartOf="@+id/imageSlide"
+                app:layout_constraintTop_toTopOf="@+id/imageSlide" />
+
+            <ImageButton
+                android:id="@+id/imageButtonClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:elevation="55dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/ic_action_close"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewDetails"
+                app:layout_constraintEnd_toEndOf="@+id/textViewDetails"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/textViewDetails"
+                app:layout_constraintTop_toTopOf="@+id/textViewDetails"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

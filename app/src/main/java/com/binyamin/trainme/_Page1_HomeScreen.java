@@ -51,11 +51,11 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
 
         progressButton = new ProgressButton(_Page1_HomeScreen.this,myView);
 
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_brady,"Tom Brady",true,true));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_lebron,"Lebron James",true,true));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_conormcgregor,"Connor McGregor",false,true));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_aaronjudge,"Aaron Judge",false,false));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_zlatan,"Zlatan Ibrah.",true,false));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_brady,"Tom Brady",true,true,0));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_lebron,"Lebron James",true,true,2));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_conormcgregor,"Connor McGregor",false,true,3));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_aaronjudge,"Aaron Judge",false,false,4));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_zlatan,"Zlatan Ibrah.",true,false,5));
 
 
     }

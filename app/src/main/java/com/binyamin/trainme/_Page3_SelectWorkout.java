@@ -29,6 +29,8 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable,
         super.onCreate(savedInstanceState);
         setContentView(R.layout._3_activity_select_workout);
 
+        Toast.makeText(this,"Click the \"Star\" to add a workout to your \"Favorites\"",Toast.LENGTH_SHORT);
+
         t = new Thread(this,"DefineAthleteWorkouts");
         t.run();
 

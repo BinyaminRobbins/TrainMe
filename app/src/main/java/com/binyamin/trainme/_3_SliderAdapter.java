@@ -48,11 +48,32 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
     @Override
     public void onBindViewHolder(@NonNull final SliderViewHolder holder, final int position) {
+        final String[] detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.descriptions);
         holder.setLockedImage(sliderItems.get(position));
         holder.setImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
         holder.startButton.setTag(position);
         holder.startButton.setOnClickListener(this);
+        holder.close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.getVisibility() == View.VISIBLE){
+                    holder.details.setVisibility(View.INVISIBLE);
+                    holder.close.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        holder.info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.close.getVisibility() == View.INVISIBLE ) {
+                    holder.details.setVisibility(View.VISIBLE);
+                    holder.close.setVisibility(View.VISIBLE);
+                    holder.details.setText(detailsArray[position]);
+                }
+
+            }
+        });
         holder.star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +126,8 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         private Button startButton;
         private ImageButton info;
         private ImageButton star;
+        private TextView details;
+        private ImageButton close;
 
         SliderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -114,6 +137,8 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             startButton = itemView.findViewById(R.id.startButton);
             star = itemView.findViewById(R.id.imageButton_star);
             info = itemView.findViewById(R.id.imageButton_info);
+            details = itemView.findViewById(R.id.textViewDetails);
+            close = itemView.findViewById(R.id.imageButtonClose);
         }
         void setImage(_3_SliderItem sliderItem){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
