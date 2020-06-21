@@ -1,38 +1,23 @@
 package com.binyamin.trainme;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
-
-import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
-
-public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable {
-    private ViewPager2 viewPager2;
+public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable, View.OnClickListener {
     int backButtonCount;
     static Context context;
     private Thread t;
@@ -52,54 +37,24 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
 
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        BottomAppBar bottomAppBar = findViewById(R.id.bar);
-        bottomAppBar.replaceMenu(R.menu.bottom_navbar_menu);
-        setSupportActionBar(bottomAppBar);
-        bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-        bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.menu_favorites:
-                        Log.i("Menu Item Selected","Favorites");
-                        return true;
-                    case R.id.menu_workouts:
-                        Log.i("Menu Item Selected","Workouts");
-                        return true;
-                    case R.id.menu_premium:
-                        Log.i("Menu Item Selected","Premium");
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
-
         NavigationView navigationView = findViewById(R.id.navigationView);
 
         NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView,navController);
 
         context = getApplicationContext();
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.bottom_navbar_menu, menu);
-        return true;
+
+        ImageButton settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(this);
     }
 
-    private Runnable sliderRunnable = new Runnable() {
+    //Automate Scrolling:
+    /*private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
                // viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
         }
-    };
+    };*/
 
     @Override
     protected void onPause() {
@@ -193,5 +148,12 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         allAthleteWorkouts.add(1,new AllWorkouts("Lebron James",lebronWorkouts));
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.settingsButton){
+            drawerLayout.openDrawer(GravityCompat.START);
+        }
     }
 }

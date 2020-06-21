@@ -10,76 +10,58 @@
     android:theme="@style/AppTheme2"
     tools:context="._Page3_SelectWorkout">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewAppName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:background="@color/colorPrimaryDark"
-        android:elevation="20dp"
-        android:fontFamily="@font/font_fox"
-        android:gravity="center"
-        android:padding="15dp"
-        android:text="@string/app_name"
-        android:textColor="#fff"
-        android:textSize="20sp" />
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/conLayout"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:elevation="20dp"
-        android:orientation="vertical"
-        android:theme="@style/AppTheme2">
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bar"
+        <TextView
+            android:id="@+id/textViewAppName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:elevation="40dp"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="20dp"
+            android:fontFamily="@font/font_fox"
             android:gravity="center"
-            android:theme="@style/AppTheme2"
-            app:fabAlignmentMode="end"
-            app:menu="@menu/bottom_navbar_menu"
-            app:navigationIcon="@drawable/ic_action_settings" />
+            android:padding="15dp"
+            android:text="@string/app_name"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
+        <ImageButton
+            android:id="@+id/settingsButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/ic_action_settings"
+            android:elevation="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewAppName"
+            app:layout_constraintEnd_toEndOf="@+id/textViewAppName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewAppName"
+            app:layout_constraintTop_toTopOf="@+id/textViewAppName" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/colorAccentBlue"
-            android:elevation="50dp"
-            android:src="@drawable/ic_action_search"
-            app:fabSize="auto"
-            app:layout_anchor="@id/bar" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <fragment
             android:id="@+id/navHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            app:defaultNavHost="true"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_alignBottom="@id/conLayout"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="90dp"
-            app:navGraph="@navigation/main_nav"
-            android:layout_below="@id/textViewAppName"
-             />
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAppName"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            app:navGraph="@navigation/main_nav" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"

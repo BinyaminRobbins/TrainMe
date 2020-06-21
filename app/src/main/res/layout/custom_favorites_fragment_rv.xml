@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:paddingStart="10dp"
+            android:paddingTop="-5dp"
+            android:paddingBottom="-10dp">
+
+            <ImageView
+                android:id="@+id/athleteImageView"
+                android:layout_width="100dp"
+                android:layout_height="130dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/homescreen_brady" />
+
+            <TextView
+                android:id="@+id/athleteTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/graduate"
+                android:gravity="center"
+                android:text="Lebron James"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="@+id/athleteImageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintStart_toEndOf="@+id/athleteImageView"
+                app:layout_constraintTop_toTopOf="@+id/athleteImageView"
+                app:layout_constraintVertical_bias="0.3" />
+
+            <ImageButton
+                android:id="@+id/imageButtonStar"
+                android:elevation="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/athleteTextView"
+                android:layout_centerHorizontal="false"
+                android:layout_toRightOf="@id/athleteImageView"
+                android:background="@drawable/ic_action_star_clicked_border"
+                app:layout_constraintBottom_toBottomOf="@+id/athleteImageView"
+                app:layout_constraintEnd_toEndOf="@+id/athleteTextView"
+                app:layout_constraintStart_toStartOf="@+id/athleteTextView"
+                app:layout_constraintTop_toBottomOf="@+id/athleteTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

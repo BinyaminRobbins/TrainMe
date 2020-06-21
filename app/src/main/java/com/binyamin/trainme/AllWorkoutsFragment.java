@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 public class AllWorkoutsFragment extends Fragment {
     public static ArrayList<_3_SliderItem> list = new ArrayList<>();
-    private Handler sliderHandler = new Handler();
+    static ArrayList<_3_SliderItem> sliderItems;
 
 
     public AllWorkoutsFragment() {
@@ -37,7 +37,7 @@ public class AllWorkoutsFragment extends Fragment {
         ViewPager2 viewPager2 = (ViewPager2) view.findViewById(R.id.ImageSlider);
 
         //preparing list of images from drawable folder
-        ArrayList<_3_SliderItem> sliderItems = _Page1_HomeScreen.sliderItems;
+        sliderItems = _Page1_HomeScreen.sliderItems;
 
         list.clear();
         for(_3_SliderItem item : sliderItems){
