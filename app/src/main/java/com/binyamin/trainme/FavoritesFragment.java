@@ -29,7 +29,7 @@ public class FavoritesFragment extends Fragment {
         LinearLayoutManager manager = new LinearLayoutManager(_Page3_SelectWorkout.context, RecyclerView.VERTICAL, false);
         rv.setLayoutManager(manager);
         ArrayList<_3_SliderItem> sliderItems = new ArrayList<>();
-        for(_3_SliderItem item : AllWorkoutsFragment.sliderItems){
+        for(_3_SliderItem item : _Page1_HomeScreen.sliderItems){
             if(item.getIsFavorite()){
                 sliderItems.add(item);
             }

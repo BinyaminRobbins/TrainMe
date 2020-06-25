@@ -2,8 +2,8 @@ package com.binyamin.trainme;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.util.Log;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +19,12 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
-import java.util.zip.CheckedOutputStream;
 
 public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder> implements View.OnClickListener {
     private List<_3_SliderItem> sliderItems;
     private ViewPager2 viewPager2;
+    //SQLiteDatabase database = _Page1_HomeScreen.database;
+    Cursor c;
     boolean colorChanged;
 
     public _3_SliderAdapter(List<_3_SliderItem> sliderItems, ViewPager2 viewPager2) {
@@ -80,11 +81,26 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                 if (!colorChanged) {
                     holder.star.setImageResource(R.drawable.ic_action_star_clicked);
                     colorChanged = true;
-                    sliderItems.get(position).setAsFavorite(true);
+                    //sliderItems.get(position).setAsFavorite(true);
+
+                    try {
+                        String query = "UPDATE  workouts  SET  isFavorite  = 'true' WHERE athleteName  = ' " + sliderItems.get(position).getAthleteName() + " ' ";
+                        //database.execSQL(query);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
                 } else if (colorChanged) {
                     holder.star.setImageResource(R.drawable.ic_action_star);
                     colorChanged = false;
-                    sliderItems.get(position).setAsFavorite(false);
+                    //sliderItems.get(position).setAsFavorite(false);
+
+                    try {
+                        String query = "UPDATE  workouts  SET  isFavorite  = 'false' + WHERE  athleteName  = ' " + sliderItems.get(position).getAthleteName() + " ' ";
+                        //database.execSQL(query);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
 
                 }
             }
@@ -104,7 +120,6 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     public void onClick(View v) {
         Context context = _Page3_SelectWorkout.context;
         if(v.getId() == R.id.startButton){
-            //Toast.makeText(context,"Button Tag is : " + v.getTag(),Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(context,_Page4_AthleteWorkout.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("tag",v.getTag().toString());

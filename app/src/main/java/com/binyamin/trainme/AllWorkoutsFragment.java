@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 public class AllWorkoutsFragment extends Fragment {
     public static ArrayList<_3_SliderItem> list = new ArrayList<>();
-    static ArrayList<_3_SliderItem> sliderItems;
+    ArrayList<_3_SliderItem> sliderItems;
 
 
     public AllWorkoutsFragment() {
