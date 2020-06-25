@@ -150,14 +150,14 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         }
         void setLockedImage(_3_SliderItem sliderItem){
             if(sliderItem.getIfRequiresPremium() == true)
-                lockedImage.setImageResource(R.drawable.padlock);
+                lockedImage.setImageResource(R.drawable.ic_action_lock);
         }
     }
-    private Runnable runnable = new Runnable() {
+   /* private Runnable runnable = new Runnable() {
         @Override
         public void run() {
             sliderItems.addAll(sliderItems);
             notifyDataSetChanged();
         }
-    };
+    };*/
 }

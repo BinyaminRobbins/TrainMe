@@ -1,5 +1,6 @@
 package com.binyamin.trainme;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -52,10 +53,10 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
         progressButton = new ProgressButton(_Page1_HomeScreen.this,myView);
 
         sliderItems.add(new _3_SliderItem(R.drawable.homescreen_brady,"Tom Brady",true,true,0));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_lebron,"Lebron James",true,true,2));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_conormcgregor,"Connor McGregor",false,true,3));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_aaronjudge,"Aaron Judge",false,false,4));
-        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_zlatan,"Zlatan Ibrah.",true,false,5));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_lebron,"Lebron James",true,true,1));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_conormcgregor,"Connor McGregor",false,true,2));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_aaronjudge,"Aaron Judge",false,false,3));
+        sliderItems.add(new _3_SliderItem(R.drawable.homescreen_zlatan,"Zlatan Ibrah.",true,false,4));
 
 
     }
