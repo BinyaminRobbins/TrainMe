@@ -35,19 +35,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeader" />
 
-            <ImageView
-                android:id="@+id/imageButton_lock"
-                android:layout_width="35dp"
-                android:layout_height="30dp"
+            <include
+                layout="@layout/custom_cv_workoutlocked"
+                android:id="@+id/include_lock"
+                android:layout_width="match_parent"
+                android:visibility="invisible"
+                android:layout_height="wrap_content"
                 android:elevation="40dp"
                 app:layout_constraintBottom_toTopOf="@+id/startButton"
                 app:layout_constraintEnd_toEndOf="@id/imageSlide"
                 app:layout_constraintStart_toStartOf="@+id/imageSlide"
                 app:layout_constraintTop_toTopOf="@+id/imageSlide"
                 app:layout_constraintVertical_bias="1.0"
-                android:layout_marginBottom="5dp"
-                android:padding="1dp"/>
-
+                android:layout_marginBottom="8dp"
+             />
 
             <Button
                 android:id="@+id/startButton"

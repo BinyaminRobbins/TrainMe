@@ -24,13 +24,6 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
     int arrayPos = 0;
     Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_aaronjudge, R.drawable.homescreen_zlatan};
     static ProgressButton progressButton;
-    SQLiteDatabase database;
-
-
-    public void setUpBackend(){
-        database = this.openOrCreateDatabase("Workouts",MODE_PRIVATE,null);
-        SliderList sliderList = new SliderList(database);
-    }
 
 
     @Override
@@ -70,7 +63,6 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //setUpBackend();
                 Intent intent = new Intent(getApplicationContext(), _Page3_SelectWorkout.class);
                 startActivity(intent);
                 finish();

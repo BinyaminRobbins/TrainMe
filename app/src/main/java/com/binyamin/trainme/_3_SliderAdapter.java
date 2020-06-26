@@ -89,13 +89,10 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
                     try {
                         SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts",Context.MODE_PRIVATE,null);
-                        //String query = "UPDATE  workouts  SET  isFavorite  = 'true' WHERE tagNum  = ' " + sliderItems.get(position).getTagNum() + " ' ";
-                        //database.execSQL(query);
                         ContentValues cv = new ContentValues();
                         cv.put("isFavorite","true"); //These Fields should be your String values of actual column names
 
                         database.update("Workouts", cv, "tagNum="+sliderItems.get(position).getTagNum(), null);
-                        Log.i("UPDATE","Should have updated TO FAVORITE");
 
                     }catch(Exception e){
                         e.printStackTrace();
@@ -107,17 +104,11 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
                     try {
                         SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts",Context.MODE_PRIVATE,null);
-                        /*String query = "UPDATE  workouts  SET  isFavorite  = 'false' WHERE athleteName  = ' " + sliderItems.get(position).getAthleteName() + " ' ";
-                        database.execSQL(query);*/
 
                         ContentValues cv = new ContentValues();
                         cv.put("isFavorite","false"); //These Fields should be your String values of actual column names
 
                         database.update("Workouts", cv, "tagNum ="+sliderItems.get(position).getTagNum(), null);
-                        Log.i("UPDATE","Should have updated TO FAVORITE");
-
-                        Log.i("UPDATE","Should have updated to NOT FAVORITE");
-
                     }catch(Exception e){
                         e.printStackTrace();
                     }
@@ -157,7 +148,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
         private RoundedImageView imageView;
         private TextView textViewHeader;
-        private ImageView lockedImage;
+        private View locked;
         private Button startButton;
         private ImageButton info;
         private ImageButton star;
@@ -168,7 +159,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             super(itemView);
             imageView = itemView.findViewById(R.id.imageSlide);
             textViewHeader = itemView.findViewById(R.id.textViewHeader);
-            lockedImage = itemView.findViewById(R.id.imageButton_lock);
+            locked = itemView.findViewById(R.id.include_lock);
             startButton = itemView.findViewById(R.id.startButton);
             star = itemView.findViewById(R.id.imageButton_star);
             info = itemView.findViewById(R.id.imageButton_info);
@@ -184,8 +175,10 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             textViewHeader.setText(sliderItem.getAthleteName());
         }
         void setLockedImage(_3_SliderItem sliderItem){
-            if(sliderItem.getIfRequiresPremium() == true)
-                lockedImage.setImageResource(R.drawable.ic_action_lock);
+            if(sliderItem.getIfRequiresPremium() == true){
+                locked.setVisibility(View.VISIBLE);
+            }
+
         }
     }
    /* private Runnable runnable = new Runnable() {

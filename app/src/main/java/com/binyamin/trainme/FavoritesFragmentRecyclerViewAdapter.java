@@ -1,8 +1,11 @@
 package com.binyamin.trainme;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +50,12 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                sliderItems.get(position).setAsFavorite(false);
+                                SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
+
+                                ContentValues cv = new ContentValues();
+                                cv.put("isFavorite","false"); //These Fields should be your String values of actual column names
+
+                                database.update("Workouts", cv, "tagNum="+sliderItems.get(position).getTagNum(), null);
                                 FavoritesFragment.updateList();
                             }
                         })
