@@ -1,9 +1,11 @@
 package com.binyamin.trainme;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +25,14 @@ import java.util.List;
 public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder> implements View.OnClickListener {
     private List<_3_SliderItem> sliderItems;
     private ViewPager2 viewPager2;
-    //SQLiteDatabase database = _Page1_HomeScreen.database;
-    Cursor c;
     boolean colorChanged;
 
     public _3_SliderAdapter(List<_3_SliderItem> sliderItems, ViewPager2 viewPager2) {
-        this.sliderItems = sliderItems;
+       // this.sliderItems = sliderItems;
         this.viewPager2 = viewPager2;
+        SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
+        SliderList sliderList = new SliderList(database);
+        this.sliderItems = sliderList.getSliderList();
     }
 
 
@@ -45,6 +48,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                         false
                 )
         );
+
     }
 
     @Override
@@ -84,8 +88,15 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                     //sliderItems.get(position).setAsFavorite(true);
 
                     try {
-                        String query = "UPDATE  workouts  SET  isFavorite  = 'true' WHERE athleteName  = ' " + sliderItems.get(position).getAthleteName() + " ' ";
+                        SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts",Context.MODE_PRIVATE,null);
+                        //String query = "UPDATE  workouts  SET  isFavorite  = 'true' WHERE tagNum  = ' " + sliderItems.get(position).getTagNum() + " ' ";
                         //database.execSQL(query);
+                        ContentValues cv = new ContentValues();
+                        cv.put("isFavorite","true"); //These Fields should be your String values of actual column names
+
+                        database.update("Workouts", cv, "tagNum="+sliderItems.get(position).getTagNum(), null);
+                        Log.i("UPDATE","Should have updated TO FAVORITE");
+
                     }catch(Exception e){
                         e.printStackTrace();
                     }
@@ -93,11 +104,20 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                 } else if (colorChanged) {
                     holder.star.setImageResource(R.drawable.ic_action_star);
                     colorChanged = false;
-                    //sliderItems.get(position).setAsFavorite(false);
 
                     try {
-                        String query = "UPDATE  workouts  SET  isFavorite  = 'false' + WHERE  athleteName  = ' " + sliderItems.get(position).getAthleteName() + " ' ";
-                        //database.execSQL(query);
+                        SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts",Context.MODE_PRIVATE,null);
+                        /*String query = "UPDATE  workouts  SET  isFavorite  = 'false' WHERE athleteName  = ' " + sliderItems.get(position).getAthleteName() + " ' ";
+                        database.execSQL(query);*/
+
+                        ContentValues cv = new ContentValues();
+                        cv.put("isFavorite","false"); //These Fields should be your String values of actual column names
+
+                        database.update("Workouts", cv, "tagNum ="+sliderItems.get(position).getTagNum(), null);
+                        Log.i("UPDATE","Should have updated TO FAVORITE");
+
+                        Log.i("UPDATE","Should have updated to NOT FAVORITE");
+
                     }catch(Exception e){
                         e.printStackTrace();
                     }

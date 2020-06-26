@@ -1,6 +1,8 @@
 package com.binyamin.trainme;
 
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class AllWorkoutsFragment extends Fragment {
-    public static ArrayList<_3_SliderItem> list = new ArrayList<>();
+   // public static ArrayList<_3_SliderItem> list = new ArrayList<>();
     ArrayList<_3_SliderItem> sliderItems;
 
 
@@ -34,15 +36,18 @@ public class AllWorkoutsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ViewPager2 viewPager2 = (ViewPager2) view.findViewById(R.id.ImageSlider);
+        ViewPager2 viewPager2 = view.findViewById(R.id.ImageSlider);
 
         //preparing list of images from drawable folder
-        sliderItems = _Page1_HomeScreen.sliderItems;
+        SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
+        SliderList sliderList = new SliderList(database);
+        sliderItems = sliderList.getSliderList();
 
-        list.clear();
+        /*list.clear();
         for(_3_SliderItem item : sliderItems){
             list.add(item);
         }
+         */
 
         viewPager2.setAdapter(new _3_SliderAdapter(sliderItems, viewPager2));
         viewPager2.setClipToPadding(false);

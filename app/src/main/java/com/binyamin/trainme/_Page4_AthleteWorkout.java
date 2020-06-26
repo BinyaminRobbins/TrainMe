@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import static com.binyamin.trainme._Page2_UserDetails.recyclerView;
 
 public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-    final ArrayList<_3_SliderItem> myList = AllWorkoutsFragment.list;
+    ArrayList<_3_SliderItem> myList = new ArrayList<>();
     ImageView backButton;
     static int tagNum;
     Spinner spinner;
@@ -62,6 +63,10 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
             }
 
             ImageView imageViewHeader = findViewById(R.id.imageViewHeader);
+
+            SQLiteDatabase database = getApplicationContext().openOrCreateDatabase("Workouts",MODE_PRIVATE,null);
+            SliderList sliderList = new SliderList(database);
+            myList = sliderList.getSliderList();
 
             _3_SliderItem sliderItem = myList.get(tagNum);
 
@@ -112,12 +117,11 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
             Log.i("CurrentItem", currentItem);
             for (AthleteWorkouts workout : athleteWorkoutList) {
                 if (workout.getCategory().equals(currentItem)) {
-                    Log.i("CurrenWorkoutCategory", workout.getCategory());
+                    Log.i("CurrentWorkoutCategory", workout.getCategory());
                     selectWorkoutList.add(workout);
                     adapter.notifyDataSetChanged();
                 }
             }
-            //Log.i("Select Workout",selectWorkoutList.get(0).getWorkoutName().toString());
             adapter.notifyDataSetChanged();
         }
 
