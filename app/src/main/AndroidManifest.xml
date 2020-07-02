@@ -12,12 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="._Page4_AthleteWorkout"></activity>
-        <activity
-            android:name="._Page3_SelectWorkout"
-            android:label="@string/app_name" />
+        <activity android:name="._Page3_SelectWorkout"/>
         <activity android:name="._Page2_UserDetails" />
-        <activity android:name=".Athlete" />
-        <activity android:name=".Select_A_Workout" />
         <activity android:name="._Page1_HomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

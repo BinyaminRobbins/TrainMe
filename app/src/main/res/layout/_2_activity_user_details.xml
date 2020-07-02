@@ -71,59 +71,62 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewSubHeader"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="-10dp"
-        android:elevation="40dp"
-        app:cardElevation="10dp"
-        app:cardMaxElevation="10dp"
-        app:cardPreventCornerOverlap="false"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/background_custom_cardview"
+        android:clipChildren="false"
+        app:cardCornerRadius="0dp"
+        app:cardPreventCornerOverlap="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="-20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:clipChildren="false">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/signup_recycler_view"
+            <FrameLayout
+                android:id="@+id/flFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="false"
-                android:longClickable="false"
-                android:overScrollMode="never"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:clipToPadding="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.cardview.widget.CardView>
+
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:progressBarStyleHorizontal"
-        android:progress="0"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/cv"
+        android:progress="0"
+        android:progressDrawable="@drawable/_2_progressbar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:progressDrawable="@drawable/_2_progressbar">
-    </ProgressBar>
+        app:layout_constraintVertical_bias="0.0"></ProgressBar>
 
     <ImageView
         android:id="@+id/checkmark"

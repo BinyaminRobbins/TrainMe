@@ -1,6 +1,7 @@
 package com.binyamin.trainme;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -9,15 +10,20 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.ImageButton;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable, View.OnClickListener {
+public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     int backButtonCount;
     static Context context;
     private Thread t;
@@ -34,6 +40,10 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable,
         t = new Thread(this,"DefineAthleteWorkouts");
         t.run();
 
+       Toolbar toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
 
         backButtonCount = 0;
 
@@ -46,8 +56,6 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable,
 
         context = getApplicationContext();
 
-        ImageButton settingsButton = findViewById(R.id.settingsButton);
-        settingsButton.setOnClickListener(this);
     }
 
     //Automate Scrolling:
@@ -153,9 +161,33 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable,
     }
 
     @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.settingsButton){
-            drawerLayout.openDrawer(GravityCompat.START);
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflator = getMenuInflater();
+        inflator.inflate(R.menu.search_menu,menu);
+
+        MenuItem drawerItem = menu.findItem(R.id.settings_icon);
+        drawerItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+
+        MenuItem searchItem = menu.findItem(R.id.search_icon);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setQueryHint("Search Here");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;
     }
 }

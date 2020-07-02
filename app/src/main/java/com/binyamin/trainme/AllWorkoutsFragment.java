@@ -43,11 +43,6 @@ public class AllWorkoutsFragment extends Fragment {
         SliderList sliderList = new SliderList(database);
         sliderItems = sliderList.getSliderList();
 
-        /*list.clear();
-        for(_3_SliderItem item : sliderItems){
-            list.add(item);
-        }
-         */
 
         viewPager2.setAdapter(new _3_SliderAdapter(sliderItems, viewPager2));
         viewPager2.setClipToPadding(false);
@@ -84,6 +79,7 @@ public class AllWorkoutsFragment extends Fragment {
 
 
     }
+
 
 
 }

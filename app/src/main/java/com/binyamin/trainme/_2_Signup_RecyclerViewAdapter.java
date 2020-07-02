@@ -140,24 +140,28 @@ public class _2_Signup_RecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         if(progressBar.getProgress() == 0) {
             setAgesUnclickable();
             pos = 1;
-        }
-        else if(progressBar.getProgress() == 33) {
-            setGoalsUnClickable();
-            pos = 2;
-        }
-        else if(progressBar.getProgress() == 66) {
-            setGenderUnClickable();
-            pos = 3;
-        }
-        /*else if(progressBar.getProgress() == 100) {
-            pos = 4;
-        }*/
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     _Page2_UserDetails.recyclerView.scrollToPosition(pos);
                 }
             }, 500);
+        }
+        else if(progressBar.getProgress() == 33) {
+            setGoalsUnClickable();
+            pos = 2;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    _Page2_UserDetails.recyclerView.scrollToPosition(pos);
+                }
+            }, 500);
+        }
+        else if(progressBar.getProgress() == 66) {
+            setGenderUnClickable();
+            pos = 3;
+
+        }
 
         v.setBackgroundColor(Color.parseColor("#1976d2"));
         _2_ProgressBarAnimation anim;
@@ -165,14 +169,14 @@ public class _2_Signup_RecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             setGenderUnClickable();
             anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), 100);
             _Page2_UserDetails.checkmark.setVisibility(View.VISIBLE);
-            new Handler().postDelayed(new Runnable() {
+           /* new Handler().postDelayed(new Runnable() {
                 @Override
-                public void run() {
+                public void run() {*/
                     Intent intent = new Intent(context,_Page3_SelectWorkout.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
-                }
-            }, 500);
+               /* }
+            }, 500);*/
 
         }else {
             anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), progressBar.getProgress() + 33);

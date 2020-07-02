@@ -31,6 +31,9 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout._1_homescreen_layout);
 
+        myView = findViewById(R.id.include);
+        myView.setOnClickListener(this);
+
         final Handler handler = new Handler();
         final int delay = 1000; //milliseconds
         final ImageView imageView = findViewById(R.id.imageView);
@@ -49,8 +52,6 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
         }, delay);
 
 
-        myView = findViewById(R.id.include);
-        myView.setOnClickListener(this);
 
         progressButton = new ProgressButton(_Page1_HomeScreen.this,myView);
 

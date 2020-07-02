@@ -7,44 +7,16 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:elevation="-5dp"
-    android:theme="@style/AppTheme2"
     tools:context="._Page3_SelectWorkout">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textViewAppName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:elevation="20dp"
-            android:fontFamily="@font/font_fox"
-            android:gravity="center"
-            android:padding="15dp"
-            android:text="@string/app_name"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageButton
-            android:id="@+id/settingsButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/ic_action_settings"
-            android:elevation="25dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewAppName"
-            app:layout_constraintEnd_toEndOf="@+id/textViewAppName"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textViewAppName"
-            app:layout_constraintTop_toTopOf="@+id/textViewAppName" />
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar"/>
 
 
         <fragment
@@ -52,13 +24,12 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAppName"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:navGraph="@navigation/main_nav" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

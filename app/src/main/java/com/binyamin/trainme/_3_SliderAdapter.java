@@ -85,6 +85,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                 if (!colorChanged) {
                     holder.star.setImageResource(R.drawable.ic_action_star_clicked);
                     colorChanged = true;
+
                     //sliderItems.get(position).setAsFavorite(true);
 
                     try {
