@@ -4,20 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -29,6 +32,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     private Thread t;
     static ArrayList<AllWorkouts> allAthleteWorkouts = new ArrayList<>();
     DrawerLayout drawerLayout;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,8 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
 
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        NavigationView navigationView = findViewById(R.id.navigationView);
+
+        navigationView = findViewById(R.id.navigationView);
 
         NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView,navController);
@@ -165,7 +170,8 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         MenuInflater inflator = getMenuInflater();
         inflator.inflate(R.menu.search_menu,menu);
 
-        MenuItem drawerItem = menu.findItem(R.id.settings_icon);
+        final MenuItem drawerItem = menu.findItem(R.id.settings_icon);
+
         drawerItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -176,10 +182,21 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
 
         MenuItem searchItem = menu.findItem(R.id.search_icon);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("Search Here");
+        searchView.setQueryHint("Athlete Name");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                closeKeyboard();
+                SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
+                SliderList sliderList = new SliderList(database);
+                ArrayList<_3_SliderItem> sliderItems = sliderList.getSliderList();
+                for(_3_SliderItem item : sliderItems){
+                    String athleteName = item.getAthleteName().toLowerCase();
+                    if(athleteName.matches(query.toLowerCase()) || athleteName.contains(query.toLowerCase()) ){
+                        AllWorkoutsFragment.viewPager2.setCurrentItem(item.getTagNum(),true);
+                        return true;
+                    }
+                }
                 return false;
             }
 
@@ -188,6 +205,33 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
                 return false;
             }
         });
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                if(!navigationView.getMenu().findItem(R.id.menuNavigation_workouts).isChecked()){
+                    Intent intent = new Intent(context, _Page3_SelectWorkout.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                closeKeyboard();
+                return true;
+            }
+        });
         return true;
+    }
+
+    public void closeKeyboard(){
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

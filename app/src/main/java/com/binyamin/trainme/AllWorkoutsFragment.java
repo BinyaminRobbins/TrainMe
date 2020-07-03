@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -14,8 +15,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 
@@ -24,8 +30,9 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class AllWorkoutsFragment extends Fragment {
-   // public static ArrayList<_3_SliderItem> list = new ArrayList<>();
     ArrayList<_3_SliderItem> sliderItems;
+    static ViewPager2 viewPager2;
+    static boolean isActive;
 
 
     public AllWorkoutsFragment() {
@@ -36,7 +43,7 @@ public class AllWorkoutsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ViewPager2 viewPager2 = view.findViewById(R.id.ImageSlider);
+        viewPager2 = view.findViewById(R.id.ImageSlider);
 
         //preparing list of images from drawable folder
         SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
@@ -79,7 +86,5 @@ public class AllWorkoutsFragment extends Fragment {
 
 
     }
-
-
 
 }
