@@ -6,10 +6,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +29,6 @@ public class Fragment_UserAge extends Fragment implements View.OnClickListener {
     CardView fifties;
     CardView sixties;
     ProgressBar progressBar;
-
-
     public Fragment_UserAge() {
         // Required empty public constructor
     }
@@ -60,23 +60,37 @@ public class Fragment_UserAge extends Fragment implements View.OnClickListener {
         sixties.setOnClickListener(this);
 
         progressBar = _Page2_UserDetails.progressBar;
-
     }
 
     @Override
     public void onClick(View v) {
-        //if(v.getTag().toString() == String.valueOf(1)){
-        Log.i("CLicked","To Frag 2");
+        int delay = 800;
+
+        teens.setClickable(false);
+        twenties.setClickable(false);
+        thirties.setClickable(false);
+        fourties.setClickable(false);
+        fifties.setClickable(false);
+        sixties.setClickable(false);
+
         _2_ProgressBarAnimation anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), 33);
-        anim.setDuration(300);
+        anim.setDuration(delay - 400);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Fragment_UserGoals fragUserGoals = new Fragment_UserGoals();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.disallowAddToBackStack();
+                transaction.replace(R.id.flFragment,fragUserGoals).commit();
+                //Fragment added to Frame Layout
+            }
+        },delay + 250);
+
         progressBar.startAnimation(anim);
+        v.animate().rotationXBy(360).setDuration(delay).start();
 
-            Fragment_UserGoals fragUserGoals = new Fragment_UserGoals();
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.disallowAddToBackStack();
-            transaction.replace(R.id.flFragment,fragUserGoals).commit();
-            //Fragment added to Frame Layout
 
-        //}
     }
 }

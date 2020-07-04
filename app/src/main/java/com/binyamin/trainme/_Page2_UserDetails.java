@@ -2,6 +2,7 @@ package com.binyamin.trainme;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
@@ -17,27 +18,6 @@ public class _Page2_UserDetails extends AppCompatActivity {
     static ProgressBar progressBar;
     static ImageView checkmark;
     static Context context;
-
-
-    private void intitRecyclerView(){
-      /*  Log.i("Layout","Initiated");
-        recyclerView = findViewById(R.id.signup_recycler_view);
-        LinearLayoutManager manager = new _2_RecyclerViewScrollSpeed(this, _2_RecyclerViewScrollSpeed.HORIZONTAL, false){
-            @Override
-            public boolean canScrollHorizontally() {
-                return false;
-            }
-        };
-        recyclerView.setLayoutManager(manager);
-        _2_Signup_RecyclerViewAdapter adapter = new _2_Signup_RecyclerViewAdapter();
-        recyclerView.setAdapter(adapter);*/
-
-    }
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +35,12 @@ public class _Page2_UserDetails extends AppCompatActivity {
 
          context = getApplicationContext();
 
-        intitRecyclerView();
-
     }
 
     @Override
     public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onPostCreate(savedInstanceState, persistentState);
         _Page1_HomeScreen.progressButton.endAnimation();
+
     }
 }

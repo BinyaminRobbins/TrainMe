@@ -50,11 +50,10 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
 
 
         adapter = new _4_RecyclerViewAdapter(selectWorkoutList);
-        LinearLayoutManager manager = new _2_RecyclerViewScrollSpeed(getApplicationContext(), _2_RecyclerViewScrollSpeed.VERTICAL, false);
+        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
-        //workoutCategories.clear();
         for (AthleteWorkouts workouts : _Page3_SelectWorkout.allAthleteWorkouts.get(tagNum).getAthleteWorkoutArrayList()) {
             String category = workouts.getCategory();
             Log.i("Category",category);

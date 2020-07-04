@@ -24,7 +24,5 @@ public class _3_SliderItem {
     public boolean getIsFavorite(){return isFavorite;}
     public int getTagNum(){return tagNum;}
 
-    public void setAsFavorite(boolean setFavorite){
-        this.isFavorite = setFavorite;
-    }
+
 }

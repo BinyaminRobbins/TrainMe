@@ -59,7 +59,7 @@
         android:inputType="textMultiLine"
         android:singleLine="false"
         android:text="Containing proven workouts used by your favorite athletes - now at your complete disposal!"
-        android:textColor="@android:color/black"
+        android:textColor="@color/textButtonColor"
         android:textSize="18sp"
         android:textStyle="normal|bold"
         app:layout_constraintBottom_toBottomOf="parent"

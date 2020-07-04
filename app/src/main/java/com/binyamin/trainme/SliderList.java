@@ -20,7 +20,7 @@ public class SliderList {
         ArrayList<_3_SliderItem> sliderItems = new ArrayList<>();
 
         try{
-            _Page3_SelectWorkout.context.deleteDatabase("Workouts");
+            //_Page3_SelectWorkout.context.deleteDatabase("Workouts");
             File dbFile = _Page3_SelectWorkout.context.getDatabasePath("Workouts");
 
             if(!dbFile.exists()) {

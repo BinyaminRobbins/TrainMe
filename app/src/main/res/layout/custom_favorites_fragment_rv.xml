@@ -10,6 +10,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/cv_favoritesfragment"
+        app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,16 +21,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/cv_favoritesfragment"
             android:clipChildren="true"
             android:clipToPadding="true"
             android:paddingStart="10dp"
-            android:paddingTop="-5dp"
-            android:paddingBottom="-10dp">
+            android:paddingTop="2dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="2dp">
 
             <ImageView
                 android:id="@+id/athleteImageView"
                 android:layout_width="100dp"
                 android:layout_height="130dp"
+                android:cropToPadding="true"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -89,13 +94,17 @@
 
             <Button
                 android:id="@+id/buttonStartWorkout"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="35dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:background="@drawable/button_custom_selectworkout"
                 android:fontFamily="@font/font_fox"
                 android:padding="5dp"
                 android:text="Start Workout"
-                android:textSize="15sp"
+                android:textColor="@color/textButtonColor"
+                android:textSize="13sp"
+                android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/imageButtonStar"
                 app:layout_constraintStart_toStartOf="@+id/imageButtonInfo"

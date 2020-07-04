@@ -32,7 +32,6 @@ import java.util.ArrayList;
 public class AllWorkoutsFragment extends Fragment {
     ArrayList<_3_SliderItem> sliderItems;
     static ViewPager2 viewPager2;
-    static boolean isActive;
 
 
     public AllWorkoutsFragment() {

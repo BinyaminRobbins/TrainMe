@@ -38,6 +38,8 @@
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        app:itemIconTint="@color/drawer_item"
+        app:itemTextColor="@color/drawer_item"
         app:headerLayout="@layout/custom_layout_navigation_header"
         app:menu="@menu/navigation_menu_resources"
         android:layout_gravity="start"/>
