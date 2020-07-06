@@ -50,12 +50,13 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
                                 SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
 
                                 ContentValues cv = new ContentValues();
                                 cv.put("isFavorite","false"); //These Fields should be your String values of actual column names
 
-                                database.update("Workouts", cv, "tagNum="+sliderItems.get(position).getTagNum(), null);
+                                database.update("workouts", cv, "tagNum="+sliderItems.get(position).getTagNum(), null);
                                 FavoritesFragment.updateList();
                             }
                         })

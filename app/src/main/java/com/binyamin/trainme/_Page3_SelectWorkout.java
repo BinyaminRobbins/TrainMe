@@ -39,6 +39,8 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         super.onCreate(savedInstanceState);
         setContentView(R.layout._3_activity_select_workout);
 
+        context = getApplicationContext();
+
         Toast.makeText(this,"Click the \"Star\" to add a workout to your \"Favorites\"",Toast.LENGTH_SHORT);
 
         t = new Thread(this,"DefineAthleteWorkouts");
@@ -59,7 +61,6 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView,navController);
 
-        context = getApplicationContext();
 
     }
 

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClickListener {
     View myView;
     int arrayPos = 0;
-    Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_aaronjudge, R.drawable.homescreen_zlatan};
+    Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_zlatan, R.drawable.homescreen_aaronjudge};
     static ProgressButton progressButton;
     boolean buttonPressed;
 
@@ -31,6 +31,10 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout._1_homescreen_layout);
+
+        /*deleteDatabase("Workouts");
+        getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE).edit().clear().commit();*/
+
 
         myView = findViewById(R.id.include);
         myView.setOnClickListener(this);
@@ -68,7 +72,6 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //getApplicationContext().deleteDatabase("Workouts");
                 Intent intent = new Intent(getApplicationContext(), _Page3_SelectWorkout.class);
                 startActivity(intent);
                 finish();

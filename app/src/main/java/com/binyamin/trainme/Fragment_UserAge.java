@@ -82,6 +82,7 @@ public class Fragment_UserAge extends Fragment implements View.OnClickListener {
             public void run() {
                 Fragment_UserGoals fragUserGoals = new Fragment_UserGoals();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(R.anim.frag_fade_in, R.anim.frag_fade_out);
                 transaction.disallowAddToBackStack();
                 transaction.replace(R.id.flFragment,fragUserGoals).commit();
                 //Fragment added to Frame Layout

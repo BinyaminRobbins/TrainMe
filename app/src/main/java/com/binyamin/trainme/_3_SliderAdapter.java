@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,13 +27,11 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     private List<_3_SliderItem> sliderItems;
     private ViewPager2 viewPager2;
     boolean colorChanged;
+    SQLiteDatabase database;
 
     public _3_SliderAdapter(List<_3_SliderItem> sliderItems, ViewPager2 viewPager2) {
-       // this.sliderItems = sliderItems;
+        this.sliderItems = sliderItems;
         this.viewPager2 = viewPager2;
-        SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
-        SliderList sliderList = new SliderList(database);
-        this.sliderItems = sliderList.getSliderList();
     }
 
 
@@ -86,10 +85,8 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                     holder.star.setImageResource(R.drawable.ic_action_star_clicked);
                     colorChanged = true;
 
-                    //sliderItems.get(position).setAsFavorite(true);
-
                     try {
-                        SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts",Context.MODE_PRIVATE,null);
+                        database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts",Context.MODE_PRIVATE,null);
                         ContentValues cv = new ContentValues();
                         cv.put("isFavorite","true"); //These Fields should be your String values of actual column names
 
@@ -104,12 +101,12 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                     colorChanged = false;
 
                     try {
-                        SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts",Context.MODE_PRIVATE,null);
+                        database = _Page3_SelectWorkout.context.openOrCreateDatabase("workouts",Context.MODE_PRIVATE,null);
 
                         ContentValues cv = new ContentValues();
                         cv.put("isFavorite","false"); //These Fields should be your String values of actual column names
 
-                        database.update("Workouts", cv, "tagNum ="+sliderItems.get(position).getTagNum(), null);
+                        database.update("workouts", cv, "tagNum ="+sliderItems.get(position).getTagNum(), null);
                     }catch(Exception e){
                         e.printStackTrace();
                     }
@@ -170,6 +167,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         void setImage(_3_SliderItem sliderItem){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setImageResource(sliderItem.getImage());
+           // imageView.setImageResource(R.drawable.homescreen_brady);
 
         }
         void setTextViewHeader(_3_SliderItem sliderItem){

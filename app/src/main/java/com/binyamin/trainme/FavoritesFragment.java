@@ -24,8 +24,9 @@ import java.util.ArrayList;
  */
 public class FavoritesFragment extends Fragment {
     static RecyclerView rv;
-    private static ArrayList<_3_SliderItem> sliderItems;
+    private static ArrayList<_3_SliderItem> sliderItems = new ArrayList<>();
     static ArrayList<_3_SliderItem> favoritesList = new ArrayList<>();
+    static SQLiteDatabase database;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -33,11 +34,11 @@ public class FavoritesFragment extends Fragment {
     public static void updateList(){
         LinearLayoutManager manager = new LinearLayoutManager(_Page3_SelectWorkout.context, RecyclerView.VERTICAL, false);
         rv.setLayoutManager(manager);
-        favoritesList.clear();
 
-        SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
         SliderList sliderList = new SliderList(database);
+        sliderItems.clear();
         sliderItems = sliderList.getSliderList();
+        favoritesList.clear();
 
         for(_3_SliderItem item : sliderItems){
             if(item.getIsFavorite()){
@@ -45,6 +46,7 @@ public class FavoritesFragment extends Fragment {
             }
         }
         Log.i("FavoritesList",favoritesList.toString());
+        rv.setOverScrollMode(View.OVER_SCROLL_NEVER);
         rv.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
         FavoritesFragmentRecyclerViewAdapter adapter = new FavoritesFragmentRecyclerViewAdapter(favoritesList);
         rv.setAdapter(adapter);
@@ -54,6 +56,7 @@ public class FavoritesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rv = view.findViewById(R.id.favorites_rv);
+        database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
         updateList();
     }
 
@@ -65,3 +68,4 @@ public class FavoritesFragment extends Fragment {
     }
 
 }
+

@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,7 +34,6 @@ public class AllWorkoutsFragment extends Fragment {
     ArrayList<_3_SliderItem> sliderItems;
     static ViewPager2 viewPager2;
 
-
     public AllWorkoutsFragment() {
         // Required empty public constructor
     }
@@ -46,6 +46,7 @@ public class AllWorkoutsFragment extends Fragment {
 
         //preparing list of images from drawable folder
         SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
+        Log.i("Page 3","DB Created");
         SliderList sliderList = new SliderList(database);
         sliderItems = sliderList.getSliderList();
 
@@ -70,8 +71,8 @@ public class AllWorkoutsFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-               // sliderHandler.removeCallbacks(sliderRunnable);
-               // sliderHandler.postDelayed(sliderRunnable,3000);
+                // sliderHandler.removeCallbacks(sliderRunnable);
+                // sliderHandler.postDelayed(sliderRunnable,3000);
             }
         });
 
