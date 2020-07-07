@@ -18,6 +18,7 @@
         android:layout_marginBottom="10dp"
         android:background="@color/colorPrimaryDark"
         android:cropToPadding="true"
+        android:elevation="2dp"
         android:paddingLeft="1dp"
         android:paddingTop="1dp"
         android:paddingRight="1dp"
@@ -33,24 +34,40 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_toRightOf="@id/gifImageView"
+        android:elevation="1dp"
         android:fontFamily="@font/alfa_slab_one"
         android:foregroundGravity="center_horizontal"
         android:text="Title"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textSize="19sp" />
 
     <TextView
         android:id="@+id/tvRepCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvExerciseName"
-        android:layout_marginTop="7dp"
         android:layout_alignStart="@id/tvExerciseName"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:elevation="0.3dp"
         android:fontFamily="@font/graduate"
         android:text="subTitle"
         android:textColor="@android:color/black"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvSetCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRepCount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:textSize="12sp"
+        android:textColor="@color/textButtonColor"
+        android:fontFamily="@font/graduate"
+        android:textStyle="italic"
+        android:layout_alignStart="@id/tvRepCount"
+        android:text="3 Sets" />
 
 
 </RelativeLayout>

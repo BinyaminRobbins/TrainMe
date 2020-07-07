@@ -23,9 +23,9 @@ public class _Page2_UserDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout._2_activity_user_details);
 
-        Fragment_UserAge fragUserAge = new Fragment_UserAge();
+        Fragment_UserName fragment_userName = new Fragment_UserName();
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().add(R.id.flFragment,fragUserAge).commit();
+        manager.beginTransaction().add(R.id.flFragment,fragment_userName).commit();
         //Fragment added to Frame Layout
 
 

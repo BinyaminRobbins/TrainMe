@@ -3,16 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="._Page4_AthleteWorkout">
 
     <ImageView
         android:id="@+id/imageViewHeader"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/colorAccentBlue"
-        android:scaleType="matrix"
+        android:layout_height="210dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp"
+        android:alpha="0.8"
+        android:background="@color/colorAccentBlue"
+        android:elevation="2dp"
+        android:scaleType="matrix" />
 
     <TextView
         android:id="@+id/textViewAthleteName"
@@ -21,9 +27,14 @@
         android:layout_alignTop="@+id/imageViewHeader"
         android:layout_alignBottom="@+id/imageViewHeader"
         android:layout_centerInParent="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
+        android:elevation="5dp"
         android:fontFamily="@font/graduate"
         android:gravity="center"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
         android:text="Tom Brady"
         android:textColor="@android:color/white"
         android:textSize="35sp"
@@ -32,16 +43,17 @@
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="60dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
+        android:adjustViewBounds="true"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:elevation="20dp"
+        android:elevation="6dp"
+        android:fadingEdgeLength="10dp"
         android:foregroundTint="@android:color/white"
-        android:scaleX="1.1"
-        android:scaleY="1.3"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_action_arrow_back"
         android:tint="@android:color/white" />
 
@@ -55,7 +67,10 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/spinner_background_4_" />
+        android:background="@drawable/spinner_background_4_"
+        android:elevation="3dp"
+        android:fadingEdgeLength="5dp"
+        android:popupBackground="@color/colorPrimary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/workoutRV"
@@ -64,8 +79,10 @@
         android:layout_below="@id/category_spinner"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="20dp"
-        />
+        android:layout_marginEnd="2dp"
+        android:background="@color/colorPrimary" />
 
 
 </RelativeLayout>

@@ -25,7 +25,7 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
     Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_zlatan, R.drawable.homescreen_aaronjudge};
     static ProgressButton progressButton;
     boolean buttonPressed;
-
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
 
         /*deleteDatabase("Workouts");
         getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE).edit().clear().commit();*/
-
+        sharedPreferences = this.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
 
         myView = findViewById(R.id.include);
         myView.setOnClickListener(this);
@@ -72,7 +72,14 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), _Page3_SelectWorkout.class);
+                boolean hasOpenedBefore = sharedPreferences.getBoolean("hasOpenedBefore",false);
+                Intent intent;
+                if(hasOpenedBefore == true){
+                    intent = new Intent(getApplicationContext(), _Page3_SelectWorkout.class);
+                }
+                else {
+                    intent = new Intent(getApplicationContext(), _Page2_UserDetails.class);
+                }
                 startActivity(intent);
                 finish();
             }

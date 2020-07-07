@@ -27,6 +27,7 @@ public class _4_RecyclerViewAdapter extends RecyclerView.Adapter<_4_RecyclerView
         holder.gifImageView.setImageResource(arrayName.get(position).getGif());
         holder.titleText.setText(arrayName.get(position).getWorkoutName());
         holder.subTitleText.setText(arrayName.get(position).getRepCount());
+        holder.tvSetCount.setText(arrayName.get(position).getSetCount());
 
     }
 
@@ -39,12 +40,14 @@ public class _4_RecyclerViewAdapter extends RecyclerView.Adapter<_4_RecyclerView
         GifImageView gifImageView;
         TextView titleText;
         TextView subTitleText;
+        TextView tvSetCount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             gifImageView = itemView.findViewById(R.id.gifImageView);
             titleText = itemView.findViewById(R.id.tvExerciseName);
             subTitleText = itemView.findViewById(R.id.tvRepCount);
+            tvSetCount = itemView.findViewById(R.id.tvSetCount);
         }
     }
 }

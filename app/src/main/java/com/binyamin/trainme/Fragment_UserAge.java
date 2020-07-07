@@ -73,7 +73,7 @@ public class Fragment_UserAge extends Fragment implements View.OnClickListener {
         fifties.setClickable(false);
         sixties.setClickable(false);
 
-        _2_ProgressBarAnimation anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), 33);
+        _2_ProgressBarAnimation anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), progressBar.getProgress() + 25);
         anim.setDuration(delay - 400);
 
         Handler handler = new Handler();

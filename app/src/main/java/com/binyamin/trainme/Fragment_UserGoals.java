@@ -1,6 +1,8 @@
 package com.binyamin.trainme;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +28,7 @@ public class Fragment_UserGoals extends Fragment implements View.OnClickListener
     CardView cv3;
     CardView cv4;
     ProgressBar progressBar;
+    SharedPreferences sharedPreferences;
 
     public Fragment_UserGoals() {
         // Required empty public constructor
@@ -34,6 +37,8 @@ public class Fragment_UserGoals extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        sharedPreferences = _Page2_UserDetails.context.getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
 
         cv1 = view.findViewById(R.id.cv_gainmuscle);
         cv2 = view.findViewById(R.id.cv_loseweight);
@@ -64,7 +69,7 @@ public class Fragment_UserGoals extends Fragment implements View.OnClickListener
         cv3.setClickable(false);
         cv4.setClickable(false);
 
-        _2_ProgressBarAnimation anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), progressBar.getProgress()+33);
+        _2_ProgressBarAnimation anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), progressBar.getProgress() + 25);
         anim.setDuration(delay - 400);
 
         Handler handler = new Handler();
@@ -83,8 +88,20 @@ public class Fragment_UserGoals extends Fragment implements View.OnClickListener
         progressBar.startAnimation(anim);
         v.animate().rotationXBy(360).setDuration(delay).start();
 
-
-
+        switch (v.getId()){
+            case R.id.cv_gainmuscle:
+                sharedPreferences.edit().putString("usergoals","Gain Muscle").apply();
+                break;
+            case R.id.cv_shapeforsports:
+                sharedPreferences.edit().putString("usergoals","Train for a Sport").apply();
+                break;
+            case R.id.cv_stayfit:
+                sharedPreferences.edit().putString("usergoals","Stay Generally Fit").apply();
+                break;
+            case R.id.cv_loseweight:
+                sharedPreferences.edit().putString("usergoals","Lose Weight").apply();
+                break;
+        }
 
     }
 

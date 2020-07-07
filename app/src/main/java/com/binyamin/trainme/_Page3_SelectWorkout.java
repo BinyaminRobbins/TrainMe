@@ -1,5 +1,7 @@
 package com.binyamin.trainme;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -12,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -33,6 +37,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     static ArrayList<AllWorkouts> allAthleteWorkouts = new ArrayList<>();
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         setContentView(R.layout._3_activity_select_workout);
 
         context = getApplicationContext();
+        sharedPreferences = getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
 
         Toast.makeText(this,"Click the \"Star\" to add a workout to your \"Favorites\"",Toast.LENGTH_SHORT);
 
@@ -50,18 +56,45 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
 
         setSupportActionBar(toolbar);
 
-
         backButtonCount = 0;
 
-        drawerLayout = findViewById(R.id.drawerLayout);
-
-
         navigationView = findViewById(R.id.navigationView);
+        navigationView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 
         NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView,navController);
 
+        drawerLayout = findViewById(R.id.drawerLayout);
+        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            /**
+             * Called when a drawer's position changes.
+             *
+             * @param slideOffset The new offset of this drawer within its range, from 0-1
+             *                    Example when you slide drawer from left to right, slideOffset will increase from 0 - 1 (0 when drawer closed and 1 when drawer display full)
+             */
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+                getUsername();
+            }
 
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                // do something when drawer opened
+                getUsername();
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+                // do something when drawer closed
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                getUsername();
+            }
+        });
+
+        getUsername();
     }
 
     //Automate Scrolling:
@@ -102,7 +135,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         {
             Toast.makeText(this, "Press Again to Close Application", Toast.LENGTH_SHORT).show();
             final Handler handler = new Handler();
-            final int delay = 5000; //milliseconds
+            final int delay = 3000; //milliseconds (x1000 for seconds)
             handler.postDelayed(new Runnable(){
                 public void run(){
                     backButtonCount = 0;
@@ -139,7 +172,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         bradyWorkouts.add(new AthleteWorkouts("FullBody","Deceleration Lunges",R.drawable.workout_pullup,"10 Reps","3 Sets (30s Rest)")); //need gif
         bradyWorkouts.add(new AthleteWorkouts("FullBody","Banded Shoulder Press",R.drawable.workout_pullup,"10 Reps","3 Sets (10s Rest)")); //need Gif
         bradyWorkouts.add(new AthleteWorkouts("FullBody","X Band Squat",R.drawable.workout_pullup,"10 Reps","3 Sets (10s Rest)")); //Need Gif
-        bradyWorkouts.add(new AthleteWorkouts("Mixed","X Band Squat",R.drawable.workout_pullup,"10 Reps","3 Sets (10s Rest)")); //Need Gif
+        //bradyWorkouts.add(new AthleteWorkouts("Mixed","X Band Squat",R.drawable.workout_pullup,"10 Reps","3 Sets (10s Rest)")); //Need Gif
 
         allAthleteWorkouts.add(0,new AllWorkouts("Tom Brady",bradyWorkouts));
 
@@ -177,6 +210,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 drawerLayout.openDrawer(GravityCompat.START);
+                getUsername();
                 return true;
             }
         });
@@ -235,4 +269,12 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    private void getUsername(){
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.navigationHeader_textView);
+        String username = sharedPreferences.getString("username","404 not found");
+        navUsername.setText(username);
+    }
+
 }

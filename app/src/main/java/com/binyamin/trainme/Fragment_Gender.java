@@ -1,6 +1,8 @@
 package com.binyamin.trainme;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
     CardView cvMan;
     CardView cvWoman;
     ProgressBar progressBar;
+    SharedPreferences sharedPreferences;
 
 
     public Fragment_Gender() {
@@ -31,6 +34,7 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        sharedPreferences = _Page2_UserDetails.context.getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
         cvMan = view.findViewById(R.id.cv_man);
         cvWoman = view.findViewById(R.id.cv_woman);
 
@@ -54,7 +58,7 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
         cvMan.setClickable(false);
         cvWoman.setClickable(false);
 
-        _2_ProgressBarAnimation anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), 100);
+        _2_ProgressBarAnimation anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), progressBar.getProgress() + 26);
         anim.setDuration(delay - 400);
 
         Handler handler = new Handler();
@@ -73,6 +77,14 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
         progressBar.startAnimation(anim);
         v.animate().rotationXBy(360).setDuration(delay).start();
 
+        switch(v.getId()){
+            case R.id.cv_man:
+                sharedPreferences.edit().putString("usergender","Man").apply();
+                break;
+            case R.id.cv_woman:
+                sharedPreferences.edit().putString("usergender","Woman").apply();
+                break;
+        }
 
     }
 
