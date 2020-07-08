@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,12 +17,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +40,6 @@ public class FavoritesFragment extends Fragment {
     private static ArrayList<_3_SliderItem> sliderItems = new ArrayList<>();
     static ArrayList<_3_SliderItem> favoritesList = new ArrayList<>();
     static SQLiteDatabase database;
-    SharedPreferences sharedPreferences;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -68,6 +71,17 @@ public class FavoritesFragment extends Fragment {
         rv = view.findViewById(R.id.favorites_rv);
         database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
         updateList();
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+        ImageView profileImage = view.findViewById(R.id.profilePic);
+        if(sharedPreferences.contains("profileBitmap")) {
+            String bitmap = sharedPreferences.getString("profileBitmap", "404 error");
+            byte[] imageAsBytes = Base64.decode(bitmap.getBytes(), Base64.DEFAULT);
+            profileImage.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+        }else if(sharedPreferences.contains("profileURI")){
+            String uri = sharedPreferences.getString("profileURI","404 error");
+            profileImage.setImageURI(Uri.parse(uri));
+        }
 
     }
 

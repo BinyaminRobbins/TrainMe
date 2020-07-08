@@ -16,13 +16,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +34,9 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     int backButtonCount;
     static Context context;
@@ -74,18 +81,20 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
              */
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-                getUsername();
             }
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
                 // do something when drawer opened
                 getUsername();
+                getProfilePic();
             }
 
             @Override
             public void onDrawerClosed(@NonNull View drawerView) {
                 // do something when drawer closed
+                getUsername();
+                getProfilePic();
             }
 
             @Override
@@ -95,6 +104,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         });
 
         getUsername();
+        getProfilePic();
     }
 
     //Automate Scrolling:
@@ -275,6 +285,18 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         TextView navUsername = (TextView) headerView.findViewById(R.id.navigationHeader_textView);
         String username = sharedPreferences.getString("username","404 not found");
         navUsername.setText(username);
+    }
+    private void getProfilePic(){
+        View headerView = navigationView.getHeaderView(0);
+        ImageView imageView = (ImageView) headerView.findViewById(R.id.navigationHeader_profilepic);
+        if(sharedPreferences.contains("profileBitmap")) {
+            String bitmap = sharedPreferences.getString("profileBitmap", "404 error");
+            byte[] imageAsBytes = Base64.decode(bitmap.getBytes(), Base64.DEFAULT);
+            imageView.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+        }else if(sharedPreferences.contains("profileURI")){
+            String uri = sharedPreferences.getString("profileURI","404 error");
+            imageView.setImageURI(Uri.parse(uri));
+        }
     }
 
 }
