@@ -3,6 +3,7 @@ package com.binyamin.trainme;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -28,6 +31,9 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     private ViewPager2 viewPager2;
     boolean colorChanged;
     SQLiteDatabase database;
+    SharedPreferences sharedPreferences;
+    static String[] detailsArray;
+    static Fragment_WorkoutInfo fragment_workoutInfo;
 
     public _3_SliderAdapter(List<_3_SliderItem> sliderItems, ViewPager2 viewPager2) {
         this.sliderItems = sliderItems;
@@ -52,30 +58,20 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
     @Override
     public void onBindViewHolder(@NonNull final SliderViewHolder holder, final int position) {
-        final String[] detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.descriptions);
+        sharedPreferences = _Page3_SelectWorkout.context.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+         detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.descriptions);
         holder.setLockedImage(sliderItems.get(position));
         holder.setImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
         holder.startButton.setTag(position);
         holder.startButton.setOnClickListener(this);
-        holder.close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v.getVisibility() == View.VISIBLE){
-                    holder.details.setVisibility(View.INVISIBLE);
-                    holder.close.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
+
         holder.info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.close.getVisibility() == View.INVISIBLE ) {
-                    holder.details.setVisibility(View.VISIBLE);
-                    holder.close.setVisibility(View.VISIBLE);
-                    holder.details.setText(detailsArray[position]);
-                }
-
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                fragment_workoutInfo = new Fragment_WorkoutInfo(position);
+                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fraginfo_fade_in,R.anim.fraginfo_fade_out).replace(R.id.fl_workoutInfo, fragment_workoutInfo).addToBackStack(null).commit();
             }
         });
         holder.star.setOnClickListener(new View.OnClickListener() {
@@ -119,10 +115,6 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         } else {
             holder.star.setImageResource(R.drawable.ic_action_star);
         }
-
-        /*if(position == sliderItems.size() - 2){
-            viewPager2.post(runnable);
-        }*/
     }
 
     @Override
@@ -150,8 +142,6 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         private Button startButton;
         private ImageButton info;
         private ImageButton star;
-        private TextView details;
-        private ImageButton close;
 
         SliderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -161,13 +151,10 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             startButton = itemView.findViewById(R.id.startButton);
             star = itemView.findViewById(R.id.imageButton_star);
             info = itemView.findViewById(R.id.imageButton_info);
-            details = itemView.findViewById(R.id.textViewDetails);
-            close = itemView.findViewById(R.id.imageButtonClose);
         }
         void setImage(_3_SliderItem sliderItem){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setImageResource(sliderItem.getImage());
-           // imageView.setImageResource(R.drawable.homescreen_brady);
 
         }
         void setTextViewHeader(_3_SliderItem sliderItem){
@@ -180,11 +167,4 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
         }
     }
-   /* private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            sliderItems.addAll(sliderItems);
-            notifyDataSetChanged();
-        }
-    };*/
 }

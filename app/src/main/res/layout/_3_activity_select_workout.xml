@@ -32,6 +32,17 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:navGraph="@navigation/main_nav" />
 
+        <FrameLayout
+            android:id="@+id/fl_workoutInfo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="200dp"
+            android:elevation="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

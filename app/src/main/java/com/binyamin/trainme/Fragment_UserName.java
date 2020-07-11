@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -43,7 +44,7 @@ public class Fragment_UserName extends Fragment implements View.OnKeyListener {
         Button button = view.findViewById(R.id.continueButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 int delay = 800;
                 _2_ProgressBarAnimation anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), progressBar.getProgress() + 25);
                 anim.setDuration(delay - 400);
@@ -52,12 +53,10 @@ public class Fragment_UserName extends Fragment implements View.OnKeyListener {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        AppCompatActivity activity = (AppCompatActivity) v.getContext();
                         Fragment_UserAge frag_Age = new Fragment_UserAge();
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.setCustomAnimations(R.anim.frag_fade_in, R.anim.frag_fade_out);
-                        transaction.disallowAddToBackStack();
-                        transaction.replace(R.id.flFragment,frag_Age).commit();
-                        //Fragment added to Frame Layout
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, frag_Age).addToBackStack(null).commit();
+
                     }
                 },delay + 250);
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -52,7 +53,7 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         int delay = 800;
 
         cvMan.setClickable(false);
@@ -65,11 +66,9 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 Fragment_Completed frag_completed = new Fragment_Completed();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(R.anim.frag_fade_in, R.anim.frag_fade_out);
-                transaction.disallowAddToBackStack();
-                transaction.replace(R.id.flFragment, frag_completed).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, frag_completed).addToBackStack(null).commit();
                 //Fragment added to Frame Layout
             }
         }, delay + 250);

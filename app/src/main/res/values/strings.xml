@@ -4,6 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="descriptions">
-        <item>> 1\, Nine-Part, Band Workout - developed by Tom Brady\'s trainer and the team at TB12.\n\n> This workout is meant to be done 3 - 4 days a week. Each excersise should comprise of 3 sets.\n\n> Difficulty Level = Moderate</item>
+        <item>>\t\t\tOne\, 9-Part, Band Workout - developed by Tom Brady\'s trainer and the team at TB12.\n\n>\t\t\tThis workout is meant to be done 3 - 4 days a week. Each excersise should comprise of 3 sets.\n\n>\t\t\tDifficulty :\tModerate</item>
+        <item>>\t\t\tThis workout is used by Lebron to gain muscle mass and weight by lifting heavy and eating right.\n\n>\t\t\tWORKOUT BASICS:\n\n\t\t-\t Lifting Weights 3x Per Week\n\n\t\t-\tYoga 30 Minutes Per Day\n\n\t\t-\tBodyweight + Plyometric Exercises 5-6x Per Week</item>
     </string-array>
 </resources>

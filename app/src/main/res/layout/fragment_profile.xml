@@ -165,6 +165,34 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3"
             app:layout_constraintVertical_bias="0.0" />
 
+        <TextView
+            android:id="@+id/txtAutoScroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/font_fox"
+            android:text="Auto Scroll:"
+            android:textColor="@color/textButtonColor"
+            android:textSize="14sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewUserGoals"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:thumbTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtAutoScroll"
+            app:layout_constraintStart_toStartOf="@+id/txtAutoScroll"
+            app:layout_constraintTop_toBottomOf="@+id/txtAutoScroll" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

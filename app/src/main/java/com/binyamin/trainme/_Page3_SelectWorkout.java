@@ -11,7 +11,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,7 +47,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     SharedPreferences sharedPreferences;
-
+    Handler sliderHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,28 +107,19 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
 
         getUsername();
         getProfilePic();
-    }
 
-    //Automate Scrolling:
-    /*private Runnable sliderRunnable = new Runnable() {
-        @Override
-        public void run() {
-               // viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
-        }
-    };*/
+        sliderHandler = new Handler();
+    }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //sliderHandler.removeCallbacks(sliderRunnable);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //sliderHandler.postDelayed(sliderRunnable,2000);
         backButtonCount = 0;
-
         t = new Thread(this,"DeclareWorkouts");
         t.run();
     }
@@ -255,9 +248,8 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
                 if(!navigationView.getMenu().findItem(R.id.menuNavigation_workouts).isChecked()){
-                    Intent intent = new Intent(context, _Page3_SelectWorkout.class);
-                    startActivity(intent);
-                    finish();
+                    Toast.makeText(context,"Can't Search Here",Toast.LENGTH_SHORT).show();
+                    return false;
                 }
 
                 return true;
@@ -298,5 +290,4 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
             imageView.setImageURI(Uri.parse(uri));
         }
     }
-
 }

@@ -15,9 +15,17 @@
         android:name="com.binyamin.trainme.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/menuNavigation_premium"
+        android:name="com.binyamin.trainme.Fragment_GetPremium"
+        android:label="fragment_get_premium"
+        tools:layout="@layout/fragment_get_premium" />
+
     <fragment
         android:id="@+id/menuNavigation_profile"
         android:name="com.binyamin.trainme.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
 </navigation>

@@ -20,10 +20,12 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -112,6 +114,23 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             String uri = sharedPreferences.getString("profileURI","404 error");
             profileImage.setImageURI(Uri.parse(uri));
         }
+        //} switch {
+        Switch scroll = view.findViewById(R.id.switch1);
+        boolean scrollOn = sharedPreferences.getBoolean("scrollOn",true);
+        if(scrollOn){
+            scroll.setChecked(true);
+        }else scroll.setChecked(false);
+
+        scroll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    sharedPreferences.edit().putBoolean("scrollOn",true).apply();
+                }else{
+                    sharedPreferences.edit().putBoolean("scrollOn",false).apply();
+                }
+            }
+        });
     }
 
     @Override

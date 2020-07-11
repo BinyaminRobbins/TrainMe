@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -63,7 +64,7 @@ public class Fragment_UserAge extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         int delay = 800;
 
         teens.setClickable(false);
@@ -80,11 +81,9 @@ public class Fragment_UserAge extends Fragment implements View.OnClickListener {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 Fragment_UserGoals fragUserGoals = new Fragment_UserGoals();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(R.anim.frag_fade_in, R.anim.frag_fade_out);
-                transaction.disallowAddToBackStack();
-                transaction.replace(R.id.flFragment,fragUserGoals).commit();
+                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.frag_fade_in,R.anim.frag_fade_out).replace(R.id.flFragment, fragUserGoals).addToBackStack(null).commit();
                 //Fragment added to Frame Layout
             }
         },delay + 250);

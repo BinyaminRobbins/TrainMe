@@ -2,6 +2,7 @@ package com.binyamin.trainme;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -33,7 +34,8 @@ import java.util.ArrayList;
 public class AllWorkoutsFragment extends Fragment {
     ArrayList<_3_SliderItem> sliderItems;
     static ViewPager2 viewPager2;
-
+    Handler sliderHandler;
+    SharedPreferences sharedPreferences;
     public AllWorkoutsFragment() {
         // Required empty public constructor
     }
@@ -42,7 +44,9 @@ public class AllWorkoutsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        sharedPreferences = getContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
         viewPager2 = view.findViewById(R.id.ImageSlider);
+        sliderHandler = new Handler();
 
         //preparing list of images from drawable folder
         SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
@@ -50,12 +54,12 @@ public class AllWorkoutsFragment extends Fragment {
         SliderList sliderList = new SliderList(database);
         sliderItems = sliderList.getSliderList();
 
-
         viewPager2.setAdapter(new _3_SliderAdapter(sliderItems, viewPager2));
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
-        viewPager2.setOffscreenPageLimit(3);
+        viewPager2.setOffscreenPageLimit(sliderItems.size());
         viewPager2.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
+        viewPager2.setCurrentItem(2,false);
 
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(70));
@@ -71,10 +75,11 @@ public class AllWorkoutsFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                // sliderHandler.removeCallbacks(sliderRunnable);
-                // sliderHandler.postDelayed(sliderRunnable,3000);
+                //sliderHandler.removeCallbacks(sliderRunnable);
+                //sliderHandler.postDelayed(sliderRunnable,3000);
             }
         });
+
 
     }
 
@@ -87,4 +92,28 @@ public class AllWorkoutsFragment extends Fragment {
 
     }
 
+    //Automate Scrolling:
+    private Runnable sliderRunnable = new Runnable() {
+        @Override
+        public void run() {
+            boolean scrollOn = sharedPreferences.getBoolean("scrollOn",true);
+            if(scrollOn) {
+                viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
+                sliderHandler.postDelayed(sliderRunnable,2800);
+            }
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sliderHandler.postDelayed(sliderRunnable,2000);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        sliderHandler.removeCallbacks(sliderRunnable);
+
+    }
 }

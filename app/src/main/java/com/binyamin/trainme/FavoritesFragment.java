@@ -59,7 +59,7 @@ public class FavoritesFragment extends Fragment {
             }
         }
         Log.i("FavoritesList",favoritesList.toString());
-        rv.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        rv.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
         //rv.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
         FavoritesFragmentRecyclerViewAdapter adapter = new FavoritesFragmentRecyclerViewAdapter(favoritesList);
         rv.setAdapter(adapter);
