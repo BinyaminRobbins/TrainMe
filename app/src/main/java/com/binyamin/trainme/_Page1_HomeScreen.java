@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClickListener {
     View myView;
     int arrayPos = 0;
-    Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_zlatan, R.drawable.homescreen_aaronjudge};
+    static Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_zlatan, R.drawable.homescreen_aaronjudge};
     static ProgressButton progressButton;
     boolean buttonPressed;
     SharedPreferences sharedPreferences;
@@ -34,7 +34,7 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
 
         /*deleteDatabase("Workouts");
         getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE).edit().clear().commit();*/
-        sharedPreferences = this.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
 
         myView = findViewById(R.id.include);
         myView.setOnClickListener(this);
@@ -68,13 +68,14 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         buttonPressed = true;
         progressButton.buttonActivated();
-        Handler handler = new Handler();
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 boolean hasOpenedBefore = sharedPreferences.getBoolean("hasOpenedBefore",false);
+                Log.i("Has Opened Before",Boolean.toString(hasOpenedBefore));
                 Intent intent;
-                if(hasOpenedBefore == true){
+                if(hasOpenedBefore){
                     intent = new Intent(getApplicationContext(), _Page3_SelectWorkout.class);
                 }
                 else {
@@ -83,6 +84,6 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
                 finish();
             }
-        }, 10);
+        }, 100);
     }
 }

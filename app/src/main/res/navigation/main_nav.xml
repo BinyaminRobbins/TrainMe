@@ -10,6 +10,7 @@
         android:name="com.binyamin.trainme.AllWorkoutsFragment"
         android:label="fragment_all_workouts"
         tools:layout="@layout/fragment_all_workouts" />
+
     <fragment
         android:id="@+id/menuNavigation_favorites"
         android:name="com.binyamin.trainme.FavoritesFragment"
@@ -27,5 +28,10 @@
         android:name="com.binyamin.trainme.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/menuNavigation_youtube"
+        android:name="com.binyamin.trainme.Fragment_YouTube"
+        android:label="fragment_youtube"
+        tools:layout="@layout/fragment_youtube" />
 
 </navigation>

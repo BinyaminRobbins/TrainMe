@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:adjustViewBounds="true"
+    android:fadingEdgeLength="10dp"
     android:orientation="vertical"
     app:riv_corner_radius="20dp">
 
@@ -36,19 +37,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeader" />
 
-            <include
-                android:id="@+id/include_lock"
-                layout="@layout/custom_cv_workoutlocked"
+            <TextView
+                android:id="@+id/locktv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:elevation="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@color/colorAccentBlue"
+                android:elevation="50dp"
+                android:fontFamily="@font/graduate"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Premium"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/startButton"
-                app:layout_constraintEnd_toEndOf="@id/imageSlide"
-                app:layout_constraintStart_toStartOf="@+id/imageSlide"
-                app:layout_constraintTop_toTopOf="@+id/imageSlide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
+
 
             <Button
                 android:id="@+id/startButton"

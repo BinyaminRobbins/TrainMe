@@ -33,7 +33,7 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
     RecyclerView recyclerView;
     _4_RecyclerViewAdapter adapter;
     ArrayList<String> workoutCategories = new ArrayList<>();
-    ArrayList<AthleteWorkouts> athleteWorkoutList;
+    ArrayList<AthleteWorkouts> athleteWorkoutList = new ArrayList<>();
     ArrayList<AthleteWorkouts> selectWorkoutList = new ArrayList<>();
 
     @Override
@@ -45,21 +45,26 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         tagNum = Integer.valueOf(intent.getStringExtra("tag"));
         Log.i("tagnum", String.valueOf(tagNum));
 
+
+        athleteWorkoutList.clear();
         athleteWorkoutList = _Page3_SelectWorkout.allAthleteWorkouts.get(tagNum).getAthleteWorkoutArrayList();
         recyclerView = findViewById(R.id.workoutRV);
-
 
         adapter = new _4_RecyclerViewAdapter(selectWorkoutList);
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
-        for (AthleteWorkouts workouts : _Page3_SelectWorkout.allAthleteWorkouts.get(tagNum).getAthleteWorkoutArrayList()) {
-            String category = workouts.getCategory();
-            Log.i("Category",category);
+        workoutCategories.clear();
+        for (AthleteWorkouts workout : athleteWorkoutList) {
+            String category = workout.getCategory();
+            Log.i("Category", category);
             if (!workoutCategories.contains(category)) {
                 workoutCategories.add(category);
+                Log.i("Category","Added");
+                Log.i("Workout SSize",String.valueOf(workoutCategories.size()));
             }
+        }
 
             ImageView imageViewHeader = findViewById(R.id.imageViewHeader);
 
@@ -84,16 +89,15 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
             backButton.setOnClickListener(this);
 
             spinner = findViewById(R.id.category_spinner);
-            String[] myArray = new String[_Page3_SelectWorkout.allAthleteWorkouts.size()];
-            MyAdapter spinnerAdapter = new MyAdapter(this, R.layout.custom_spinner_4_, workoutCategories.toArray(myArray));
+            //String[] myArray = new String[_Page3_SelectWorkout.allAthleteWorkouts.size()];
+            MyAdapter spinnerAdapter = new MyAdapter(this, R.layout.custom_spinner_4_, workoutCategories);
+
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(spinnerAdapter);
             spinner.setOnItemSelectedListener(this);
             spinnerAdapter.notifyDataSetChanged();
 
-
         }
-    }
 
         @Override
         public void onBackPressed () {
@@ -111,9 +115,9 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         @Override
         public void onItemSelected (AdapterView <?> parent, View view,int position, long id){
         selectWorkoutList.clear();
+
             Log.i("Item Selected", parent.getItemAtPosition(position).toString());
             String currentItem = workoutCategories.get(position);
-            Log.i("CurrentItem", currentItem);
             for (AthleteWorkouts workout : athleteWorkoutList) {
                 if (workout.getCategory().equals(currentItem)) {
                     Log.i("CurrentWorkoutCategory", workout.getCategory());
@@ -133,7 +137,7 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         public class MyAdapter extends ArrayAdapter {
 
             public MyAdapter(Context context, int textViewResourceId,
-                             String[] objects) {
+                             ArrayList objects) {
                 super(context, textViewResourceId, objects);
 
             }
@@ -145,11 +149,12 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
                 TextView categoryTXT = layout.findViewById(R.id.textViewCategoryName);
 
 
-               if(workoutCategories.size() > 0) {
-                   categoryTXT.setText(workoutCategories.get(position));
+               if(workoutCategories.size() > 0 && position < workoutCategories.size()) {
+                   for (int i = 0; i < workoutCategories.size(); i++){
+                       Log.i("Spinner Position", String.valueOf(position));
+                           categoryTXT.setText(workoutCategories.get(position));
+                   }
                }
-               else return null;
-
 
                 return layout;
             }

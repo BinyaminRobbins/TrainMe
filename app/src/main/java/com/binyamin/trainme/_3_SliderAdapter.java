@@ -1,7 +1,9 @@
 package com.binyamin.trainme;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -22,11 +24,16 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.SkuDetails;
 import com.makeramen.roundedimageview.RoundedImageView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder> implements View.OnClickListener {
+public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder>{
     private List<_3_SliderItem> sliderItems;
     private ViewPager2 viewPager2;
     boolean colorChanged;
@@ -34,14 +41,14 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     SharedPreferences sharedPreferences;
     static String[] detailsArray;
     static Fragment_WorkoutInfo fragment_workoutInfo;
+    static AlertDialog dialog = null;
+    static AlertDialog.Builder builder = null;
+
 
     public _3_SliderAdapter(List<_3_SliderItem> sliderItems, ViewPager2 viewPager2) {
         this.sliderItems = sliderItems;
         this.viewPager2 = viewPager2;
     }
-
-
-
 
     @NonNull
     @Override
@@ -60,11 +67,42 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     public void onBindViewHolder(@NonNull final SliderViewHolder holder, final int position) {
         sharedPreferences = _Page3_SelectWorkout.context.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
          detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.descriptions);
-        holder.setLockedImage(sliderItems.get(position));
         holder.setImage(sliderItems.get(position));
+        holder.setLockedImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
         holder.startButton.setTag(position);
-        holder.startButton.setOnClickListener(this);
+        Log.i("Possition",String.valueOf(position));
+
+
+        holder.startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = _Page3_SelectWorkout.context;
+                 if(v.getId() == R.id.startButton){
+                     if(!sliderItems.get(position).getIfRequiresPremium()){
+                        Intent intent = new Intent(context,_Page4_AthleteWorkout.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("tag",v.getTag().toString());
+                        context.startActivity(intent);
+                    }else{
+                         builder = new AlertDialog.Builder(v.getContext());
+
+                         builder.setTitle("Upgrade to Premium");
+                         builder.setIcon(R.drawable.ic_action_premium);
+                         builder.setMessage("You have discovered a premium feature.");
+                                 builder.setPositiveButton("Upgrade Now", new DialogInterface.OnClickListener() {
+                                     @Override
+                                     public void onClick(DialogInterface dialog, int which) {
+                                         _Page3_SelectWorkout.navController.navigate(R.id.menuNavigation_premium);
+                                     }
+                                 });
+                                 builder.setNegativeButton("I'm too lazy", null);
+                         dialog = builder.create();
+                         dialog.show();
+                     }
+                 }
+            }
+        });
 
         holder.info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,18 +156,6 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     }
 
     @Override
-    public void onClick(View v) {
-        Context context = _Page3_SelectWorkout.context;
-        if(v.getId() == R.id.startButton){
-            Intent intent = new Intent(context,_Page4_AthleteWorkout.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("tag",v.getTag().toString());
-            context.startActivity(intent);
-        }
-
-    }
-
-    @Override
     public int getItemCount() {
         return sliderItems.size();
     }
@@ -138,7 +164,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
         private RoundedImageView imageView;
         private TextView textViewHeader;
-        private View locked;
+        private TextView locktv;
         private Button startButton;
         private ImageButton info;
         private ImageButton star;
@@ -147,7 +173,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             super(itemView);
             imageView = itemView.findViewById(R.id.imageSlide);
             textViewHeader = itemView.findViewById(R.id.textViewHeader);
-            locked = itemView.findViewById(R.id.include_lock);
+            locktv = itemView.findViewById(R.id.locktv);
             startButton = itemView.findViewById(R.id.startButton);
             star = itemView.findViewById(R.id.imageButton_star);
             info = itemView.findViewById(R.id.imageButton_info);
@@ -161,8 +187,9 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             textViewHeader.setText(sliderItem.getAthleteName());
         }
         void setLockedImage(_3_SliderItem sliderItem){
-            if(sliderItem.getIfRequiresPremium() == true){
-                locked.setVisibility(View.VISIBLE);
+           if(sliderItem.getIfRequiresPremium()){
+                locktv.setVisibility(View.VISIBLE);
+                Log.i("Premium On",sliderItem.getAthleteName());
             }
 
         }

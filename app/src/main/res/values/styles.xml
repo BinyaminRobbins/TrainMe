@@ -36,4 +36,17 @@
         <item name="android:fontFamily">@font/font_fox</item>
     </style>
 
+    <style name="AppTheme.Tiktok" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FullScreen" parent="AppTheme.Tiktok">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+     
 </resources>

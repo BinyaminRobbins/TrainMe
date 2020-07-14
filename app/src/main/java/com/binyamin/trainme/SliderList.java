@@ -39,10 +39,10 @@ public class SliderList {
 
                 this.database.execSQL("CREATE TABLE IF NOT EXISTS workouts (image INTEGER, athleteName VARCHAR, requiresPremium VARCHAR, isFavorite VARCHAR, tagNum INT(2),id INTEGER PRIMARY KEY)");
                 this.database.execSQL("INSERT INTO workouts (image, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + bradyLocation + "','Tom Brady','false', 'false', 0)");
-                this.database.execSQL("INSERT INTO workouts (image, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + lebronLocation + "','Lebron James','true', 'false', 1)");
+                this.database.execSQL("INSERT INTO workouts (image, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + lebronLocation + "','Lebron James','false', 'false', 1)");
                 this.database.execSQL("INSERT INTO workouts (image, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + mcgregorLocation + "','Connor McGregor','false', 'false',2)");
-                this.database.execSQL("INSERT INTO workouts (image, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + zlatanLocation + "','Zlatan  Ibrahim.','false', 'false',3)");
-                this.database.execSQL("INSERT INTO workouts (image, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + judgeLocation + "','Aaron Judge','false', 'false',4)");
+                this.database.execSQL("INSERT INTO workouts (image, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + zlatanLocation + "','Zlatan  Ibrahim.','true', 'false',3)");
+                this.database.execSQL("INSERT INTO workouts (image, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + judgeLocation + "','Aaron Judge','true', 'true',4)");
                 sharedPreferences.edit().putInt("openedBefore",1).commit();
             }else{
                 Log.i("DB","Exists");

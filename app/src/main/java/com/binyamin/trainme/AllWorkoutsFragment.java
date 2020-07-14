@@ -1,6 +1,5 @@
 package com.binyamin.trainme;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,7 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.GravityCompat;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -17,25 +16,25 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AllWorkoutsFragment extends Fragment {
-    ArrayList<_3_SliderItem> sliderItems;
+    static protected ArrayList<_3_SliderItem> sliderItems;
     static ViewPager2 viewPager2;
     Handler sliderHandler;
     SharedPreferences sharedPreferences;
+    short delay;
+
     public AllWorkoutsFragment() {
         // Required empty public constructor
     }
@@ -43,6 +42,9 @@ public class AllWorkoutsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        delay = 3500;
+        Toast.makeText(getContext(),"You can disable auto-scroll in \"My Profile\"",Toast.LENGTH_LONG).show();
 
         sharedPreferences = getContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
         viewPager2 = view.findViewById(R.id.ImageSlider);
@@ -56,10 +58,10 @@ public class AllWorkoutsFragment extends Fragment {
 
         viewPager2.setAdapter(new _3_SliderAdapter(sliderItems, viewPager2));
         viewPager2.setClipToPadding(false);
+        viewPager2.setElevation(40);
         viewPager2.setClipChildren(false);
         viewPager2.setOffscreenPageLimit(sliderItems.size());
-        viewPager2.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
-        viewPager2.setCurrentItem(2,false);
+        viewPager2.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
 
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(70));
@@ -75,12 +77,13 @@ public class AllWorkoutsFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                //sliderHandler.removeCallbacks(sliderRunnable);
-                //sliderHandler.postDelayed(sliderRunnable,3000);
+                sliderHandler.removeCallbacks(sliderRunnable);
+                sliderHandler.postDelayed(sliderRunnable,delay);
             }
         });
 
 
+        viewPager2.setCurrentItem(2,true);
     }
 
     @Override
@@ -92,22 +95,28 @@ public class AllWorkoutsFragment extends Fragment {
 
     }
 
+
     //Automate Scrolling:
     private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
             boolean scrollOn = sharedPreferences.getBoolean("scrollOn",true);
-            if(scrollOn) {
-                viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
-                sliderHandler.postDelayed(sliderRunnable,2800);
+                if(scrollOn) {
+                    if(viewPager2.getCurrentItem() != sliderItems.size() - 1) {
+                        viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1, true);
+                        //sliderHandler.postDelayed(sliderRunnable, delay);
+                    }else{
+                        viewPager2.setCurrentItem(0 , true);
+                    }
             }
+
         }
     };
 
     @Override
     public void onResume() {
         super.onResume();
-        sliderHandler.postDelayed(sliderRunnable,2000);
+        sliderHandler.postDelayed(sliderRunnable,delay);
     }
 
     @Override
@@ -116,4 +125,5 @@ public class AllWorkoutsFragment extends Fragment {
         sliderHandler.removeCallbacks(sliderRunnable);
 
     }
+
 }

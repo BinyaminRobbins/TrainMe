@@ -24,14 +24,9 @@
     <item android:title="Others">
         <menu>
             <item
-                android:id="@+id/menuNavigation_free"
-                android:icon="@drawable/ic_action_free"
-                android:title="Free Workouts"/>
-
-            <item
                 android:id="@+id/menuNavigation_youtube"
                 android:icon="@drawable/ic_action_video"
-                android:title="YouTube Fitness Channels"/>
+                android:title="YouTube Home-Workouts"/>
 
             <item
                 android:id="@+id/menuNavigation_diets"
