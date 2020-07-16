@@ -28,5 +28,10 @@
         android:name="com.binyamin.trainme.Fragment_YouTube"
         android:label="fragment_youtube"
         tools:layout="@layout/fragment_youtube" />
+    <fragment
+        android:id="@+id/menuNavigation_settings"
+        android:name="com.binyamin.trainme.Fragment_Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

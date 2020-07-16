@@ -49,7 +49,7 @@ public class AllWorkoutsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         delay = 2500;
-        Toast.makeText(getContext(),"You can disable auto-scroll in \"My Profile\"",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),"Disable Auto-Scroll in Settings",Toast.LENGTH_LONG).show();
 
         sharedPreferences = getContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
         viewPager2 = view.findViewById(R.id.ImageSlider);
