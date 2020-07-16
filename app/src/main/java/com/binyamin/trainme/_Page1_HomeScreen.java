@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClickListener {
     View myView;
     int arrayPos = 0;
-    static Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_zlatan, R.drawable.homescreen_aaronjudge};
+    static Integer[] bgImgs = {R.drawable.homescreen_brady, R.drawable.homescreen_lebron, R.drawable.homescreen_conormcgregor, R.drawable.homescreen_zlatan, R.drawable.homescreen_aaronjudge,R.drawable.ronaldo_homescreen};
     static ProgressButton progressButton;
     boolean buttonPressed;
     SharedPreferences sharedPreferences;
@@ -40,7 +40,7 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
         myView.setOnClickListener(this);
 
         final Handler handler = new Handler();
-        final int delay = 1000; //milliseconds
+        final int delay = 500; //milliseconds
         final ImageView imageView = findViewById(R.id.imageView);
 
         handler.postDelayed(new Runnable() {

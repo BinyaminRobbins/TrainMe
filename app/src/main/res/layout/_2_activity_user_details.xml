@@ -7,140 +7,128 @@
     android:background="@color/colorPrimary"
     tools:context="._Page2_UserDetails">
 
-    <ImageView
-        android:id="@+id/imageViewHeader"
+    <ProgressBar
+        android:id="@+id/proBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:elevation="20dp"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl2"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/shape_custom_header"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textViewTrainMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/fox_font"
-        android:text="TrainMe"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewHeader"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewHeader"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageViewHeader" />
-
-    <TextView
-        android:id="@+id/textViewSubHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/graduate"
-        android:foregroundGravity="center_vertical"
-        android:gravity="center_vertical"
-        android:text="Tell Us About Yourself"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewHeader"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
-        android:alpha="0.9"
-        android:fontFamily="@font/graduate"
-        android:foregroundGravity="center"
-        android:gravity="center_vertical"
-        android:inputType="textMultiLine"
-        android:text="Let us know more about yourself so that we can provide workouts that you'll love and are best for you."
-        android:textColor="@android:color/black"
-        android:textSize="12sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textViewSubHeader"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSubHeader"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_fragmentHolder"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="20dp"
-        android:clipChildren="false"
-        app:cardPreventCornerOverlap="true"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/imageViewHeader"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:layout_marginBottom="-20dp"
-            android:clipChildren="false">
+            android:layout_height="70dp"
+            android:background="@drawable/shape_custom_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <FrameLayout
-                android:id="@+id/flFragment"
+        <TextView
+            android:id="@+id/textViewTrainMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fox_font"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:text="TrainMe"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewHeader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageViewHeader"
+            app:layout_constraintTop_toTopOf="@+id/imageViewHeader" />
+
+        <TextView
+            android:id="@+id/textViewSubHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graduate"
+            android:foregroundGravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="Tell Us About Yourself"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewHeader" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:alpha="0.9"
+            android:fontFamily="@font/graduate"
+            android:foregroundGravity="center"
+            android:gravity="center_vertical"
+            android:inputType="textMultiLine"
+            android:text="Let us know more about yourself so that we can provide workouts that you'll love and are best for you."
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewSubHeader"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSubHeader" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_fragmentHolder"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="90dp"
+            android:background="@color/colorPrimary"
+            android:clipChildren="false"
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:clipToPadding="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginBottom="-20dp"
+                android:background="@color/colorPrimary"
+                android:clipChildren="false">
 
-    </androidx.cardview.widget.CardView>
+                <FrameLayout
+                    android:id="@+id/flFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clipToPadding="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
+                </FrameLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:progressBarStyleHorizontal"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:elevation="15dp"
-        android:progress="0"
-        android:progressDrawable="@drawable/_2_progressbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.0"></ProgressBar>
-
-    <ImageView
-        android:id="@+id/checkmark"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:elevation="17dp"
-        android:src="@drawable/check"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@+id/progressBar" />
-
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

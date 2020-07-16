@@ -3,21 +3,26 @@ package com.binyamin.trainme;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Matrix;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -43,7 +48,7 @@ public class AllWorkoutsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        delay = 3500;
+        delay = 2500;
         Toast.makeText(getContext(),"You can disable auto-scroll in \"My Profile\"",Toast.LENGTH_LONG).show();
 
         sharedPreferences = getContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
@@ -81,9 +86,7 @@ public class AllWorkoutsFragment extends Fragment {
                 sliderHandler.postDelayed(sliderRunnable,delay);
             }
         });
-
-
-        viewPager2.setCurrentItem(2,true);
+        viewPager2.setCurrentItem(2,false);
     }
 
     @Override
@@ -104,7 +107,6 @@ public class AllWorkoutsFragment extends Fragment {
                 if(scrollOn) {
                     if(viewPager2.getCurrentItem() != sliderItems.size() - 1) {
                         viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1, true);
-                        //sliderHandler.postDelayed(sliderRunnable, delay);
                     }else{
                         viewPager2.setCurrentItem(0 , true);
                     }

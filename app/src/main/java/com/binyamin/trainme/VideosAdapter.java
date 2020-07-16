@@ -46,20 +46,15 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.VideoViewH
     }
 
     static class VideoViewHolder extends RecyclerView.ViewHolder{
-
-        //VideoView videoView;
         TextView textVideoTitle, textVideoDescription;
         WebView webView;
         ProgressBar videoProgressBar;
-        //ImageView tiktokImageView;
 
         public VideoViewHolder(@NonNull View itemView) {
             super(itemView);
-            //videoView = itemView.findViewById(R.id.videoView);
             textVideoTitle = itemView.findViewById(R.id.textVideoTitle);
             textVideoDescription = itemView.findViewById(R.id.textVideoDescription);
             videoProgressBar = itemView.findViewById(R.id.tiktokProgressBar);
-            //tiktokImageView = itemView.findViewById(R.id.tiktokImageView);
             webView = itemView.findViewById(R.id.webView);
             webView.getSettings().setJavaScriptEnabled(true);
             WebViewClient client = new WebViewClient(){
@@ -77,33 +72,6 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.VideoViewH
             textVideoDescription.setText(videoItem.videoDescription);
             webView.loadUrl(videoItem.videoUrl);
 
-            //tells the phone to open the webpage on the app - NOT on the default browser on user's phone
-            //tiktokImageView.setImageResource(R.drawable.homescreen_brady);
-            //videoView.setVideoURI(videoItem.videoURI);
-            //videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                /*@Override
-                public void onPrepared(MediaPlayer mp) {
-                    videoProgressBar.setVisibility(View.GONE);
-                    mp.start();
-
-                    float videoRatio = mp.getVideoWidth() / (float) mp.getVideoHeight();
-                    float screenRatio = videoView.getWidth() / (float) videoView.getHeight();
-                    float scale = videoRatio / screenRatio;
-
-                    if (scale >= 1f) {
-                        videoView.setScaleX(scale);
-                    } else {
-                        videoView.setScaleY(1f / scale);
-                    }
-
-                }
-            });
-            videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                     mp.start();
-                }
-            });*/
         }
     }
 }

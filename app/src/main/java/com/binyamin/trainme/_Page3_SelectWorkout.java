@@ -74,38 +74,6 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         NavigationUI.setupWithNavController(navigationView,navController);
 
         drawerLayout = findViewById(R.id.drawerLayout);
-        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-            /**
-             * Called when a drawer's position changes.
-             *
-             * @param slideOffset The new offset of this drawer within its range, from 0-1
-             *                    Example when you slide drawer from left to right, slideOffset will increase from 0 - 1 (0 when drawer closed and 1 when drawer display full)
-             */
-            @Override
-            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-                getUsername();
-            }
-
-            @Override
-            public void onDrawerOpened(@NonNull View drawerView) {
-                // do something when drawer opened
-            }
-
-            @Override
-            public void onDrawerClosed(@NonNull View drawerView) {
-                // do something when drawer closed
-                getUsername();
-                getProfilePic();
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-                getUsername();
-            }
-        });
-
-        getUsername();
-        getProfilePic();
 
         sliderHandler = new Handler();
     }
@@ -232,7 +200,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 drawerLayout.openDrawer(GravityCompat.START);
-                getUsername();
+               // getUsername();
                 return true;
             }
         });
@@ -291,38 +259,9 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         }
     }
 
-    private void getUsername(){
-        View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = (TextView) headerView.findViewById(R.id.navigationHeader_textView);
-        String username = sharedPreferences.getString("username","404 not found");
-        navUsername.setText(username);
-    }
-    private void getProfilePic(){
-        View headerView = navigationView.getHeaderView(0);
-        ImageView imageView = (ImageView) headerView.findViewById(R.id.navigationHeader_profilepic);
-        if(sharedPreferences.contains("profileBitmap")) {
-            String bitmap = sharedPreferences.getString("profileBitmap", "404 error");
-            byte[] imageAsBytes = Base64.decode(bitmap.getBytes(), Base64.DEFAULT);
-            imageView.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
-        }else if(sharedPreferences.contains("profileURI")){
-            String uri = sharedPreferences.getString("profileURI","404 error");
-            imageView.setImageURI(Uri.parse(uri));
-        }else{
-            Random rand = new Random();
-            int num = rand.nextInt(2);
-            if(num == 1){
-                imageView.setImageResource(R.drawable.homescreen_lebron);
-            }else{
-                imageView.setImageResource(R.drawable.homescreen_zlatan);
-
-            }
-        }
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        sharedPreferences.edit().remove("profileURI").apply();
-        sharedPreferences.edit().remove("profileBitmap").apply();
+
     }
 }

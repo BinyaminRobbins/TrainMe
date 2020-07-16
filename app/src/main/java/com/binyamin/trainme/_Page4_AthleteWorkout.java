@@ -18,12 +18,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
-import static com.binyamin.trainme._Page2_UserDetails.recyclerView;
 
 public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     ArrayList<_3_SliderItem> myList = new ArrayList<>();

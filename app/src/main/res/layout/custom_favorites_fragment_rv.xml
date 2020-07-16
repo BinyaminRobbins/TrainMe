@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/cv_favoritesfragment"
-        app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,24 +19,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/cv_favoritesfragment"
-            android:clipChildren="true"
-            android:clipToPadding="true"
-            android:paddingStart="10dp"
-            android:paddingTop="2dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="2dp">
+            android:clipChildren="true">
 
             <ImageView
                 android:id="@+id/athleteImageView"
-                android:layout_width="100dp"
-                android:layout_height="130dp"
-                android:cropToPadding="true"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/homescreen_brady" />
@@ -46,20 +38,22 @@
                 android:id="@+id/athleteTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
                 android:fontFamily="@font/graduate"
                 android:gravity="center"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="15"
                 android:text="Lebron James"
-                android:textColor="@android:color/black"
-                android:textSize="17sp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButtonStar"
                 app:layout_constraintEnd_toStartOf="@+id/imageButtonStar"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/athleteImageView"
-                app:layout_constraintTop_toBottomOf="@+id/imageButtonStar"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="@+id/athleteImageView"
+                app:layout_constraintTop_toTopOf="@+id/imageButtonStar" />
 
             <ImageButton
                 android:id="@+id/imageButtonStar"
@@ -79,25 +73,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <ImageButton
-                android:id="@+id/imageButtonInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/ic_action_info"
-                android:backgroundTint="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButtonStar"
-                app:layout_constraintEnd_toStartOf="@+id/imageButtonStar"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/athleteImageView"
-                app:layout_constraintTop_toTopOf="@+id/imageButtonStar" />
-
             <Button
                 android:id="@+id/buttonStartWorkout"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="3dp"
                 android:background="@drawable/button_custom_selectworkout"
                 android:fontFamily="@font/font_fox"
                 android:padding="5dp"
@@ -106,9 +88,10 @@
                 android:textSize="13sp"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imageButtonStar"
-                app:layout_constraintStart_toStartOf="@+id/imageButtonInfo"
-                app:layout_constraintTop_toBottomOf="@+id/athleteTextView" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/athleteTextView"
+                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

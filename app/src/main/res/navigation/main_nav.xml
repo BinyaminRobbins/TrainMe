@@ -24,11 +24,6 @@
         tools:layout="@layout/fragment_get_premium" />
 
     <fragment
-        android:id="@+id/menuNavigation_profile"
-        android:name="com.binyamin.trainme.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
         android:id="@+id/menuNavigation_youtube"
         android:name="com.binyamin.trainme.Fragment_YouTube"
         android:label="fragment_youtube"

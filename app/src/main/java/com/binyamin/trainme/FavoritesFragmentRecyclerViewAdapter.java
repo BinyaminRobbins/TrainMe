@@ -38,7 +38,9 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
         final ViewHolderClass viewHolderClass = (ViewHolderClass) holder;
 
         viewHolderClass.athleteTextView.setText(sliderItems.get(position).getAthleteName());
-        viewHolderClass.athleteImageView.setImageResource(sliderItems.get(position).getImage());
+
+        viewHolderClass.athleteImageView.setImageResource(sliderItems.get(position).getFavoriteImage());
+
         viewHolderClass.star.setImageResource(R.drawable.ic_action_star_clicked_border);
         viewHolderClass.star.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,12 +69,28 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
         viewHolderClass.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!sliderItems.get(position).getIfRequiresPremium()) {
                     Intent intent = new Intent(_Page3_SelectWorkout.context, _Page4_AthleteWorkout.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("tag", String.valueOf(sliderItems.get(position).getTagNum()));
                     _Page3_SelectWorkout.context.startActivity(intent);
+                }else{
+                    new AlertDialog.Builder(v.getContext())
+                            .setTitle("Upgrade to Premium")
+                            .setIcon(R.drawable.ic_action_premium)
+                            .setMessage("You have discovered a premium feature.")
+                            .setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    _Page3_SelectWorkout.navController.navigate(R.id.menuNavigation_premium);
+                                }
+                            })
+                            .setNegativeButton("Not now", null)
+                            .show();
+                }
             }
         });
+
 
     }
 

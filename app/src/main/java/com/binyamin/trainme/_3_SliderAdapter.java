@@ -90,13 +90,13 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                          builder.setTitle("Upgrade to Premium");
                          builder.setIcon(R.drawable.ic_action_premium);
                          builder.setMessage("You have discovered a premium feature.");
-                                 builder.setPositiveButton("Upgrade Now", new DialogInterface.OnClickListener() {
+                                 builder.setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
                                      @Override
                                      public void onClick(DialogInterface dialog, int which) {
                                          _Page3_SelectWorkout.navController.navigate(R.id.menuNavigation_premium);
                                      }
                                  });
-                                 builder.setNegativeButton("I'm too lazy", null);
+                                 builder.setNegativeButton("Not now", null);
                          dialog = builder.create();
                          dialog.show();
                      }

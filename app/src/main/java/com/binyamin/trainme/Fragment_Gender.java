@@ -2,6 +2,7 @@ package com.binyamin.trainme;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 
@@ -25,8 +27,8 @@ import android.widget.ProgressBar;
 public class Fragment_Gender extends Fragment implements View.OnClickListener {
     CardView cvMan;
     CardView cvWoman;
-    ProgressBar progressBar;
     SharedPreferences sharedPreferences;
+    ProgressBar progressBar;
 
 
     public Fragment_Gender() {
@@ -42,7 +44,7 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
         cvMan.setOnClickListener(this);
         cvWoman.setOnClickListener(this);
 
-        progressBar = _Page2_UserDetails.progressBar;
+        progressBar = _Page2_UserDetails.probar;
     }
 
     @Override
@@ -53,28 +55,24 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(final View v) {
-        int delay = 800;
+    public void onClick(View v) {
+
+        _Page2_UserDetails.constraintLayout.setAlpha(0.4f);
+        getActivity().getWindow().
+                setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+        progressBar.setVisibility(View.VISIBLE);
 
         cvMan.setClickable(false);
         cvWoman.setClickable(false);
 
-        _2_ProgressBarAnimation anim = new _2_ProgressBarAnimation(progressBar, progressBar.getProgress(), progressBar.getProgress() + 26);
-        anim.setDuration(delay - 400);
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                Fragment_Completed frag_completed = new Fragment_Completed();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, frag_completed).addToBackStack(null).commit();
+                Intent intent = new Intent(getContext(),_Page3_SelectWorkout.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                getActivity().finish();
+                sharedPreferences.edit().putBoolean("hasOpenedBefore",true).apply();
+                getActivity().overridePendingTransition( R.anim.intent_slide_out, R.anim.intent_slide_in );
                 //Fragment added to Frame Layout
-            }
-        }, delay + 250);
-
-        progressBar.startAnimation(anim);
-        v.animate().rotationXBy(360).setDuration(delay).start();
 
         switch(v.getId()){
             case R.id.cv_man:

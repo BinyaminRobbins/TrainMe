@@ -72,10 +72,6 @@ public class FavoritesFragment extends Fragment {
         rv = view.findViewById(R.id.favorites_rv);
         database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
         updateList();
-
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
-        getProfilePic(sharedPreferences,view);
-
     }
 
     @Override
@@ -83,26 +79,6 @@ public class FavoritesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favorites, container, false);
-    }
-    private void getProfilePic(SharedPreferences sharedPreferences, View view){
-        ImageView imageView = view.findViewById(R.id.profilePic);
-        if(sharedPreferences.contains("profileBitmap")) {
-            String bitmap = sharedPreferences.getString("profileBitmap", "404 error");
-            byte[] imageAsBytes = Base64.decode(bitmap.getBytes(), Base64.DEFAULT);
-            imageView.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
-        }else if(sharedPreferences.contains("profileURI")){
-            String uri = sharedPreferences.getString("profileURI","404 error");
-            imageView.setImageURI(Uri.parse(uri));
-        }else{
-            Random rand = new Random();
-            int num = rand.nextInt(2);
-            if(num == 1){
-                imageView.setImageResource(R.drawable.homescreen_lebron);
-            }else{
-                imageView.setImageResource(R.drawable.homescreen_zlatan);
-
-            }
-        }
     }
 }
 

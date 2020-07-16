@@ -4,7 +4,7 @@
     <item
         android:id="@+id/menuNavigation_workouts"
         android:icon="@drawable/ic_action_workouts"
-        android:title="All Workouts"/>
+        android:title="Athlete Workouts"/>
 
     <item
         android:id="@+id/menuNavigation_favorites"
@@ -15,11 +15,6 @@
         android:id="@+id/menuNavigation_premium"
         android:icon="@drawable/ic_action_premium"
         android:title="Unlock Everything"/>
-
-    <item
-        android:id="@+id/menuNavigation_profile"
-        android:icon="@drawable/ic_action_profile"
-        android:title="My Profile"/>
 
     <item android:title="Others">
         <menu>
