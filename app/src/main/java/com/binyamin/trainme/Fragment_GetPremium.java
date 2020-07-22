@@ -1,11 +1,14 @@
 package com.binyamin.trainme;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +35,11 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Fragment_GetPremium extends Fragment implements PurchasesUpdatedListener {
+public class Fragment_GetPremium extends Fragment {
     Button button;
-    BillingClient billingClient;
-    List<String> skuList = new ArrayList<>();
+    private SkuDetailsParams.Builder params;
     String product = "premium_features_sub_2";
+    String type = "BillingClient.SkuType.SUBS";
 
     public Fragment_GetPremium() {
         // Required empty public constructor
@@ -47,72 +50,20 @@ public class Fragment_GetPremium extends Fragment implements PurchasesUpdatedLis
         button = view.findViewById(R.id.premiumButton);
 
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        SharedPreferences prefs = getContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
 //        getActivity().getActionBar().hide();
 
+        final PurchaseProduct purchaseProduct = new PurchaseProduct(getContext(),getActivity(),product,prefs);
+        purchaseProduct.setUp();
 
-
-        billingClient = BillingClient.newBuilder(getContext()).enablePendingPurchases().setListener(new PurchasesUpdatedListener() {
-            @Override
-            //This method starts when user buys a product
-            public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> list) {
-                if (list != null && billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    for (Purchase purchase : list) {
-                        handlePurchase(purchase);
-                    }
-                } else {
-                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
-                        Toast.makeText(getContext(), "User Canceled - Try Purchasing Again", Toast.LENGTH_SHORT).show();
-                    } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
-                        Toast.makeText(getContext(), "Item Already Owned", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        }).build();
-
-        billingClient.startConnection(new BillingClientStateListener() {
-            @Override
-            public void onBillingSetupFinished(BillingResult billingResult) {
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    //Toast.makeText(getContext(), "Successfully connected to BillingClient", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(getContext(), "Failed to Connect", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onBillingServiceDisconnected() {
-                Toast.makeText(getContext(), "Disconnected from BillingClient", Toast.LENGTH_SHORT).show();
-            }
-        });
-        skuList.add(product);
-        final SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
-        params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS); // Subscription vs 1-Time Purchase
+        button = view.findViewById(R.id.premiumButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                billingClient.querySkuDetailsAsync(params.build(), new SkuDetailsResponseListener() {
-                    @Override
-                    public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
-                        if (list != null && billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                            for (final SkuDetails details : list) {
-
-                                String sku = details.getSku(); //Your Product ID
-                                String price = details.getPrice(); //Product Price
-                                String description = details.getDescription(); //Product description
-
-                                //Opens Pop-Up For Billing Purchase
-                                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                                        .setSkuDetails(details)
-                                        .build();
-
-                                BillingResult responseCode = billingClient.launchBillingFlow(getActivity(), billingFlowParams);
-                            }
-                        }
-                    }
-                });
+                purchaseProduct.query();
             }
         });
+
     }
 
     @Override
@@ -120,36 +71,6 @@ public class Fragment_GetPremium extends Fragment implements PurchasesUpdatedLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_get_premium, container, false);
-    }
-
-    private void handlePurchase(Purchase purchase) {
-        try {
-
-            if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
-                if (purchase.getSku().equals(product)) {
-                    ConsumeParams consumeParams = ConsumeParams.newBuilder()
-                            .setPurchaseToken(purchase.getPurchaseToken())
-                            .build();
-
-                    ConsumeResponseListener consumeResponseListener = new ConsumeResponseListener() {
-                        @Override
-                        public void onConsumeResponse(BillingResult billingResult, String s) {
-                            Toast.makeText(getContext(), "Purchase Acknowledged", Toast.LENGTH_SHORT).show();
-                        }
-                    };
-                    //billingClient.consumeAsync(consumeParams, consumeResponseListener);
-                    //now purchase works again and again
-                }
-            }
-        } catch (Exception e) {
-            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    @Override
-    public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> list) {
-        Toast.makeText(getContext(), "OnPurchases Updated", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -30,7 +30,6 @@ public class SliderList {
         try{
             //_Page3_SelectWorkout.context.deleteDatabase("Workouts");
             if(openedBefore == -1) {
-                Log.i("DB","DOESN'T Exist");
                 int bradyLocation = R.drawable.homescreen_brady; int bradyFavoriteLocation = R.drawable.brady_favorites;
                 int lebronLocation = R.drawable.homescreen_lebron; int lebronFavoriteLocation = R.drawable.lebron_favorites;
                 int mcgregorLocation = R.drawable.homescreen_conormcgregor; int mcgregorFavoriteLocation = R.drawable.mcgregor_favorites;
@@ -39,15 +38,13 @@ public class SliderList {
                 int ronaldoLocation = R.drawable.ronaldo_homescreen; int ronaldoFavoriteLocation = R.drawable.ronaldo_favorites;
 
                 this.database.execSQL("CREATE TABLE IF NOT EXISTS workouts (image INTEGER,favoritesImage INTEGER, athleteName VARCHAR, requiresPremium VARCHAR, isFavorite VARCHAR, tagNum INT(2),id INTEGER PRIMARY KEY)");
-                this.database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + bradyLocation + "','"+bradyFavoriteLocation+"','Tom Brady','false', 'false', 0)");
+                this.database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + bradyLocation + "','"+bradyFavoriteLocation+"','Tom Brady','true', 'false', 0)");
                 this.database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + lebronLocation + "','"+lebronFavoriteLocation+"','Lebron James','false', 'false', 1)");
                 this.database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + mcgregorLocation + "','"+mcgregorFavoriteLocation+"','Connor McGregor','false', 'false',2)");
                 this.database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + zlatanLocation + "','"+zlatanFavoriteLocation+"','Zlatan  Ibrahim.','true', 'false',3)");
                 this.database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + judgeLocation + "','"+judgeFavoriteLocation+"','Aaron Judge','true', 'false',4)");
                 this.database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + ronaldoLocation + "','"+ronaldoFavoriteLocation+"','Cristiano Ronaldo','true', 'false',5)");
                 sharedPreferences.edit().putInt("openedBefore",1).commit();
-            }else{
-                Log.i("DB","Exists");
             }
 
             Cursor c = this.database.rawQuery("SELECT * FROM workouts",null);

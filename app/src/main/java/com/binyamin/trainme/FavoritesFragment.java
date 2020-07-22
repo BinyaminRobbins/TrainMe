@@ -61,7 +61,6 @@ public class FavoritesFragment extends Fragment {
         }
         Log.i("FavoritesList",favoritesList.toString());
         rv.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
-        //rv.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
         FavoritesFragmentRecyclerViewAdapter adapter = new FavoritesFragmentRecyclerViewAdapter(favoritesList);
         rv.setAdapter(adapter);
     }
@@ -79,6 +78,18 @@ public class FavoritesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favorites, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle("Your Favorites");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().setTitle(R.string.app_name);
     }
 }
 

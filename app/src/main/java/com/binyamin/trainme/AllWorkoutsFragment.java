@@ -3,32 +3,22 @@ package com.binyamin.trainme;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Matrix;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +29,7 @@ public class AllWorkoutsFragment extends Fragment {
     Handler sliderHandler;
     SharedPreferences sharedPreferences;
     short delay;
+    boolean scrollOn;
 
     public AllWorkoutsFragment() {
         // Required empty public constructor
@@ -49,15 +40,15 @@ public class AllWorkoutsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         delay = 2500;
-        Toast.makeText(getContext(),"Disable Auto-Scroll in Settings",Toast.LENGTH_LONG).show();
 
         sharedPreferences = getContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
         viewPager2 = view.findViewById(R.id.ImageSlider);
+        scrollOn = sharedPreferences.getBoolean("scrollOn",false);
+
         sliderHandler = new Handler();
 
         //preparing list of images from drawable folder
         SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
-        Log.i("Page 3","DB Created");
         SliderList sliderList = new SliderList(database);
         sliderItems = sliderList.getSliderList();
 
@@ -87,6 +78,7 @@ public class AllWorkoutsFragment extends Fragment {
             }
         });
         viewPager2.setCurrentItem(2,false);
+
     }
 
     @Override
@@ -94,16 +86,12 @@ public class AllWorkoutsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_all_workouts, container, false);
-
-
     }
-
 
     //Automate Scrolling:
     private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
-            boolean scrollOn = sharedPreferences.getBoolean("scrollOn",true);
                 if(scrollOn) {
                     if(viewPager2.getCurrentItem() != sliderItems.size() - 1) {
                         viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1, true);
@@ -111,7 +99,6 @@ public class AllWorkoutsFragment extends Fragment {
                         viewPager2.setCurrentItem(0 , true);
                     }
             }
-
         }
     };
 
@@ -119,6 +106,16 @@ public class AllWorkoutsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         sliderHandler.postDelayed(sliderRunnable,delay);
+
+        //Billing Client
+        PurchaseProduct product = new PurchaseProduct(getContext(),getActivity(),"premium_features_sub_2",sharedPreferences);
+        product.setUp();
+
+        //Keep screen on?
+        boolean screenOn =  sharedPreferences.getBoolean("screenOn",true);
+        if(screenOn){
+            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
     }
 
     @Override
@@ -128,4 +125,10 @@ public class AllWorkoutsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+    }
 }

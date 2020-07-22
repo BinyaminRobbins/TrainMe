@@ -71,7 +71,6 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         holder.setLockedImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
         holder.startButton.setTag(position);
-        Log.i("Possition",String.valueOf(position));
 
 
         holder.startButton.setOnClickListener(new View.OnClickListener() {
@@ -80,25 +79,26 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                 Context context = _Page3_SelectWorkout.context;
                  if(v.getId() == R.id.startButton){
                      if(!sliderItems.get(position).getIfRequiresPremium()){
-                        Intent intent = new Intent(context,_Page4_AthleteWorkout.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra("tag",v.getTag().toString());
-                        context.startActivity(intent);
-                    }else{
-                         builder = new AlertDialog.Builder(v.getContext());
+                         openAct4(v.getContext(),v);
+                     }else{
+                         if(sharedPreferences.getBoolean("ProductIsOwned",false)){
+                             openAct4(v.getContext(),v);
+                         }else {
+                             builder = new AlertDialog.Builder(v.getContext());
 
-                         builder.setTitle("Upgrade to Premium");
-                         builder.setIcon(R.drawable.ic_action_premium);
-                         builder.setMessage("You have discovered a premium feature.");
-                                 builder.setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
-                                     @Override
-                                     public void onClick(DialogInterface dialog, int which) {
-                                         _Page3_SelectWorkout.navController.navigate(R.id.menuNavigation_premium);
-                                     }
-                                 });
-                                 builder.setNegativeButton("Not now", null);
-                         dialog = builder.create();
-                         dialog.show();
+                             builder.setTitle("Upgrade to Premium");
+                             builder.setIcon(R.drawable.ic_action_premium);
+                             builder.setMessage("You have discovered a premium feature.");
+                             builder.setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
+                                 @Override
+                                 public void onClick(DialogInterface dialog, int which) {
+                                     _Page3_SelectWorkout.navController.navigate(R.id.menuNavigation_premium);
+                                 }
+                             });
+                             builder.setNegativeButton("Not now", null);
+                             dialog = builder.create();
+                             dialog.show();
+                         }
                      }
                  }
             }
@@ -155,6 +155,13 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         }
     }
 
+    private void openAct4(Context context, View v){
+        Intent intent = new Intent(context,_Page4_AthleteWorkout.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("tag",v.getTag().toString());
+        context.startActivity(intent);
+    }
+
     @Override
     public int getItemCount() {
         return sliderItems.size();
@@ -189,7 +196,6 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         void setLockedImage(_3_SliderItem sliderItem){
            if(sliderItem.getIfRequiresPremium()){
                 locktv.setVisibility(View.VISIBLE);
-                Log.i("Premium On",sliderItem.getAthleteName());
             }
 
         }

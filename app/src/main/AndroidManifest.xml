@@ -4,6 +4,9 @@
     package="com.binyamin.trainme">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
@@ -20,7 +23,8 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         tools:targetApi="m">
-        <activity android:name="._Page4_AthleteWorkout"></activity>
+        <activity android:name="._Page4_AthleteWorkout"
+            android:hardwareAccelerated="true"/>
         <activity android:name="._Page3_SelectWorkout"/>
         <activity android:name="._Page2_UserDetails" />
         <activity android:name="._Page1_HomeScreen">
@@ -34,6 +38,15 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver
+            android:name="com.binyamin.trainme.NetworkConnectionCheck"
+            android:label="NetworkChangeReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

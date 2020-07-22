@@ -2,6 +2,7 @@ package com.binyamin.trainme;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,13 +54,20 @@ public class Fragment_Settings extends Fragment implements View.OnClickListener 
         generalItems.add(generalItem2);
         generalItems.add(generalItem3);
 
-        SettingsListAdapter generalListAdapter = new SettingsListAdapter(getContext(),R.layout.adapter_view_settings_general,generalItems);
+        SettingsListAdapter generalListAdapter = new SettingsListAdapter(getContext(),R.layout.adapter_view_settings_general,generalItems,true);
         generalListView.setAdapter(generalListAdapter);
         generalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 Toast.makeText(getContext(),"Touched",Toast.LENGTH_SHORT).show();
-
+                Handler handler = new Handler();
+                view.setBackgroundColor(Color.parseColor("#b0bec5"));
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.setBackgroundColor(getResources().getColor(android.R.color.white));
+                    }
+                },200);
 
             }
         });
@@ -67,21 +76,23 @@ public class Fragment_Settings extends Fragment implements View.OnClickListener 
         ListView listViewSupportUs = view.findViewById(R.id.listViewSupportUs);
         SettingsItem supportItem1 = new SettingsItem(R.drawable.ic_app_icon_rateus,"Rate Us");
         SettingsItem supportItem2 = new SettingsItem(R.drawable.ic_app_icon_blockads,"Remove Ads");
-        SettingsItem supportItem3 = new SettingsItem(R.drawable.ic_app_icon_feedback,"Feedback");
+        SettingsItem supportItem3 = new SettingsItem(R.drawable.ic_app_icon_feedback,"Feedback by Mail");
         SettingsItem supportItem4 = new SettingsItem(R.drawable.ic_app_icon_more,"More By SyntApps");
+        SettingsItem supportItem5 = new SettingsItem(R.drawable.ic_app_icon_share,"Share with friends");
 
         ArrayList<SettingsItem> supportItems = new ArrayList<>();
         supportItems.add(supportItem1);
         supportItems.add(supportItem2);
         supportItems.add(supportItem3);
         supportItems.add(supportItem4);
+        supportItems.add(supportItem5);
 
-        SettingsListAdapter supportItemAdapter = new SettingsListAdapter(getContext(),R.layout.adapter_view_settings_general,supportItems);
+        SettingsListAdapter supportItemAdapter = new SettingsListAdapter(getContext(),R.layout.adapter_view_settings_general,supportItems,false);
         listViewSupportUs.setAdapter(supportItemAdapter);
         listViewSupportUs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(),"Touched",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Loading...",Toast.LENGTH_SHORT).show();
                 switch (position) {
                     case 0:
                         final String appPackageName = getActivity().getPackageName(); // getPackageName() from Context or Activity object
@@ -117,6 +128,19 @@ public class Fragment_Settings extends Fragment implements View.OnClickListener 
                            e.printStackTrace();
                         }
                         break;
+                    case 4:
+                        try {
+                            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                            shareIntent.setType("text/plain");
+                            shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
+                            String shareMessage= "\nCheck out TrainMe - real workouts & diets by PRO ATHLETES\n\n";
+                            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                            startActivity(Intent.createChooser(shareIntent, "select to share"));
+                        } catch(Exception e) {
+                            Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
                 }
             }
         });
@@ -136,7 +160,7 @@ public class Fragment_Settings extends Fragment implements View.OnClickListener 
     public void onDestroyView() {
         super.onDestroyView();
         getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getActivity().setTitle("TrainMe");
+        getActivity().setTitle(R.string.app_name);
     }
 
     @Override

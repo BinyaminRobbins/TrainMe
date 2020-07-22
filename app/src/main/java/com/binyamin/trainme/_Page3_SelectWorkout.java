@@ -1,25 +1,16 @@
 package com.binyamin.trainme;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-import androidx.viewpager2.widget.ViewPager2;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -33,6 +24,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+
 public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     int backButtonCount;
     static Context context;
@@ -49,6 +41,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         setContentView(R.layout._3_activity_select_workout);
 
         context = getApplicationContext();
+        Toast.makeText(context,"You Can Disable Auto-Scroll in Settings",Toast.LENGTH_LONG).show();
         sharedPreferences = getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
 
         t = new Thread(this,"DefineAthleteWorkouts");
@@ -69,6 +62,9 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         drawerLayout = findViewById(R.id.drawerLayout);
 
         sliderHandler = new Handler();
+
+        PurchaseProduct product = new PurchaseProduct(this,_Page3_SelectWorkout.this,getResources().getString(R.string.productId),sharedPreferences);
+        product.setUp();
     }
 
     @Override
@@ -82,6 +78,8 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         backButtonCount = 0;
         t = new Thread(this,"DeclareWorkouts");
         t.run();
+        PurchaseProduct product = new PurchaseProduct(this,_Page3_SelectWorkout.this,getResources().getString(R.string.productId),sharedPreferences);
+        product.setUp();
     }
 
     @Override
@@ -255,6 +253,5 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
 }

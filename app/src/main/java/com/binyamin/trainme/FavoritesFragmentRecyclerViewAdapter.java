@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,8 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         final ViewHolderClass viewHolderClass = (ViewHolderClass) holder;
+
+        final SharedPreferences sharedPreferences = _Page3_SelectWorkout.context.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
 
         viewHolderClass.athleteTextView.setText(sliderItems.get(position).getAthleteName());
 
@@ -70,28 +73,35 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
             @Override
             public void onClick(View v) {
                 if(!sliderItems.get(position).getIfRequiresPremium()) {
-                    Intent intent = new Intent(_Page3_SelectWorkout.context, _Page4_AthleteWorkout.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("tag", String.valueOf(sliderItems.get(position).getTagNum()));
-                    _Page3_SelectWorkout.context.startActivity(intent);
+                    toAct4(v.getContext(),position);
                 }else{
-                    new AlertDialog.Builder(v.getContext())
-                            .setTitle("Upgrade to Premium")
-                            .setIcon(R.drawable.ic_action_premium)
-                            .setMessage("You have discovered a premium feature.")
-                            .setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    _Page3_SelectWorkout.navController.navigate(R.id.menuNavigation_premium);
-                                }
-                            })
-                            .setNegativeButton("Not now", null)
-                            .show();
+                    if(sharedPreferences.getBoolean("ProductIsOwned",false)){
+                        toAct4(v.getContext(),position);
+                    }else {
+                        new AlertDialog.Builder(v.getContext())
+                                .setTitle("Upgrade to Premium")
+                                .setIcon(R.drawable.ic_action_premium)
+                                .setMessage("You have discovered a premium feature.")
+                                .setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        _Page3_SelectWorkout.navController.navigate(R.id.menuNavigation_premium);
+                                    }
+                                })
+                                .setNegativeButton("Not now", null)
+                                .show();
+                    }
                 }
             }
         });
 
 
+    }
+    public void toAct4(Context context,int position){
+        Intent intent = new Intent(context, _Page4_AthleteWorkout.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("tag", String.valueOf(sliderItems.get(position).getTagNum()));
+        _Page3_SelectWorkout.context.startActivity(intent);
     }
 
     @Override
