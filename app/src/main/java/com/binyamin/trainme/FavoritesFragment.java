@@ -1,83 +1,45 @@
 package com.binyamin.trainme;
 
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
-import android.text.Editable;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TableLayout;
 
-import java.util.ArrayList;
-import java.util.Random;
+import com.google.android.material.tabs.TabLayout;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FavoritesFragment extends Fragment {
-    static RecyclerView rv;
-    private static ArrayList<_3_SliderItem> sliderItems = new ArrayList<>();
-    static ArrayList<_3_SliderItem> favoritesList = new ArrayList<>();
-    static SQLiteDatabase database;
+    View view;
+
 
     public FavoritesFragment() {
         // Required empty public constructor
-    }
-    public static void updateList(){
-        LinearLayoutManager manager = new LinearLayoutManager(_Page3_SelectWorkout.context, RecyclerView.VERTICAL, false);
-        rv.setLayoutManager(manager);
-
-        SliderList sliderList = new SliderList(database);
-        sliderItems.clear();
-        sliderItems = sliderList.getSliderList();
-        favoritesList.clear();
-
-        for(_3_SliderItem item : sliderItems){
-            if(item.getIsFavorite()){
-                favoritesList.add(item);
-            }
-        }
-        Log.i("FavoritesList",favoritesList.toString());
-        rv.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
-        FavoritesFragmentRecyclerViewAdapter adapter = new FavoritesFragmentRecyclerViewAdapter(favoritesList);
-        rv.setAdapter(adapter);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        rv = view.findViewById(R.id.favorites_rv);
-        database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
-        updateList();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false);
+        view = inflater.inflate(R.layout.fragment_favorites, container, false);
+
+        TabLayout tabLayout = view.findViewById(R.id.tabLayout_favorites);
+        ViewPager viewPager = view.findViewById(R.id.favorites_viewpager);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager(),0);
+        adapter.addFragment(new WorkoutsFavoritesFragment(), "Favorite Workouts");
+        adapter.addFragment(new DietsFavoritesFragment(), "Favorite Diets");
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        return view;
     }
 
     @Override
@@ -91,5 +53,5 @@ public class FavoritesFragment extends Fragment {
         super.onDestroyView();
         getActivity().setTitle(R.string.app_name);
     }
-}
 
+}

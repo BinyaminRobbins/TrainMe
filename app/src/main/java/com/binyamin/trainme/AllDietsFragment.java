@@ -1,5 +1,6 @@
 package com.binyamin.trainme;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,26 +13,30 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AllWorkoutsFragment extends Fragment {
-    static private ArrayList<_3_SliderItem> sliderItems;
-    static ViewPager2 viewPager2;
+public class AllDietsFragment extends Fragment {
+    private PurchaseProduct product;
+    private ViewPager2 viewPager2;
+    private ArrayList<_3_SliderItem> sliderItems;
     private Handler sliderHandler;
     private short delay;
     private boolean scrollOn;
-    private PurchaseProduct product;
 
-    public AllWorkoutsFragment(PurchaseProduct purchaseProduct) {
+
+    public AllDietsFragment(PurchaseProduct purchaseProduct) {
         // Required empty public constructor
         this.product = purchaseProduct;
+
     }
 
     @Override
@@ -39,20 +44,20 @@ public class AllWorkoutsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         delay = 2500;
-
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
-        viewPager2 = view.findViewById(R.id.ImageSlider);
-        scrollOn = sharedPreferences.getBoolean("scrollOn",false);
-
         sliderHandler = new Handler();
 
-        //preparing list of images from drawable folder
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
+        viewPager2 = view.findViewById(R.id.Diets_ImageSlider);
+        scrollOn = sharedPreferences.getBoolean("scrollOn",false);
+
+
         SliderList sliderList = new SliderList(getContext(),sharedPreferences);
-        sliderItems = sliderList.getWorkoutList();
+        sliderItems = sliderList.getDietList();
+        Log.i("SliderItems",sliderItems.toString());
 
         viewPager2.setAdapter(new _3_SliderAdapter(viewPager2,sliderList,sliderItems,product));
-        viewPager2.setClipToPadding(false);
 
+        viewPager2.setClipToPadding(false);
         viewPager2.setElevation(40);
         viewPager2.setClipChildren(false);
         viewPager2.setOffscreenPageLimit(sliderItems.size());
@@ -74,7 +79,6 @@ public class AllWorkoutsFragment extends Fragment {
                 super.onPageSelected(position);
                 sliderHandler.removeCallbacks(sliderRunnable);
                 sliderHandler.postDelayed(sliderRunnable,delay);
-
             }
         });
         viewPager2.setCurrentItem(2,false);
@@ -85,19 +89,19 @@ public class AllWorkoutsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_workouts, container, false);
+        return inflater.inflate(R.layout.fragment_all_diets,container,false);
     }
 
     //Automate Scrolling:
     private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
-                if(scrollOn) {
-                    if(viewPager2.getCurrentItem() != sliderItems.size() - 1) {
-                        viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1, true);
-                    }else{
-                        viewPager2.setCurrentItem(0 , true);
-                    }
+            if(scrollOn) {
+                if(viewPager2.getCurrentItem() != sliderItems.size() - 1) {
+                    viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1, true);
+                }else{
+                    viewPager2.setCurrentItem(0 , true);
+                }
             }
         }
     };
@@ -113,4 +117,5 @@ public class AllWorkoutsFragment extends Fragment {
         super.onPause();
         sliderHandler.removeCallbacks(sliderRunnable);
     }
+
 }

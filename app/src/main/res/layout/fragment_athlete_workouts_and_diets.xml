@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
-    tools:context=".FavoritesFragment">
+    tools:context=".AthleteWorkoutsAndDietsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout_favorites"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
@@ -22,11 +22,11 @@
             android:background="@color/colorPrimaryDark"
             app:tabMode="fixed"/>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/favorites_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+       <androidx.viewpager.widget.ViewPager
+           android:id="@+id/workout_diet_viewpager"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           />
     </LinearLayout>
 
 </FrameLayout>

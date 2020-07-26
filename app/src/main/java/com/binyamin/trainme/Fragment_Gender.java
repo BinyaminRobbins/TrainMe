@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import java.util.Objects;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +39,8 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        sharedPreferences = _Page2_UserDetails.context.getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
+        sharedPreferences = requireContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
+
         cvMan = view.findViewById(R.id.cv_man);
         cvWoman = view.findViewById(R.id.cv_woman);
 
@@ -57,11 +60,14 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+        progressBar.setVisibility(View.VISIBLE);
+        SliderList sliderList = new SliderList(getContext(),sharedPreferences);
+        sliderList.setUpDB();
+
         _Page2_UserDetails.constraintLayout.setAlpha(0.4f);
         getActivity().getWindow().
                 setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-        progressBar.setVisibility(View.VISIBLE);
 
         cvMan.setClickable(false);
         cvWoman.setClickable(false);

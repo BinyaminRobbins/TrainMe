@@ -3,20 +3,17 @@ package com.binyamin.trainme;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.android.billingclient.api.AcknowledgePurchaseParams;
+import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
-import com.android.billingclient.api.ConsumeParams;
-import com.android.billingclient.api.ConsumeResponseListener;
 import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchaseHistoryRecord;
-import com.android.billingclient.api.PurchaseHistoryResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
@@ -27,11 +24,11 @@ import java.util.List;
 
 public class PurchaseProduct implements PurchasesUpdatedListener {
     Context context;
-    BillingClient billingClient;
-    String product;
-    Activity activity;
-    List<String> skuList = new ArrayList<>();
-    SharedPreferences prefs;
+    private BillingClient billingClient;
+    private String product;
+    private Activity activity;
+    private List<String> skuList = new ArrayList<>();
+    private SharedPreferences prefs;
 
 
     public PurchaseProduct(Context context, Activity activity, String product,SharedPreferences prefs){
@@ -40,8 +37,9 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
         this.product = product;
         this.prefs = prefs;
     }
+
     public void setUp(){
-    billingClient = BillingClient.newBuilder(context).enablePendingPurchases().setListener(new PurchasesUpdatedListener() {
+        billingClient = BillingClient.newBuilder(context).enablePendingPurchases().setListener(new PurchasesUpdatedListener() {
         @Override
         //This method starts when user buys a product
         public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> list) {
@@ -68,29 +66,7 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
             final String TAG = "OnBillingSetup";
             if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                 //Toast.makeText(context, "Successfully connected to BillingClient", Toast.LENGTH_SHORT).show();
-
-                billingClient.queryPurchaseHistoryAsync(BillingClient.SkuType.SUBS, new PurchaseHistoryResponseListener() {
-                    @Override
-                    public void onPurchaseHistoryResponse(BillingResult billingResult, List<PurchaseHistoryRecord> list) {
-                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && list != null) {
-                            boolean productFound = false;
-                            for (PurchaseHistoryRecord purchase : list) {
-                                if (purchase.getSku().equals(product)) {
-                                    productFound = true;
-                                    prefs.edit().putBoolean("ProductIsOwned", true).apply();
-                                    //Log.i(TAG,String.valueOf(prefs.getBoolean("ProductIsOwned",false)));
-                                }
-                            }
-                            if (!productFound) {
-                                    prefs.edit().putBoolean("ProductIsOwned", false).apply();
-                                    //Log.i(TAG,String.valueOf(prefs.getBoolean("ProductIsOwned",false)));
-                            }
-                        }
-                    }
-                });
-
-            } else {
-                //Toast.makeText(context, "Failed to Connect", Toast.LENGTH_SHORT).show();
+                checkIfOwned();
             }
         }
 
@@ -131,25 +107,27 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
 
     private void handlePurchase(Purchase purchase) {
         try {
-
             if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
-                if (purchase.getSku().equals(product)) {
-                    ConsumeParams consumeParams = ConsumeParams.newBuilder()
-                            .setPurchaseToken(purchase.getPurchaseToken())
-                            .build();
+                prefs.edit().putBoolean("ProductIsOwned", true).apply();
+                if (!purchase.isAcknowledged()) {
+                    AcknowledgePurchaseParams acknowledgePurchaseParams =
+                            AcknowledgePurchaseParams.newBuilder()
+                                    .setPurchaseToken(purchase.getPurchaseToken())
+                                    .build();
 
-                    ConsumeResponseListener consumeResponseListener = new ConsumeResponseListener() {
+                    AcknowledgePurchaseResponseListener acknowledgePurchaseResponseListener = new AcknowledgePurchaseResponseListener() {
                         @Override
-                        public void onConsumeResponse(BillingResult billingResult, String s) {
-                            Toast.makeText(context, "Purchase Acknowledged", Toast.LENGTH_SHORT).show();
+                        public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
+                            prefs.edit().putBoolean("ProductIsOwned", true).apply();
                         }
                     };
-                    //billingClient.consumeAsync(consumeParams, consumeResponseListener);
-                    //now purchase works again and again
+                    billingClient.acknowledgePurchase(acknowledgePurchaseParams, acknowledgePurchaseResponseListener);
                 }
+            }else{
+                prefs.edit().putBoolean("ProductIsOwned", false).apply();
             }
-        } catch (Exception e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -158,5 +136,21 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
     @Override
     public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> list) {
         Toast.makeText(context, "OnPurchases Updated", Toast.LENGTH_SHORT).show();
+    }
+
+
+    boolean checkIfOwned() {
+        prefs = context.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+        Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(BillingClient.SkuType.SUBS); //Or SkuType.INAPP
+
+        if (purchasesResult.getPurchasesList() != null) {
+            for (Purchase purchase : purchasesResult.getPurchasesList()) {
+
+                if (purchase.getSku().equals(product)) {
+                    handlePurchase(purchase);
+                }
+            }
+        }
+        return prefs.getBoolean("ProductIsOwned", false);
     }
 }

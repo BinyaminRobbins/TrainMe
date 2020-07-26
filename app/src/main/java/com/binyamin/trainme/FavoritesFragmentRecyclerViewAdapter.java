@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +17,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ArrayList<_3_SliderItem> sliderItems;
-    public FavoritesFragmentRecyclerViewAdapter(ArrayList<_3_SliderItem> sliderItems){
+    Context context;
+    SliderList list;
+    SharedPreferences prefs;
+    String currentTableName;
+    public FavoritesFragmentRecyclerViewAdapter(Context context,SharedPreferences prefs,SliderList list, ArrayList<_3_SliderItem> sliderItems, String currentTableName){
+        this.prefs = prefs;
+        this.context = context;
+        this.list = list;
         this.sliderItems = sliderItems;
+        this.currentTableName = currentTableName;
     }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_favorites_fragment_rv,parent,false);
         RecyclerView.ViewHolder viewHolder = new ViewHolderClass (view);
         return viewHolder;
@@ -38,8 +47,6 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         final ViewHolderClass viewHolderClass = (ViewHolderClass) holder;
 
-        final SharedPreferences sharedPreferences = _Page3_SelectWorkout.context.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
-
         viewHolderClass.athleteTextView.setText(sliderItems.get(position).getAthleteName());
 
         viewHolderClass.athleteImageView.setImageResource(sliderItems.get(position).getFavoriteImage());
@@ -47,7 +54,7 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
         viewHolderClass.star.setImageResource(R.drawable.ic_action_star_clicked_border);
         viewHolderClass.star.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 new AlertDialog.Builder(v.getContext())
                         .setIcon(R.drawable.ic_action_star_clicked_border)
                         .setTitle("Remove From Favorites?")
@@ -56,13 +63,15 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
-
                                 ContentValues cv = new ContentValues();
                                 cv.put("isFavorite","false"); //These Fields should be your String values of actual column names
 
-                                database.update("workouts", cv, "tagNum="+sliderItems.get(position).getTagNum(), null);
-                                FavoritesFragment.updateList();
+                                list.getDB().update(currentTableName, cv, "tagNum="+sliderItems.get(position).getTagNum(), null);
+                                if(currentTableName.equals(context.getResources().getString(R.string.workoutsTable))){
+                                    WorkoutsFavoritesFragment.updateList(context);
+                                }else if(currentTableName.equals(context.getResources().getString(R.string.dietsTable))){
+                                    DietsFavoritesFragment.updateList(context);
+                                }
                             }
                         })
                         .setNegativeButton("Never Mind",null)
@@ -75,7 +84,7 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
                 if(!sliderItems.get(position).getIfRequiresPremium()) {
                     toAct4(v.getContext(),position);
                 }else{
-                    if(sharedPreferences.getBoolean("ProductIsOwned",false)){
+                    if(prefs.getBoolean("ProductIsOwned",false)){
                         toAct4(v.getContext(),position);
                     }else {
                         new AlertDialog.Builder(v.getContext())
@@ -101,7 +110,7 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
         Intent intent = new Intent(context, _Page4_AthleteWorkout.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("tag", String.valueOf(sliderItems.get(position).getTagNum()));
-        _Page3_SelectWorkout.context.startActivity(intent);
+        context.startActivity(intent);
     }
 
     @Override

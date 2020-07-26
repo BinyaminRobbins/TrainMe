@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,23 +32,26 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder>{
-    private List<_3_SliderItem> sliderItems;
+    private ArrayList <_3_SliderItem> sliderItems;
+    private boolean colorChanged = false;
     private ViewPager2 viewPager2;
-    boolean colorChanged;
-    SQLiteDatabase database;
-    SharedPreferences sharedPreferences;
+    private SliderList sliderList;
     static String[] detailsArray;
     static Fragment_WorkoutInfo fragment_workoutInfo;
-    static AlertDialog dialog = null;
-    static AlertDialog.Builder builder = null;
+    static private AlertDialog dialog = null;
+    static private AlertDialog.Builder builder = null;
+    private PurchaseProduct purchaseProduct;
 
 
-    public _3_SliderAdapter(List<_3_SliderItem> sliderItems, ViewPager2 viewPager2) {
-        this.sliderItems = sliderItems;
+    public _3_SliderAdapter(ViewPager2 viewPager2,SliderList sliderList, ArrayList<_3_SliderItem> sliderItems, PurchaseProduct product) {
         this.viewPager2 = viewPager2;
+        this.sliderList = sliderList;
+        this.sliderItems = sliderItems;
+        this.purchaseProduct = product;
     }
 
     @NonNull
@@ -60,30 +64,52 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                         false
                 )
         );
+    }
 
+    private String getTableName(){
+        final String tableName;
+        if(viewPager2.getId() == R.id.ImageSlider){
+            tableName = _Page3_SelectWorkout.context.getResources().getString(R.string.workoutsTable);
+        }else {
+            tableName = _Page3_SelectWorkout.context.getResources().getString(R.string.dietsTable);
+        }
+        Log.i("TableName",tableName);
+        return tableName;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final SliderViewHolder holder, final int position) {
-        sharedPreferences = _Page3_SelectWorkout.context.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
-         detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.descriptions);
+        holder.startButton.setTag(position);
         holder.setImage(sliderItems.get(position));
         holder.setLockedImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
-        holder.startButton.setTag(position);
-
+        if(viewPager2.getId() == R.id.ImageSlider){
+            holder.startButton.setText("Start Workouts");
+            detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.descriptions);
+        }else{
+            holder.startButton.setText("See More");
+            holder.startButton.setTextSize(16f);
+            //Diets Info:
+            //detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.descriptions);
+        }
 
         holder.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = _Page3_SelectWorkout.context;
+                String TAG = "OnClick";
+                Log.i(TAG,"Button Clicked");
                  if(v.getId() == R.id.startButton){
                      if(!sliderItems.get(position).getIfRequiresPremium()){
+                         Log.i(TAG,"Doesn't Require Premium");
                          openAct4(v.getContext(),v);
-                     }else{
-                         if(sharedPreferences.getBoolean("ProductIsOwned",false)){
+                     }else if(sliderItems.get(position).getIfRequiresPremium()){
+                         Log.i(TAG,"Requires Premium");
+                         if(purchaseProduct.checkIfOwned()){
+                             Log.i(TAG,"Product is owned");
                              openAct4(v.getContext(),v);
-                         }else {
+                         }else{
+                             Log.i(TAG,"Product is Not Owned");
+
                              builder = new AlertDialog.Builder(v.getContext());
 
                              builder.setTitle("Upgrade to Premium");
@@ -107,9 +133,11 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         holder.info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                fragment_workoutInfo = new Fragment_WorkoutInfo(position);
-                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fraginfo_fade_in,R.anim.fraginfo_fade_out).replace(R.id.fl_workoutInfo, fragment_workoutInfo).addToBackStack(null).commit();
+                if(viewPager2.getId() == R.id.ImageSlider) {
+                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                    fragment_workoutInfo = new Fragment_WorkoutInfo(position);
+                    activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fraginfo_fade_in, R.anim.fraginfo_fade_out).replace(R.id.fl_workoutInfo, fragment_workoutInfo).addToBackStack(null).commit();
+                }
             }
         });
         holder.star.setOnClickListener(new View.OnClickListener() {
@@ -118,16 +146,15 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                 if (!colorChanged) {
                     holder.star.setImageResource(R.drawable.ic_action_star_clicked);
                     colorChanged = true;
-
                     try {
-                        database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts",Context.MODE_PRIVATE,null);
                         ContentValues cv = new ContentValues();
                         cv.put("isFavorite","true"); //These Fields should be your String values of actual column names
 
-                        database.update("Workouts", cv, "tagNum="+sliderItems.get(position).getTagNum(), null);
+                        sliderList.getDB().update(getTableName(), cv, "tagNum ="+sliderItems.get(position).getTagNum(), null);
 
                     }catch(Exception e){
                         e.printStackTrace();
+                        Toast.makeText(_Page3_SelectWorkout.context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                 } else if (colorChanged) {
@@ -135,30 +162,34 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                     colorChanged = false;
 
                     try {
-                        database = _Page3_SelectWorkout.context.openOrCreateDatabase("workouts",Context.MODE_PRIVATE,null);
-
                         ContentValues cv = new ContentValues();
                         cv.put("isFavorite","false"); //These Fields should be your String values of actual column names
 
-                        database.update("workouts", cv, "tagNum ="+sliderItems.get(position).getTagNum(), null);
+                        sliderList.getDB().update(getTableName(), cv, "tagNum ="+sliderItems.get(position).getTagNum(), null);
+
                     }catch(Exception e){
                         e.printStackTrace();
+                        Toast.makeText(_Page3_SelectWorkout.context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                 }
             }
         });
-        if (sliderItems.get(position).getIsFavorite() == true) {
+
+        //On start show which items are already favorites
+        if (sliderItems.get(position).getIsFavorite()) {
             holder.star.setImageResource(R.drawable.ic_action_star_clicked);
         } else {
             holder.star.setImageResource(R.drawable.ic_action_star);
         }
+
     }
 
     private void openAct4(Context context, View v){
         Intent intent = new Intent(context,_Page4_AthleteWorkout.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("tag",v.getTag().toString());
+        intent.putExtra("tableName",getTableName());
         context.startActivity(intent);
     }
 

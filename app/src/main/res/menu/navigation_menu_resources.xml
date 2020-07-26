@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menuNavigation_workouts"
+        android:id="@+id/menuNavigation_workout_and_diets"
         android:icon="@drawable/ic_action_workouts"
-        android:title="Athlete Workouts"/>
+        android:title="Athlete Workouts &amp; Diets"/>
 
     <item
         android:id="@+id/menuNavigation_favorites"
@@ -22,11 +22,6 @@
                 android:id="@+id/menuNavigation_youtube"
                 android:icon="@drawable/ic_action_video"
                 android:title="YouTube Home-Workouts"/>
-
-            <item
-                android:id="@+id/menuNavigation_diets"
-                android:icon="@drawable/ic_action_diet"
-                android:title="Athlete Diets"/>
 
             <item
                 android:id="@+id/menuNavigation_women"

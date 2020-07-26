@@ -40,7 +40,7 @@ public class Fragment_WorkoutInfo extends Fragment {
         workoutInfoTxt = view.findViewById(R.id.workout_infoTxt);
         workoutInfoTxt.setText(detailsArray[position]);
         workoutInfoTxt.setTextColor(Color.WHITE);
-        workoutInfoTxt.setTextSize(16);
+        workoutInfoTxt.setTextSize(16.5f);
 
         closeButton = view.findViewById(R.id.closeInfoButton);
         closeButton.setOnClickListener(new View.OnClickListener() {

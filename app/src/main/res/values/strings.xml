@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">TrainMe</string>
     <string name="productId">premium_features_sub_2</string>
+    <string name="dbName">TrainMeDatabase</string>
+    <string name="workoutsTable">workouts</string>
+    <string name="dietsTable">diets</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

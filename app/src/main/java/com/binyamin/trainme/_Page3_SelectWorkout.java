@@ -1,16 +1,21 @@
 package com.binyamin.trainme;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -29,7 +34,9 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     int backButtonCount;
     static Context context;
     private Thread t;
+    private Thread t2;
     static ArrayList<AllWorkouts> allAthleteWorkouts = new ArrayList<>();
+    static ArrayList<AllWorkouts> allAthleteDiets = new ArrayList<>();
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     SharedPreferences sharedPreferences;
@@ -42,10 +49,12 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
 
         context = getApplicationContext();
         Toast.makeText(context,"You Can Disable Auto-Scroll in Settings",Toast.LENGTH_LONG).show();
-        sharedPreferences = getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
 
-        t = new Thread(this,"DefineAthleteWorkouts");
+        t = new Thread(this,"DeclareWorkouts");
         t.run();
+        t2 = new Thread(this,"DeclareDiets");
+        t2.run();
 
        Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -61,11 +70,39 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
 
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        sliderHandler = new Handler();
-
-        PurchaseProduct product = new PurchaseProduct(this,_Page3_SelectWorkout.this,getResources().getString(R.string.productId),sharedPreferences);
+        final PurchaseProduct product = new PurchaseProduct(context,_Page3_SelectWorkout.this,getResources().getString(R.string.productId),sharedPreferences);
         product.setUp();
+
+       navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+           @Override
+           public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+               if(destination.getId() == R.id.menuNavigation_youtube){
+                   AlertDialog dialog;
+                   AlertDialog.Builder builder = new AlertDialog.Builder(_Page3_SelectWorkout.this);
+                   builder.setTitle("Upgrade to Premium");
+                   builder.setIcon(R.drawable.ic_action_premium);
+                   builder.setMessage("You have discovered a premium feature.");
+                   builder.setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                           navController.navigate(R.id.menuNavigation_premium);
+                       }
+                   });
+                   builder.setNegativeButton("Not now", new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                           navController.navigate(R.id.menuNavigation_workout_and_diets);
+                       }
+                   });
+                   dialog = builder.create();
+                   dialog.setCanceledOnTouchOutside(false);
+                   dialog.show();
+               }
+           }
+       });
+        sliderHandler = new Handler();
     }
+
 
     @Override
     protected void onPause() {
@@ -78,6 +115,8 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         backButtonCount = 0;
         t = new Thread(this,"DeclareWorkouts");
         t.run();
+        t2 = new Thread(this,"DeclareDiets");
+        t2.run();
         PurchaseProduct product = new PurchaseProduct(this,_Page3_SelectWorkout.this,getResources().getString(R.string.productId),sharedPreferences);
         product.setUp();
     }
@@ -120,7 +159,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     //Stretching
     @Override
     public void run() {
-        if (t.getName() == "DeclareWorkouts") {
+        if (t.getName().equals("DeclareWorkouts")) {
             allAthleteWorkouts.clear();
 
             final ArrayList<AthleteWorkouts> bradyWorkouts = new ArrayList<>();
@@ -143,7 +182,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
 
             lebronWorkouts.add(new AthleteWorkouts("Mixed", "Push-Ups", R.drawable.workout_pushup, "Till-Failure", "3 Sets (45s Rest)"));
             lebronWorkouts.add(new AthleteWorkouts("Mixed", "Pull-Ups", R.drawable.workout_pullup, "10 Reps", "3 Sets (45s Rest)"));
-            lebronWorkouts.add(new AthleteWorkouts("Mixed", "Dumbbell Snatches", R.drawable.workout_pullup, "5 Reps (Per Arm)", "3 Sets (45s Rest)")); //need to get gif resource for "Dumbbell Snatches"
+            lebronWorkouts.add(new AthleteWorkouts("Mixed", "KettleBell Snatches", R.drawable.dumbbell_snatch, "5 Reps (Per Arm)", "3 Sets (45s Rest)")); //need to get gif resource for "Dumbbell Snatches"
             lebronWorkouts.add(new AthleteWorkouts("Mixed", "Single-Arm Cable Rows", R.drawable.workout_pullup, "10 Reps (Per Arm)", "3 Sets (45s Rest)")); //need gif resource for "single arm cable rows"
             lebronWorkouts.add(new AthleteWorkouts("LowerBody", "Dumbbell Squats", R.drawable.workout_squat, "8-14 Reps", "3 Sets (40s Rest)")); //need gid for "DUMBBELL squats"
             lebronWorkouts.add(new AthleteWorkouts("LowerBody", "Swiss Ball Hip Raises", R.drawable.workout_pullup, "10-12 Reps", "3 Sets (40s Rest)")); //need gif for "Swiss Ball Hip Raises"
@@ -161,7 +200,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
             final ArrayList<AthleteWorkouts> mcGregorWorkouts = new ArrayList<>();
             mcGregorWorkouts.clear();
 
-            mcGregorWorkouts.add(new AthleteWorkouts("BodyWeight", "Muscle-Ups", R.drawable.workout_pushup, "1 - minute", "5 Sets (2 - 3 min Rest)")); //Gif
+            mcGregorWorkouts.add(new AthleteWorkouts("BodyWeight", "Chin-Ups", R.drawable.chin_ups, "1 - minute", "5 Sets (2 - 3 min Rest)")); //Gif
             mcGregorWorkouts.add(new AthleteWorkouts("BodyWeight", "Push-Ups", R.drawable.workout_pushup, "1 - minute", "5 Sets (2 - 3 min Rest)"));
             mcGregorWorkouts.add(new AthleteWorkouts("BodyWeight", "Pull-Ups", R.drawable.workout_pullup, "1 - minute", "5 Sets (2 - 3 min Rest)"));
             mcGregorWorkouts.add(new AthleteWorkouts("BodyWeight", "Squats", R.drawable.workout_squat, "1 - minute", "5 Sets (2 - 3 min Rest)")); //Gif (Air Squat)
@@ -176,6 +215,21 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
             mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Ostrich Walk", R.drawable.workout_squat, "1", "Perform till loose"));//Gif
 
             allAthleteWorkouts.add(2, new AllWorkouts("Connor McGregor", mcGregorWorkouts));
+
+        }else if (t.getName().equals("DeclareDiets")){
+            //Setup Diets
+            allAthleteDiets.clear();
+
+            final ArrayList<AthleteWorkouts> ronaldoDiet = new ArrayList<>();
+            ronaldoDiet.clear();
+            ronaldoDiet.add(new AthleteWorkouts(null,"Breakfast",R.drawable.ham_and_cheese,"Ham & Cheese + Low-Fat Yogurt","* protein and fat"));
+            ronaldoDiet.add(new AthleteWorkouts(null,"Lunch #1",R.drawable.chicken_salad,"Chicken & Salad","* lean protein and greens"));
+            ronaldoDiet.add(new AthleteWorkouts(null,"Lunch #2",R.drawable.seared_tuna,"Tuna, Olives, Eggs","* protein + antioxidants"));
+            ronaldoDiet.add(new AthleteWorkouts(null,"Snack",R.drawable.avocado_toast,"Avocado Toast w/ fresh fruit","* Fat, Fiber, Essential Vitamins"));
+            ronaldoDiet.add(new AthleteWorkouts(null,"Dinner #1",R.drawable.fish,"Fresh Fish w/ salad","* lean protein + greens"));
+            ronaldoDiet.add(new AthleteWorkouts(null,"Dinner #2",R.drawable.steak,"Steak w/ calamari","* protein, fat, carbs"));
+
+            allAthleteDiets.add(0,new AllWorkouts("C. Ronaldo",ronaldoDiet));
 
         }
     }
@@ -203,9 +257,8 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
             @Override
             public boolean onQueryTextSubmit(String query) {
                 closeKeyboard();
-                SQLiteDatabase database = _Page3_SelectWorkout.context.openOrCreateDatabase("Workouts", Context.MODE_PRIVATE,null);
-                SliderList sliderList = new SliderList(database);
-                ArrayList<_3_SliderItem> sliderItems = sliderList.getSliderList();
+                SliderList sliderList = new SliderList(context,sharedPreferences);
+                ArrayList<_3_SliderItem> sliderItems = sliderList.getWorkoutList();
                 for(_3_SliderItem item : sliderItems){
                     String athleteName = item.getAthleteName().toLowerCase();
                     if(athleteName.matches(query.toLowerCase()) || athleteName.contains(query.toLowerCase()) ){
@@ -225,7 +278,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
 
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                if(!navigationView.getMenu().findItem(R.id.menuNavigation_workouts).isChecked()){
+                if(!navigationView.getMenu().findItem(R.id.menuNavigation_workout_and_diets).isChecked()){
                     Toast.makeText(context,"Can't Search Here",Toast.LENGTH_SHORT).show();
                     return false;
                 }

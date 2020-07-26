@@ -1,13 +1,12 @@
 package com.binyamin.trainme;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,14 +39,20 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
 
         Intent intent = getIntent();
         tagNum = Integer.valueOf(intent.getStringExtra("tag"));
+        String tableName = intent.getStringExtra("tableName");
         Log.i("tagnum", String.valueOf(tagNum));
 
-
         athleteWorkoutList.clear();
-        athleteWorkoutList = _Page3_SelectWorkout.allAthleteWorkouts.get(tagNum).getAthleteWorkoutArrayList();
-        recyclerView = findViewById(R.id.workoutRV);
+        if(tableName.equals(getResources().getString(R.string.workoutsTable))) {
+            //Workout ArrayList
+            athleteWorkoutList = _Page3_SelectWorkout.allAthleteWorkouts.get(tagNum).getAthleteWorkoutArrayList();
+        }else {
+            //Diet ArrayList
+            athleteWorkoutList = _Page3_SelectWorkout.allAthleteDiets.get(tagNum).getAthleteWorkoutArrayList();
+        }
 
-        adapter = new _4_RecyclerViewAdapter(selectWorkoutList);
+        adapter = new _4_RecyclerViewAdapter(athleteWorkoutList);
+        recyclerView = findViewById(R.id.workoutRV);
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
@@ -55,23 +60,25 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         workoutCategories.clear();
         for (AthleteWorkouts workout : athleteWorkoutList) {
             String category = workout.getCategory();
-            Log.i("Category", category);
             if (!workoutCategories.contains(category)) {
                 workoutCategories.add(category);
-                Log.i("Category","Added");
-                Log.i("Workout SSize",String.valueOf(workoutCategories.size()));
             }
         }
 
-            ImageView imageViewHeader = findViewById(R.id.imageViewHeader);
+        ImageView imageViewHeader = findViewById(R.id.imageViewHeader);
 
-            SQLiteDatabase database = getApplicationContext().openOrCreateDatabase("Workouts",MODE_PRIVATE,null);
-            SliderList sliderList = new SliderList(database);
-            myList = sliderList.getSliderList();
+        SharedPreferences prefs = getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
 
-            _3_SliderItem sliderItem = myList.get(tagNum);
+        SliderList sliderList = new SliderList(getApplicationContext(),prefs);
+        if(tableName.equals(getResources().getString(R.string.workoutsTable))) {
+            myList = sliderList.getWorkoutList();
+        }else{
+            myList = sliderList.getDietList();
+        }
 
-            imageViewHeader.setImageResource(sliderItem.getImage());
+        _3_SliderItem sliderItem = myList.get(tagNum);
+
+        imageViewHeader.setImageResource(sliderItem.getImage());
             final Matrix matrix = imageViewHeader.getImageMatrix();
             final float imageWidth = imageViewHeader.getDrawable().getIntrinsicWidth();
             final int screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -84,17 +91,19 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
 
             backButton = findViewById(R.id.backButton);
             backButton.setOnClickListener(this);
-
             spinner = findViewById(R.id.category_spinner);
-            //String[] myArray = new String[_Page3_SelectWorkout.allAthleteWorkouts.size()];
+
+        if(tableName.equals(getResources().getString(R.string.workoutsTable))) {
             MyAdapter spinnerAdapter = new MyAdapter(this, R.layout.custom_spinner_4_, workoutCategories);
 
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(spinnerAdapter);
             spinner.setOnItemSelectedListener(this);
             spinnerAdapter.notifyDataSetChanged();
-
+        }else{
+            spinner.setVisibility(View.GONE);
         }
+    }
 
         @Override
         public void onBackPressed () {
@@ -119,15 +128,16 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
                 if (workout.getCategory().equals(currentItem)) {
                     Log.i("CurrentWorkoutCategory", workout.getCategory());
                     selectWorkoutList.add(workout);
-                    adapter.notifyDataSetChanged();
+                    //adapter.notifyDataSetChanged();
                 }
             }
+            adapter = new _4_RecyclerViewAdapter(selectWorkoutList);
+            recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
 

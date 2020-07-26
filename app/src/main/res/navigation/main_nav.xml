@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/menuNavigation_workouts">
+    app:startDestination="@id/menuNavigation_workout_and_diets">
 
     <fragment
-        android:id="@+id/menuNavigation_workouts"
-        android:name="com.binyamin.trainme.AllWorkoutsFragment"
-        android:label="fragment_all_workouts"
-        tools:layout="@layout/fragment_all_workouts" />
+        android:id="@+id/menuNavigation_workout_and_diets"
+        android:name="com.binyamin.trainme.AthleteWorkoutsAndDietsFragment"
+        android:label="fragment_athlete_workouts_and_diets"
+        tools:layout="@layout/fragment_athlete_workouts_and_diets" />
 
     <fragment
         android:id="@+id/menuNavigation_favorites"
@@ -33,5 +33,6 @@
         android:name="com.binyamin.trainme.Fragment_Settings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+
 
 </navigation>

@@ -30,6 +30,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     implementation 'androidx.cardview:cardview:1.0.0'
+
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     //ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
@@ -43,13 +44,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0-rc01'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0-rc01'
     //in-app purchases
-    //implementation 'com.android.billingclient:billing:1.2'
     implementation 'com.android.billingclient:billing:2.2.0'
 
     //tiktok layout
     implementation 'com.google.android.material:material:1.1.0'
-    //Glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-
 
 }

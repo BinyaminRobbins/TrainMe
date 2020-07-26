@@ -73,7 +73,6 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
             @Override
             public void run() {
                 boolean hasOpenedBefore = sharedPreferences.getBoolean("hasOpenedBefore",false);
-                Log.i("Has Opened Before",Boolean.toString(hasOpenedBefore));
                 Intent intent;
                 if(hasOpenedBefore){
                     intent = new Intent(getApplicationContext(), _Page3_SelectWorkout.class);
