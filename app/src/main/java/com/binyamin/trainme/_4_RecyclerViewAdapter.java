@@ -1,5 +1,9 @@
 package com.binyamin.trainme;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +27,7 @@ public class _4_RecyclerViewAdapter extends RecyclerView.Adapter<_4_RecyclerView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull _4_RecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final _4_RecyclerViewAdapter.ViewHolder holder, int position) {
         holder.gifImageView.setImageResource(arrayName.get(position).getGif());
         holder.titleText.setText(arrayName.get(position).getWorkoutName());
         holder.subTitleText.setText(arrayName.get(position).getRepCount());

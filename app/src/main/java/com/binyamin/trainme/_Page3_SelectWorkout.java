@@ -30,7 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
+public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable {
     int backButtonCount;
     static Context context;
     private Thread t;
@@ -42,21 +42,22 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     SharedPreferences sharedPreferences;
     Handler sliderHandler;
     static NavController navController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout._3_activity_select_workout);
 
         context = getApplicationContext();
-        Toast.makeText(context,"You Can Disable Auto-Scroll in Settings",Toast.LENGTH_LONG).show();
-        sharedPreferences = this.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+        Toast.makeText(context, "You Can Disable Auto-Scroll in Settings", Toast.LENGTH_LONG).show();
+        sharedPreferences = this.getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
 
-        t = new Thread(this,"DeclareWorkouts");
+        t = new Thread(this, "DeclareWorkouts");
         t.run();
-        t2 = new Thread(this,"DeclareDiets");
+        t2 = new Thread(this, "DeclareDiets");
         t2.run();
 
-       Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
 
@@ -66,40 +67,40 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
         navigationView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 
         navController = Navigation.findNavController(this, R.id.navHostFragment);
-        NavigationUI.setupWithNavController(navigationView,navController);
+        NavigationUI.setupWithNavController(navigationView, navController);
 
         drawerLayout = findViewById(R.id.drawerLayout);
 
-        final PurchaseProduct product = new PurchaseProduct(context,_Page3_SelectWorkout.this,getResources().getString(R.string.productId),sharedPreferences);
+        final PurchaseProduct product = new PurchaseProduct(context, _Page3_SelectWorkout.this, getResources().getString(R.string.productId), sharedPreferences);
         product.setUp();
 
-       navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-           @Override
-           public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-               if(destination.getId() == R.id.menuNavigation_youtube){
-                   AlertDialog dialog;
-                   AlertDialog.Builder builder = new AlertDialog.Builder(_Page3_SelectWorkout.this);
-                   builder.setTitle("Upgrade to Premium");
-                   builder.setIcon(R.drawable.ic_action_premium);
-                   builder.setMessage("You have discovered a premium feature.");
-                   builder.setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
-                       @Override
-                       public void onClick(DialogInterface dialog, int which) {
-                           navController.navigate(R.id.menuNavigation_premium);
-                       }
-                   });
-                   builder.setNegativeButton("Not now", new DialogInterface.OnClickListener() {
-                       @Override
-                       public void onClick(DialogInterface dialog, int which) {
-                           navController.navigate(R.id.menuNavigation_workout_and_diets);
-                       }
-                   });
-                   dialog = builder.create();
-                   dialog.setCanceledOnTouchOutside(false);
-                   dialog.show();
-               }
-           }
-       });
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                if (destination.getId() == R.id.menuNavigation_youtube) {
+                    AlertDialog dialog;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(_Page3_SelectWorkout.this);
+                    builder.setTitle("Upgrade to Premium");
+                    builder.setIcon(R.drawable.ic_action_premium);
+                    builder.setMessage("You have discovered a premium feature.");
+                    builder.setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            navController.navigate(R.id.menuNavigation_premium);
+                        }
+                    });
+                    builder.setNegativeButton("Not now", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            navController.navigate(R.id.menuNavigation_workout_and_diets);
+                        }
+                    });
+                    dialog = builder.create();
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.show();
+                }
+            }
+        });
         sliderHandler = new Handler();
     }
 
@@ -113,31 +114,28 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     protected void onResume() {
         super.onResume();
         backButtonCount = 0;
-        t = new Thread(this,"DeclareWorkouts");
+        t = new Thread(this, "DeclareWorkouts");
         t.run();
-        t2 = new Thread(this,"DeclareDiets");
+        t2 = new Thread(this, "DeclareDiets");
         t2.run();
-        PurchaseProduct product = new PurchaseProduct(this,_Page3_SelectWorkout.this,getResources().getString(R.string.productId),sharedPreferences);
+        PurchaseProduct product = new PurchaseProduct(this, _Page3_SelectWorkout.this, getResources().getString(R.string.productId), sharedPreferences);
         product.setUp();
     }
 
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        if(backButtonCount >= 1)
-        {
+        if (backButtonCount >= 1) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-        else
-        {
+        } else {
             Toast.makeText(this, "Press Again to Close Application", Toast.LENGTH_SHORT).show();
             final Handler handler = new Handler();
             final int delay = 3000; //milliseconds (x1000 for seconds)
-            handler.postDelayed(new Runnable(){
-                public void run(){
+            handler.postDelayed(new Runnable() {
+                public void run() {
                     backButtonCount = 0;
                 }
             }, delay);
@@ -149,14 +147,85 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
     //FullBody
     //BodyWeight
     //UpperBody
-        //Chest
-        //Arms
-        //Back
+    //Chest
+    //Arms
+    //Back
     //LowerBody
-        //Legs
-        //Glutes
+    //Legs
+    //Glutes
     //Cardio
     //Stretching
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflator = getMenuInflater();
+        inflator.inflate(R.menu.search_menu, menu);
+
+        final MenuItem drawerItem = menu.findItem(R.id.settings_icon);
+
+        drawerItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+
+        final MenuItem searchItem = menu.findItem(R.id.search_icon);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setQueryHint("Athlete Name");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                closeKeyboard();
+                searchItem.collapseActionView();
+                SliderList sliderList = new SliderList(context, sharedPreferences);
+                ArrayList<_3_SliderItem> sliderItems = sliderList.getWorkoutList();
+                for (_3_SliderItem item : sliderItems) {
+                    String athleteName = item.getAthleteName().toLowerCase();
+                    if (athleteName.matches(query.toLowerCase()) || athleteName.contains(query.toLowerCase())) {
+                        AllWorkoutsFragment.viewPager2.setCurrentItem(item.getTagNum(), true);
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                if (!navigationView.getMenu().findItem(R.id.menuNavigation_workout_and_diets).isChecked()) {
+                    Toast.makeText(context, "Can't Search Here", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                closeKeyboard();
+                return true;
+            }
+        });
+        return true;
+    }
+
+    public void closeKeyboard() {
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
     @Override
     public void run() {
         if (t.getName().equals("DeclareWorkouts")) {
@@ -216,95 +285,21 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable{
 
             allAthleteWorkouts.add(2, new AllWorkouts("Connor McGregor", mcGregorWorkouts));
 
-        }else if (t.getName().equals("DeclareDiets")){
+        } else if (t.getName().equals("DeclareDiets")) {
             //Setup Diets
             allAthleteDiets.clear();
 
             final ArrayList<AthleteWorkouts> ronaldoDiet = new ArrayList<>();
             ronaldoDiet.clear();
-            ronaldoDiet.add(new AthleteWorkouts(null,"Breakfast",R.drawable.ham_and_cheese,"Ham & Cheese + Low-Fat Yogurt","* protein and fat"));
-            ronaldoDiet.add(new AthleteWorkouts(null,"Lunch #1",R.drawable.chicken_salad,"Chicken & Salad","* lean protein and greens"));
-            ronaldoDiet.add(new AthleteWorkouts(null,"Lunch #2",R.drawable.seared_tuna,"Tuna, Olives, Eggs","* protein + antioxidants"));
-            ronaldoDiet.add(new AthleteWorkouts(null,"Snack",R.drawable.avocado_toast,"Avocado Toast w/ fresh fruit","* Fat, Fiber, Essential Vitamins"));
-            ronaldoDiet.add(new AthleteWorkouts(null,"Dinner #1",R.drawable.fish,"Fresh Fish w/ salad","* lean protein + greens"));
-            ronaldoDiet.add(new AthleteWorkouts(null,"Dinner #2",R.drawable.steak,"Steak w/ calamari","* protein, fat, carbs"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Breakfast", R.drawable.ham_and_cheese, "Ham & Cheese + Low-Fat Yogurt", "* protein and fat"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Lunch #1", R.drawable.chicken_salad, "Chicken & Salad", "* lean protein and greens"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Lunch #2", R.drawable.seared_tuna, "Tuna, Olives, Eggs", "* protein + antioxidants"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Snack", R.drawable.avocado_toast, "Avocado Toast w/ fresh fruit", "* Fat, Fiber, Essential Vitamins"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Dinner #1", R.drawable.fish, "Fresh Fish w/ salad", "* lean protein + greens"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Dinner #2", R.drawable.steak, "Steak w/ calamari", "* protein, fat, carbs"));
 
-            allAthleteDiets.add(0,new AllWorkouts("C. Ronaldo",ronaldoDiet));
+            allAthleteDiets.add(0, new AllWorkouts("C. Ronaldo", ronaldoDiet));
 
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflator = getMenuInflater();
-        inflator.inflate(R.menu.search_menu,menu);
-
-        final MenuItem drawerItem = menu.findItem(R.id.settings_icon);
-
-        drawerItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                drawerLayout.openDrawer(GravityCompat.START);
-               // getUsername();
-                return true;
-            }
-        });
-
-        MenuItem searchItem = menu.findItem(R.id.search_icon);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("Athlete Name");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                closeKeyboard();
-                SliderList sliderList = new SliderList(context,sharedPreferences);
-                ArrayList<_3_SliderItem> sliderItems = sliderList.getWorkoutList();
-                for(_3_SliderItem item : sliderItems){
-                    String athleteName = item.getAthleteName().toLowerCase();
-                    if(athleteName.matches(query.toLowerCase()) || athleteName.contains(query.toLowerCase()) ){
-                        AllWorkoutsFragment.viewPager2.setCurrentItem(item.getTagNum(),true);
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                if(!navigationView.getMenu().findItem(R.id.menuNavigation_workout_and_diets).isChecked()){
-                    Toast.makeText(context,"Can't Search Here",Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                closeKeyboard();
-                return true;
-            }
-        });
-        return true;
-    }
-
-    public void closeKeyboard(){
-        View view = getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }

@@ -27,8 +27,9 @@ import java.util.Objects;
  */
 public class AthleteWorkoutsAndDietsFragment extends Fragment {
     View view;
-    SharedPreferences sharedPreferences;
-    PurchaseProduct purchaseProduct;
+    private SharedPreferences sharedPreferences;
+    private PurchaseProduct purchaseProduct;
+    static TabLayout tabLayout;
 
 
     public AthleteWorkoutsAndDietsFragment() {
@@ -46,9 +47,7 @@ public class AthleteWorkoutsAndDietsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TabLayout tabLayout;
         ViewPager viewPager;
-
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_athlete_workouts_and_diets, container, false);
         tabLayout = view.findViewById(R.id.tabLayout);

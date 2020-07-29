@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
+    android:paddingBottom="20dp"
     tools:context="._Page4_AthleteWorkout">
 
     <ImageView
@@ -16,7 +17,6 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="3dp"
         android:alpha="0.8"
-        android:background="@color/colorAccentBlue"
         android:elevation="2dp"
         android:scaleType="matrix" />
 
@@ -72,17 +72,41 @@
         android:fadingEdgeLength="5dp"
         android:popupBackground="@color/colorPrimary" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/workoutRV"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_below="@id/category_spinner"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/workoutRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:paddingBottom="10dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="2dp"
         android:background="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tv_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/workoutRV"
+            android:text="Workout Info Link"
+            android:gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:textSize="14sp"
+            android:textColor="@color/linkColor"/>
+        </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

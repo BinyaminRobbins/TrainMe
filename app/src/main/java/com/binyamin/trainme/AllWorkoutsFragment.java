@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class AllWorkoutsFragment extends Fragment {
         SliderList sliderList = new SliderList(getContext(),sharedPreferences);
         sliderItems = sliderList.getWorkoutList();
 
-        viewPager2.setAdapter(new _3_SliderAdapter(viewPager2,sliderList,sliderItems,product));
+        viewPager2.setAdapter(new _3_SliderAdapter(sliderList,sliderItems,product));
         viewPager2.setClipToPadding(false);
 
         viewPager2.setElevation(40);

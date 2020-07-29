@@ -28,6 +28,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.SkuDetails;
+import com.google.android.material.tabs.TabLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.w3c.dom.Text;
@@ -38,7 +39,6 @@ import java.util.List;
 public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder>{
     private ArrayList <_3_SliderItem> sliderItems;
     private boolean colorChanged = false;
-    private ViewPager2 viewPager2;
     private SliderList sliderList;
     static String[] detailsArray;
     static Fragment_WorkoutInfo fragment_workoutInfo;
@@ -46,9 +46,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     static private AlertDialog.Builder builder = null;
     private PurchaseProduct purchaseProduct;
 
-
-    public _3_SliderAdapter(ViewPager2 viewPager2,SliderList sliderList, ArrayList<_3_SliderItem> sliderItems, PurchaseProduct product) {
-        this.viewPager2 = viewPager2;
+    public _3_SliderAdapter(SliderList sliderList, ArrayList<_3_SliderItem> sliderItems, PurchaseProduct product) {
         this.sliderList = sliderList;
         this.sliderItems = sliderItems;
         this.purchaseProduct = product;
@@ -67,14 +65,22 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     }
 
     private String getTableName(){
-        final String tableName;
-        if(viewPager2.getId() == R.id.ImageSlider){
+        String tableName = null;
+        if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 0){
             tableName = _Page3_SelectWorkout.context.getResources().getString(R.string.workoutsTable);
-        }else {
+        }else if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 1) {
             tableName = _Page3_SelectWorkout.context.getResources().getString(R.string.dietsTable);
         }
-        Log.i("TableName",tableName);
         return tableName;
+    }
+
+    private String[] getDetailsArray(){
+        if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 0){
+            detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.workoutDescriptions);
+        }else if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 1){
+            detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.dietDescriptions);
+        }
+        return detailsArray;
     }
 
     @Override
@@ -83,35 +89,27 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         holder.setImage(sliderItems.get(position));
         holder.setLockedImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
-        if(viewPager2.getId() == R.id.ImageSlider){
+        if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 0){
             holder.startButton.setText("Start Workouts");
-            detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.descriptions);
-        }else{
+            detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.workoutDescriptions);
+        }else if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 1){
             holder.startButton.setText("See More");
             holder.startButton.setTextSize(16f);
             //Diets Info:
-            //detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.descriptions);
+            detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.dietDescriptions);
         }
 
         holder.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String TAG = "OnClick";
-                Log.i(TAG,"Button Clicked");
                  if(v.getId() == R.id.startButton){
                      if(!sliderItems.get(position).getIfRequiresPremium()){
-                         Log.i(TAG,"Doesn't Require Premium");
                          openAct4(v.getContext(),v);
                      }else if(sliderItems.get(position).getIfRequiresPremium()){
-                         Log.i(TAG,"Requires Premium");
                          if(purchaseProduct.checkIfOwned()){
-                             Log.i(TAG,"Product is owned");
                              openAct4(v.getContext(),v);
                          }else{
-                             Log.i(TAG,"Product is Not Owned");
-
                              builder = new AlertDialog.Builder(v.getContext());
-
                              builder.setTitle("Upgrade to Premium");
                              builder.setIcon(R.drawable.ic_action_premium);
                              builder.setMessage("You have discovered a premium feature.");
@@ -133,11 +131,13 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         holder.info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(viewPager2.getId() == R.id.ImageSlider) {
-                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                    fragment_workoutInfo = new Fragment_WorkoutInfo(position);
-                    activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fraginfo_fade_in, R.anim.fraginfo_fade_out).replace(R.id.fl_workoutInfo, fragment_workoutInfo).addToBackStack(null).commit();
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 0) {
+                    fragment_workoutInfo = new Fragment_WorkoutInfo(position,getDetailsArray());
+                }else if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 1){
+                    fragment_workoutInfo = new Fragment_WorkoutInfo(position,getDetailsArray());
                 }
+                activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fraginfo_fade_in, R.anim.fraginfo_fade_out).replace(R.id.fl_workoutInfo, fragment_workoutInfo).addToBackStack(null).commit();
             }
         });
         holder.star.setOnClickListener(new View.OnClickListener() {

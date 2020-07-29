@@ -7,14 +7,16 @@ public class _3_SliderItem {
     private boolean requiresPremium;
     private boolean isFavorite;
     private int tagNum;
+    private String link;
 
-    public _3_SliderItem(int image, int favoriteImage, String athleteName,boolean requiresPremium,boolean isFavorite, int tagNum){
+    public _3_SliderItem(int image, int favoriteImage, String athleteName,boolean requiresPremium,boolean isFavorite, String link, int tagNum){
         this.image = image;
         this.favoriteImage = favoriteImage;
         this.athleteName = athleteName;
         this.requiresPremium = requiresPremium;
         this.isFavorite = isFavorite;
         this.tagNum = tagNum;
+        this.link = link;
     }
     public int getImage(){
         return image;
@@ -28,6 +30,7 @@ public class _3_SliderItem {
     public boolean getIfRequiresPremium() { return requiresPremium; }
     public boolean getIsFavorite(){return isFavorite;}
     public int getTagNum(){return tagNum;}
+    public String getLink(){return link;}
 
 
 }

@@ -28,21 +28,21 @@ public class SliderList {
 
         fillData();
 
-        database.execSQL("CREATE TABLE IF NOT EXISTS workouts (image INTEGER,favoritesImage INTEGER, athleteName VARCHAR, requiresPremium VARCHAR, isFavorite VARCHAR, tagNum INT(2),id INTEGER PRIMARY KEY)");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + bradyLocation + "','"+bradyFavoriteLocation+"','Tom Brady','false', 'false', 0)");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + lebronLocation + "','"+lebronFavoriteLocation+"','Lebron James','false', 'false', 1)");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + mcgregorLocation + "','"+mcgregorFavoriteLocation+"','Connor McGregor','false', 'false',2)");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + zlatanLocation + "','"+zlatanFavoriteLocation+"','Zlatan  Ibrahim.','true', 'false',3)");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + judgeLocation + "','"+judgeFavoriteLocation+"','Aaron Judge','true', 'false',4)");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + ronaldoLocation + "','"+ronaldoFavoriteLocation+"','Cristiano Ronaldo','true', 'false',5)");
+        database.execSQL("CREATE TABLE IF NOT EXISTS workouts (image INTEGER,favoritesImage INTEGER, athleteName VARCHAR, requiresPremium VARCHAR, isFavorite VARCHAR, link VARCHAR, tagNum INT(2),id INTEGER PRIMARY KEY)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + bradyLocation + "','"+bradyFavoriteLocation+"','Tom Brady','false', 'false','https://tb12sports.com/blog/tom-brady-workout', 0)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + lebronLocation + "','"+lebronFavoriteLocation+"','Lebron James','false', 'false','https://www.jumpropedudes.com/workouts/lebron-james-body-breakdown', 1)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + mcgregorLocation + "','"+mcgregorFavoriteLocation+"','Connor McGregor','false','https://manofmany.com/lifestyle/fitness/conor-mcgregor-diet-workout-plan', 'false',2)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + zlatanLocation + "','"+zlatanFavoriteLocation+"','Zlatan  Ibrahim.','true', 'false','WorkoutLink',3)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + judgeLocation + "','"+judgeFavoriteLocation+"','Aaron Judge','true', 'false','WorkoutLink',4)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + ronaldoLocation + "','"+ronaldoFavoriteLocation+"','Cristiano Ronaldo','true', 'false','WorkoutLink',5)");
 
-        database.execSQL("CREATE TABLE IF NOT EXISTS diets (image INTEGER, favoritesImage INTEGER,athleteName VARCHAR, requiresPremium VARCHAR, isFavorite VARCHAR, tagNum INT(2),id INTEGER PRIMARY KEY)");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + ronaldoLocation + "','"+ronaldoFavoriteLocation+"','C. Ronaldo','false', 'false', 0)");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + image + "','"+image+"','C. Mcgregor','false', 'false', 1)");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#0','false', 'false',2)");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#1','true', 'false',3)");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#2','true', 'false',4)");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#3','true', 'false',5)");
+        database.execSQL("CREATE TABLE IF NOT EXISTS diets (image INTEGER, favoritesImage INTEGER,athleteName VARCHAR, requiresPremium VARCHAR, isFavorite VARCHAR, link VARCHAR, tagNum INT(2),id INTEGER PRIMARY KEY)");
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + ronaldoLocation + "','"+ronaldoFavoriteLocation+"','C. Ronaldo','false', 'false','https://www.stack.com/a/heres-what-a-full-day-of-eating-looks-like-for-cristiano-ronaldo', 0)");
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + image + "','"+image+"','C. Mcgregor','false', 'false', 'https://manofmany.com/lifestyle/fitness/conor-mcgregor-diet-workout-plan',1)");
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#0','false', 'false','DietLink',2)");
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#1','true', 'false','DietLink',3)");
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#2','true', 'false','DietLink',4)");
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#3','true', 'false','DietLink',5)");
 
         sharedPreferences.edit().putInt("openedBefore",1).apply();
     }
@@ -83,11 +83,12 @@ public class SliderList {
             int athleteNameIndex = c.getColumnIndex("athleteName");
             int requiresPremiumIndex = c.getColumnIndex("requiresPremium");
             int isFavoriteIndex = c.getColumnIndex("isFavorite");
+            int linkIndex = c.getColumnIndex("link");
             int tagNumIndex = c.getColumnIndex("tagNum");
             c.moveToFirst();
 
             while (!c.isAfterLast()){
-                _3_SliderItem item = new _3_SliderItem (c.getInt(imageIndex),c.getInt(favoritesImageIndex),c.getString(athleteNameIndex),Boolean.parseBoolean(c.getString(requiresPremiumIndex)),Boolean.parseBoolean(c.getString(isFavoriteIndex)),c.getInt(tagNumIndex));
+                _3_SliderItem item = new _3_SliderItem (c.getInt(imageIndex),c.getInt(favoritesImageIndex),c.getString(athleteNameIndex),Boolean.parseBoolean(c.getString(requiresPremiumIndex)),Boolean.parseBoolean(c.getString(isFavoriteIndex)),c.getString(linkIndex),c.getInt(tagNumIndex));
                 workoutItems.add(item);
 
                 c.moveToNext();
@@ -105,11 +106,12 @@ public class SliderList {
             int athleteNameIndex = c.getColumnIndex("athleteName");
             int requiresPremiumIndex = c.getColumnIndex("requiresPremium");
             int isFavoriteIndex = c.getColumnIndex("isFavorite");
+            int linkIndex = c.getColumnIndex("link");
             int tagNumIndex = c.getColumnIndex("tagNum");
             c.moveToFirst();
 
             while (!c.isAfterLast()){
-                _3_SliderItem item = new _3_SliderItem (c.getInt(imageIndex),c.getInt(favoritesImageIndex),c.getString(athleteNameIndex),Boolean.parseBoolean(c.getString(requiresPremiumIndex)),Boolean.parseBoolean(c.getString(isFavoriteIndex)),c.getInt(tagNumIndex));
+                _3_SliderItem item = new _3_SliderItem (c.getInt(imageIndex),c.getInt(favoritesImageIndex),c.getString(athleteNameIndex),Boolean.parseBoolean(c.getString(requiresPremiumIndex)),Boolean.parseBoolean(c.getString(isFavoriteIndex)),c.getString(linkIndex),c.getInt(tagNumIndex));
                 dietItems.add(item);
                 c.moveToNext();
             }

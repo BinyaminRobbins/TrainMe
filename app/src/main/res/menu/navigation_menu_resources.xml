@@ -32,11 +32,6 @@
                 android:id="@+id/menuNavigation_settings"
                 android:icon="@drawable/ic_action_settings_wheel"
                 android:title="Settings"/>
-
-            <item
-                android:id="@+id/menuNavigation_sources"
-                android:icon="@drawable/ic_action_sources"
-                android:title="Our Sources"/>
         </menu>
     </item>
 

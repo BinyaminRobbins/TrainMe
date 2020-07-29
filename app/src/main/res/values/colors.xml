@@ -6,6 +6,7 @@
     <color name="colorAccentBlue">#3949AB</color>
     <color name="yellowButton">#FFEA00</color>
     <color name="textButtonColor">#EB0C0C0C</color>
+    <color name="linkColor">#1E88E5</color>
 </resources>
 
 

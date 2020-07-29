@@ -8,8 +8,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string-array name="descriptions">
-        <item>>\t\t\tOne\, 9-Part, Band Workout - developed by Tom Brady\'s trainer and the team at TB12.\n\n>\t\t\tThis workout is meant to be done 3 - 4 days a week. Each excersise should comprise of 3 sets.\n\n>\t\t\tDifficulty :\tModerate</item>
-        <item>>\t\t\tThis workout is used by Lebron to gain muscle mass and weight by lifting heavy and eating right.\n\n>\t\t\tWORKOUT BASICS:\n\n\t\t-\t Lifting Weights 3x Per Week\n\n\t\t-\tYoga 30 Minutes Per Day\n\n\t\t-\tBodyweight + Plyometric Exercises 5-6x Per Week</item>
+    <string-array name="workoutDescriptions">
+        <item><![CDATA[>\t\t\tOne\, 9–Part, Band Workout - developed by Tom Brady\'s trainer and the team at TB12.\n\n>\t\t\tThis workout is meant to be done 3 - 4 days a week. Each excersise should comprise of 3 sets.\n\n>\t\t\tDifficulty :\tModerate]]></item>
+        <item><![CDATA[>\t\t\tThis workout is used by Lebron to gain muscle mass and weight by lifting heavy and eating right.\n\n>\t\t\tWORKOUT BASICS:\n\n\t\t–\t Lifting Weights 3x Per Week\n\n\t\t-\tYoga 30 Minutes Per Day\n\n\t\t-\tBodyweight + Plyometric Exercises 5-6x Per Week]]></item>
+        <item>>\t\t\tThis workout is used by Connor McGregor - \"The Notorious\" to keep in shape for power and endurance in the octagon.\n\n>\t\t\tSome of McGregor\'s Tips:\n\n\t\t-\t Change up your workout from time to time.\n\n\t\t-\tAlways Stretch &amp; Get Proper Rest\n\n\t\t-\tPractice Bodyweight Exercises - "Machines don\'t use machines; and I am a machine\".</item>
+    </string-array>
+
+    <string-array name="dietDescriptions">
+        <item>empty text</item>
     </string-array>
 </resources>

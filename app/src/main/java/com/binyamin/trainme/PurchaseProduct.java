@@ -3,6 +3,7 @@ package com.binyamin.trainme;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -106,6 +107,7 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
     }
 
     private void handlePurchase(Purchase purchase) {
+        Log.i("Purchase","Handling Purchase");
         try {
             if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
                 prefs.edit().putBoolean("ProductIsOwned", true).apply();
@@ -145,7 +147,6 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
 
         if (purchasesResult.getPurchasesList() != null) {
             for (Purchase purchase : purchasesResult.getPurchasesList()) {
-
                 if (purchase.getSku().equals(product)) {
                     handlePurchase(purchase);
                 }

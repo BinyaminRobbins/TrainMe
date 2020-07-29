@@ -25,7 +25,9 @@
         tools:targetApi="m">
         <activity android:name="._Page4_AthleteWorkout"
             android:hardwareAccelerated="true"/>
-        <activity android:name="._Page3_SelectWorkout"/>
+        <activity android:name="._Page3_SelectWorkout"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name="._Page2_UserDetails" />
         <activity android:name="._Page1_HomeScreen">
             <intent-filter>

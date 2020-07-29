@@ -36,10 +36,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class Fragment_GetPremium extends Fragment {
-    Button button;
-    private SkuDetailsParams.Builder params;
-    String product = "premium_features_sub_2";
-    String type = "BillingClient.SkuType.SUBS";
+    private String product;
 
     public Fragment_GetPremium() {
         // Required empty public constructor
@@ -47,19 +44,22 @@ public class Fragment_GetPremium extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        button = view.findViewById(R.id.premiumButton);
-
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        SharedPreferences prefs = getContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
+        final SharedPreferences prefs = getContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
 //        getActivity().getActionBar().hide();
 
+        product = getResources().getString(R.string.productId);
         final PurchaseProduct purchaseProduct = new PurchaseProduct(getContext(),getActivity(),product,prefs);
         purchaseProduct.setUp();
 
-        button = view.findViewById(R.id.premiumButton);
+        Button button = view.findViewById(R.id.premiumButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(prefs.getBoolean("ProductIsOwned", false)){
+                    Toast.makeText(getContext(),"Product Is Already Owned",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 purchaseProduct.query();
             }
         });

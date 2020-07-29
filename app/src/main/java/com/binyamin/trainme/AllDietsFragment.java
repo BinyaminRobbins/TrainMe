@@ -55,7 +55,7 @@ public class AllDietsFragment extends Fragment {
         sliderItems = sliderList.getDietList();
         Log.i("SliderItems",sliderItems.toString());
 
-        viewPager2.setAdapter(new _3_SliderAdapter(viewPager2,sliderList,sliderItems,product));
+        viewPager2.setAdapter(new _3_SliderAdapter(sliderList,sliderItems,product));
 
         viewPager2.setClipToPadding(false);
         viewPager2.setElevation(40);

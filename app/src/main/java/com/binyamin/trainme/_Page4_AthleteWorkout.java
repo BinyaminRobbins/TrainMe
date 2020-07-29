@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,11 +67,10 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
             }
         }
 
+        SharedPreferences prefs = getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+        SliderList sliderList = new SliderList(getApplicationContext(),prefs);
         ImageView imageViewHeader = findViewById(R.id.imageViewHeader);
 
-        SharedPreferences prefs = getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
-
-        SliderList sliderList = new SliderList(getApplicationContext(),prefs);
         if(tableName.equals(getResources().getString(R.string.workoutsTable))) {
             myList = sliderList.getWorkoutList();
         }else{
@@ -87,7 +88,8 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
             imageViewHeader.setImageMatrix(matrix);
 
             TextView athleteName = findViewById(R.id.textViewAthleteName);
-            athleteName.setText(sliderItem.getAthleteName());
+            String name = sliderItem.getAthleteName();
+            athleteName.setText(name);
 
             backButton = findViewById(R.id.backButton);
             backButton.setOnClickListener(this);
@@ -103,6 +105,26 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         }else{
             spinner.setVisibility(View.GONE);
         }
+
+        TextView tvLink = findViewById(R.id.tv_link);
+        final String linkInfo;
+        if(tableName.equals(getResources().getString(R.string.workoutsTable))){
+            tvLink.setText(name + " Workout List Source");
+            linkInfo = sliderList.getWorkoutList().get(tagNum).getLink();
+        }else{
+            tvLink.setText(name + " Workout List Source");
+            linkInfo = sliderList.getDietList().get(tagNum).getLink();
+        }
+
+        tvLink.setPaintFlags(tvLink.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        tvLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkInfo));
+                browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(browserIntent);
+            }
+        });
     }
 
         @Override
