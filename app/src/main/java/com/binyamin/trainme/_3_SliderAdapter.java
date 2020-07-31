@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,7 +91,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         holder.setLockedImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
         if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 0){
-            holder.startButton.setText("Start Workouts");
+            holder.startButton.setText("See Workouts");
             detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.workoutDescriptions);
         }else if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 1){
             holder.startButton.setText("See More");
@@ -103,12 +104,16 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             @Override
             public void onClick(View v) {
                  if(v.getId() == R.id.startButton){
+                     holder.progressBar.setVisibility(View.VISIBLE);
+                     holder.startButton.setText("");
                      if(!sliderItems.get(position).getIfRequiresPremium()){
                          openAct4(v.getContext(),v);
                      }else if(sliderItems.get(position).getIfRequiresPremium()){
                          if(purchaseProduct.checkIfOwned()){
                              openAct4(v.getContext(),v);
                          }else{
+                             holder.progressBar.setVisibility(View.GONE);
+                             holder.startButton.setText("See Workouts");
                              builder = new AlertDialog.Builder(v.getContext());
                              builder.setTitle("Upgrade to Premium");
                              builder.setIcon(R.drawable.ic_action_premium);
@@ -206,6 +211,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         private Button startButton;
         private ImageButton info;
         private ImageButton star;
+        ProgressBar progressBar;
 
         SliderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -215,6 +221,8 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             startButton = itemView.findViewById(R.id.startButton);
             star = itemView.findViewById(R.id.imageButton_star);
             info = itemView.findViewById(R.id.imageButton_info);
+            progressBar = itemView.findViewById(R.id.startProgressBar);
+            progressBar.setVisibility(View.GONE);
         }
         void setImage(_3_SliderItem sliderItem){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

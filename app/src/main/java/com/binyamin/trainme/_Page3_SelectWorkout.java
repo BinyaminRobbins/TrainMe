@@ -73,35 +73,37 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
 
         final PurchaseProduct product = new PurchaseProduct(context, _Page3_SelectWorkout.this, getResources().getString(R.string.productId), sharedPreferences);
         product.setUp();
+        if(!product.checkIfOwned()) {
 
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if (destination.getId() == R.id.menuNavigation_youtube) {
-                    AlertDialog dialog;
-                    AlertDialog.Builder builder = new AlertDialog.Builder(_Page3_SelectWorkout.this);
-                    builder.setTitle("Upgrade to Premium");
-                    builder.setIcon(R.drawable.ic_action_premium);
-                    builder.setMessage("You have discovered a premium feature.");
-                    builder.setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            navController.navigate(R.id.menuNavigation_premium);
-                        }
-                    });
-                    builder.setNegativeButton("Not now", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            navController.navigate(R.id.menuNavigation_workout_and_diets);
-                        }
-                    });
-                    dialog = builder.create();
-                    dialog.setCanceledOnTouchOutside(false);
-                    dialog.show();
+            navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+                @Override
+                public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                    if (destination.getId() == R.id.menuNavigation_youtube) {
+                        AlertDialog dialog;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(_Page3_SelectWorkout.this);
+                        builder.setTitle("Upgrade to Premium");
+                        builder.setIcon(R.drawable.ic_action_premium);
+                        builder.setMessage("You have discovered a premium feature.");
+                        builder.setPositiveButton("Check It Out", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                navController.navigate(R.id.menuNavigation_premium);
+                            }
+                        });
+                        builder.setNegativeButton("Not now", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                navController.navigate(R.id.menuNavigation_workout_and_diets);
+                            }
+                        });
+                        dialog = builder.create();
+                        dialog.setCanceledOnTouchOutside(false);
+                        dialog.show();
+                    }
                 }
-            }
-        });
-        sliderHandler = new Handler();
+            });
+            sliderHandler = new Handler();
+        }
     }
 
 
@@ -142,20 +144,6 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
             backButtonCount++;
         }
     }
-//Categories include:
-    //Mixed
-    //FullBody
-    //BodyWeight
-    //UpperBody
-    //Chest
-    //Arms
-    //Back
-    //LowerBody
-    //Legs
-    //Glutes
-    //Cardio
-    //Stretching
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -226,9 +214,24 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
         }
     }
 
+    //Categories include:
+    //Mixed
+    //FullBody
+    //BodyWeight
+    //UpperBody
+    //Chest
+    //Arms
+    //Back
+    //LowerBody
+    //Legs
+    //Glutes
+    //Cardio
+    //Stretching
+    //Daily Workout
     @Override
     public void run() {
         if (t.getName().equals("DeclareWorkouts")) {
+            int i = 0;
             allAthleteWorkouts.clear();
 
             final ArrayList<AthleteWorkouts> bradyWorkouts = new ArrayList<>();
@@ -244,7 +247,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
             bradyWorkouts.add(new AthleteWorkouts("FullBody", "Banded Shoulder Press", R.drawable.workout_pullup, "10 Reps", "3 Sets (10s Rest)")); //need Gif
             bradyWorkouts.add(new AthleteWorkouts("FullBody", "X Band Squat", R.drawable.workout_pullup, "10 Reps", "3 Sets (10s Rest)")); //Need Gif
 
-            allAthleteWorkouts.add(0, new AllWorkouts("Tom Brady", bradyWorkouts));
+            allAthleteWorkouts.add(i, new AllWorkouts("Tom Brady", bradyWorkouts));
 
             final ArrayList<AthleteWorkouts> lebronWorkouts = new ArrayList<>();
             lebronWorkouts.clear();
@@ -264,7 +267,7 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
             lebronWorkouts.add(new AthleteWorkouts("UpperBody", "Shoulder Press", R.drawable.workout_pullup, "6-10 Reps (Each Side)", "3 Sets (45s Rest)")); //Shoulder Press gif
             lebronWorkouts.add(new AthleteWorkouts("UpperBody", "Dumbbell-Rows", R.drawable.workout_dubbell_row, "10 Reps (Each Side)", "3 Sets (40s Rest)"));
 
-            allAthleteWorkouts.add(1, new AllWorkouts("Lebron James", lebronWorkouts));
+            allAthleteWorkouts.add(i++, new AllWorkouts("Lebron James", lebronWorkouts));
 
             final ArrayList<AthleteWorkouts> mcGregorWorkouts = new ArrayList<>();
             mcGregorWorkouts.clear();
@@ -283,7 +286,87 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
             mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Lizard Walk", R.drawable.workout_squat, "1", "Perform till loose"));//Gif
             mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Ostrich Walk", R.drawable.workout_squat, "1", "Perform till loose"));//Gif
 
-            allAthleteWorkouts.add(2, new AllWorkouts("Connor McGregor", mcGregorWorkouts));
+            allAthleteWorkouts.add(i++, new AllWorkouts("Connor McGregor", mcGregorWorkouts));
+
+            final ArrayList<AthleteWorkouts> zlatanWorkouts = new ArrayList<>();
+            zlatanWorkouts.clear();
+
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Dead-lift", R.drawable.workout_squat, "5 Reps", "4 Sets (2 min rest)")); //Gif
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Barbell Squats", R.drawable.workout_squat, "3 Reps", "2 Sets (2 min rest)")); //Gif
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Push Press", R.drawable.workout_squat, "3 Reps", "3 Sets (1 min rest)")); //Gif
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Bench Press", R.drawable.workout_squat, "5 Reps", "4 Sets (2 min rest)")); //Gif
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Pull-Ups", R.drawable.workout_squat, "15 Reps", "2 Sets (90s rest)")); //Gif
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Weighted Floor Wipers", R.drawable.workout_squat, "15 Reps (each side)", "2 Sets (90s rest)")); //Gif
+
+            allAthleteWorkouts.add(i++, new AllWorkouts("Zlatan Ibrah.", zlatanWorkouts));
+
+
+            final ArrayList<AthleteWorkouts> judgeWorkouts = new ArrayList<>();
+            judgeWorkouts.clear();
+
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Tire Jumps", R.drawable.workout_squat, "Till Fatigued", "Till Fatigued")); //Gif
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Bench Press", R.drawable.workout_squat, "Limit", "3-4 Sets")); //Gif
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Sled Pushes", R.drawable.workout_squat, "Limit", "Limit")); //Gif
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Barbell Squats", R.drawable.workout_squat, "Limit", "3-4 Sets")); //Gif
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Box Jumps", R.drawable.workout_squat, "Till Fatigued", "Till Fatigued")); //Gif
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Yoga / Pilates", R.drawable.workout_squat, "30 min", "Every Day")); //Gif
+
+            allAthleteWorkouts.add(i++, new AllWorkouts("Aaron Judge", judgeWorkouts));
+
+            final ArrayList<AthleteWorkouts> ronaldoWorkouts = new ArrayList<>();
+            ronaldoWorkouts.clear();
+
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Drop Squats", R.drawable.workout_squat, "40 seconds", "1 Set (20s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Dumbbell Reverse Lunges", R.drawable.workout_squat, "30 seconds (per side)", "1 Set (20s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Single-Leg Glute Bridge", R.drawable.workout_squat, "40 seconds (per side)", "1 Set (20s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Jump Squats", R.drawable.workout_squat, "30 seconds", "1 Set (20s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Side-lying Leg Raises", R.drawable.workout_squat, "50 seconds (per side)", "1 Set (20s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Bodyweight Squats", R.drawable.workout_squat, "30 seconds", "1 Set (20s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Barbell Squat", R.drawable.workout_squat, "30 seconds", "1 Set (20s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Box Jump", R.drawable.workout_squat, "8 Reps", "3 Sets (30s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Broad Jump", R.drawable.workout_squat, "10 Reps", "3 Sets (30s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Broad Jump", R.drawable.workout_squat, "8 Reps", "3 Sets (30s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Lateral Bound", R.drawable.workout_squat, "10 Reps", "3 Sets (30s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Burpee Pullups", R.drawable.workout_squat, "10-15 Reps", "3 Sets (30s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Bench Dips", R.drawable.workout_squat, "20 Reps", "3 Sets (30s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Push-Ups", R.drawable.workout_squat, "20-30 Reps", "3 Sets (30s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Medicine Ball Toss", R.drawable.workout_squat, "50 Reps", "3 Sets (30s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Push-Press", R.drawable.workout_squat, "10 Reps", "3 Sets (30s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Quads + Cardio", "Jump Rope", R.drawable.workout_squat, "1 min", "10 Sets (1m rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Quads + Cardio", "Power Cleans", R.drawable.workout_squat, "5 Reps", "5 Sets (20s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Quads + Cardio", "Sprints", R.drawable.workout_squat, "200 meters", "8 Sets (1m rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Abs + Core", "One-Arm Side Lifts", R.drawable.workout_squat, "5 Reps", "3 Sets (15s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Abs + Core", "Overhead Slams", R.drawable.workout_squat, "10-12 Reps", "3 Sets (15s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Abs + Core", "Knee Tuck Jump", R.drawable.workout_squat, "10-12 Reps", "3 Sets (15s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Abs + Core", "Hanging Leg Raises", R.drawable.workout_squat, "10-15 Reps", "3 Sets (25s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Abs + Core", "Barbell Squats", R.drawable.workout_squat, "10-15 Reps", "3 Sets (25s rest)")); //Gif
+
+            allAthleteWorkouts.add(i++, new AllWorkouts("Cristiano Ronaldo", ronaldoWorkouts));
+
+            final ArrayList<AthleteWorkouts> jamesHarrisonWorkouts = new ArrayList<>();
+            jamesHarrisonWorkouts.clear();
+
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Chest", "Bench Press", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Chest", "Incline Bench Press", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Chest", "No-Legs Bench Press", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Barbell Back Squats", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Barbell Deadlifts", R.drawable.workout_pullup, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Hip Thrusts", R.drawable.workout_benchpress, "10 Reps", "5 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Sled Push", R.drawable.workout_benchpress, "100 meters", "5-10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Sumo Belt Squats", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Core", "Hanging Windshield Wipers", R.drawable.workout_benchpress, "30 Reps", "2 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Core", "Dragon Flags", R.drawable.workout_benchpress, "3-5 Reps", "5 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Core", "Ab Rollouts", R.drawable.workout_benchpress, "8-12 Reps", "3 Sets"));
+
+            allAthleteWorkouts.add(i+1, new AllWorkouts("James Harrison", jamesHarrisonWorkouts));
+
+            final ArrayList<AthleteWorkouts> paulGeorgeWorkouts = new ArrayList<>();
+            paulGeorgeWorkouts.clear();
+
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Chest", "Bench Press", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
+
+            allAthleteWorkouts.add(i+1, new AllWorkouts("Paul George", paulGeorgeWorkouts));
+
 
         } else if (t.getName().equals("DeclareDiets")) {
             //Setup Diets
@@ -291,12 +374,11 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable 
 
             final ArrayList<AthleteWorkouts> ronaldoDiet = new ArrayList<>();
             ronaldoDiet.clear();
-            ronaldoDiet.add(new AthleteWorkouts(null, "Breakfast", R.drawable.ham_and_cheese, "Ham & Cheese + Low-Fat Yogurt", "* protein and fat"));
-            ronaldoDiet.add(new AthleteWorkouts(null, "Lunch #1", R.drawable.chicken_salad, "Chicken & Salad", "* lean protein and greens"));
-            ronaldoDiet.add(new AthleteWorkouts(null, "Lunch #2", R.drawable.seared_tuna, "Tuna, Olives, Eggs", "* protein + antioxidants"));
-            ronaldoDiet.add(new AthleteWorkouts(null, "Snack", R.drawable.avocado_toast, "Avocado Toast w/ fresh fruit", "* Fat, Fiber, Essential Vitamins"));
-            ronaldoDiet.add(new AthleteWorkouts(null, "Dinner #1", R.drawable.fish, "Fresh Fish w/ salad", "* lean protein + greens"));
-            ronaldoDiet.add(new AthleteWorkouts(null, "Dinner #2", R.drawable.steak, "Steak w/ calamari", "* protein, fat, carbs"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Breakfast", R.drawable.ham_and_cheese, "Cereal or Ham & Cheese + Low-Fat Yogurt", "* protein and fat"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Snack #1", R.drawable.seared_tuna, "Tuna & Fruit/Greens", "* protein + antioxidants"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Lunch", R.drawable.chicken_salad, "Chicken & Salad or Pasta & Veggies ", "* lean protein and greens"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Snack #2", R.drawable.avocado_toast, "Avocado Toast & or Protein Shake", "* Fat, Fiber, Protein, Essential Vitamins"));
+            ronaldoDiet.add(new AthleteWorkouts(null, "Dinner #1", R.drawable.steak, "Fish/Chicken/Steak w/ salad", "* lean protein + greens"));
 
             allAthleteDiets.add(0, new AllWorkouts("C. Ronaldo", ronaldoDiet));
 
