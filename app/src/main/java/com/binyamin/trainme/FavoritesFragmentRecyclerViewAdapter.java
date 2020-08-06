@@ -50,6 +50,18 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
         viewHolderClass.athleteTextView.setText(sliderItems.get(position).getAthleteName());
 
         viewHolderClass.athleteImageView.setImageResource(sliderItems.get(position).getFavoriteImage());
+        switch (sliderItems.get(position).getFavoriteImage()){
+            case R.drawable.paulgeorge_favorites:
+                viewHolderClass.athleteImageView.setScrollY(-30);
+                break;
+            case R.drawable.jamesharrison_favorites:
+                viewHolderClass.athleteImageView.setScrollY(-45);
+                break;
+            case R.drawable.jjwatt_favorites:
+                viewHolderClass.athleteImageView.setScrollY(-40);
+                break;
+
+        }
 
         viewHolderClass.star.setImageResource(R.drawable.ic_action_star_clicked_border);
         viewHolderClass.star.setOnClickListener(new View.OnClickListener() {

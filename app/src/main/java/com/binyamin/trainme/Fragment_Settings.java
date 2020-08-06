@@ -23,13 +23,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Fragment_Settings extends Fragment implements View.OnClickListener {
-    Button button;
 
     public Fragment_Settings() {
         // Required empty public constructor
@@ -38,10 +38,10 @@ public class Fragment_Settings extends Fragment implements View.OnClickListener 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Settings");
+        requireActivity().setTitle("Settings");
         //Fullscreen
         //getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        button = view.findViewById(R.id.settings_premium_button);
+        Button button = view.findViewById(R.id.settings_premium_button);
         button.setOnClickListener(this);
         //General Settings List View
         ListView generalListView = view.findViewById(R.id.listViewGeneral);
@@ -113,7 +113,7 @@ public class Fragment_Settings extends Fragment implements View.OnClickListener 
                         break;
                     case 2:
                         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                        String aEmailList[] = {"syntappsdev@gmail.com"};
+                        String aEmailList = "syntappsdev@gmail.com";
                         emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList);
                         emailIntent.setType("plain/text");
                         startActivity(emailIntent);

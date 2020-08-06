@@ -79,16 +79,14 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         >
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/workoutRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:paddingBottom="10dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="20dp"
@@ -99,13 +97,12 @@
             android:id="@+id/tv_link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/workoutRV"
             android:text="Workout Info Link"
             android:gravity="center"
             android:fontFamily="sans-serif-black"
             android:textSize="14sp"
             android:textColor="@color/linkColor"/>
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 
 

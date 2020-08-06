@@ -5,10 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,20 +18,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
-
-import com.android.billingclient.api.BillingClient;
-import com.android.billingclient.api.BillingFlowParams;
-import com.android.billingclient.api.SkuDetails;
-import com.google.android.material.tabs.TabLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.SliderViewHolder>{
     private ArrayList <_3_SliderItem> sliderItems;
@@ -46,11 +31,13 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     static private AlertDialog dialog = null;
     static private AlertDialog.Builder builder = null;
     private PurchaseProduct purchaseProduct;
+    private boolean isWorkoutsFragment;
 
-    public _3_SliderAdapter(SliderList sliderList, ArrayList<_3_SliderItem> sliderItems, PurchaseProduct product) {
+    public _3_SliderAdapter(SliderList sliderList, ArrayList<_3_SliderItem> sliderItems, PurchaseProduct product,boolean isWorkouts) {
         this.sliderList = sliderList;
         this.sliderItems = sliderItems;
         this.purchaseProduct = product;
+        this.isWorkoutsFragment = isWorkouts;
     }
 
     @NonNull
@@ -66,19 +53,19 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
     }
 
     private String getTableName(){
-        String tableName = null;
-        if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 0){
+        String tableName;
+        if(isWorkoutsFragment){
             tableName = _Page3_SelectWorkout.context.getResources().getString(R.string.workoutsTable);
-        }else if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 1) {
+        }else{
             tableName = _Page3_SelectWorkout.context.getResources().getString(R.string.dietsTable);
         }
         return tableName;
     }
 
     private String[] getDetailsArray(){
-        if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 0){
+        if(isWorkoutsFragment){
             detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.workoutDescriptions);
-        }else if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 1){
+        }else {
             detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.dietDescriptions);
         }
         return detailsArray;
@@ -90,30 +77,51 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         holder.setImage(sliderItems.get(position));
         holder.setLockedImage(sliderItems.get(position));
         holder.setTextViewHeader(sliderItems.get(position));
-        if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 0){
+        holder.progressBar.setElevation(5f);
+        holder.progressBar.setVisibility(View.GONE);
+
+        if(isWorkoutsFragment){
             holder.startButton.setText("See Workouts");
-            detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.workoutDescriptions);
-        }else if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 1){
+            getDetailsArray();
+        }else {
             holder.startButton.setText("See More");
             holder.startButton.setTextSize(16f);
+            holder.dietTextView.setVisibility(View.VISIBLE);
             //Diets Info:
-            detailsArray = _Page3_SelectWorkout.context.getResources().getStringArray(R.array.dietDescriptions);
+            getDetailsArray();
         }
 
         holder.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                  if(v.getId() == R.id.startButton){
+                     holder.progressBar.setElevation(30);
                      holder.progressBar.setVisibility(View.VISIBLE);
                      holder.startButton.setText("");
                      if(!sliderItems.get(position).getIfRequiresPremium()){
                          openAct4(v.getContext(),v);
+                         holder.progressBar.setVisibility(View.GONE);
+                         if(AthleteWorkoutsAndDietsFragment.tabPosition == 0){
+                             holder.startButton.setText("See Workouts");
+                         }else{
+                             holder.startButton.setText("See More");
+                         }
                      }else if(sliderItems.get(position).getIfRequiresPremium()){
                          if(purchaseProduct.checkIfOwned()){
                              openAct4(v.getContext(),v);
+                             holder.progressBar.setVisibility(View.GONE);
+                             if(AthleteWorkoutsAndDietsFragment.tabPosition == 0){
+                                 holder.startButton.setText("See Workouts");
+                             }else{
+                                 holder.startButton.setText("See More");
+                             }
                          }else{
                              holder.progressBar.setVisibility(View.GONE);
-                             holder.startButton.setText("See Workouts");
+                             if(AthleteWorkoutsAndDietsFragment.tabPosition == 0){
+                                 holder.startButton.setText("See Workouts");
+                             }else{
+                                 holder.startButton.setText("See More");
+                             }
                              builder = new AlertDialog.Builder(v.getContext());
                              builder.setTitle("Upgrade to Premium");
                              builder.setIcon(R.drawable.ic_action_premium);
@@ -137,9 +145,9 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 0) {
+                if(AthleteWorkoutsAndDietsFragment.tabPosition == 0) {
                     fragment_workoutInfo = new Fragment_WorkoutInfo(position,getDetailsArray());
-                }else if(AthleteWorkoutsAndDietsFragment.tabLayout.getSelectedTabPosition() == 1){
+                }else if(AthleteWorkoutsAndDietsFragment.tabPosition == 1){
                     fragment_workoutInfo = new Fragment_WorkoutInfo(position,getDetailsArray());
                 }
                 activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fraginfo_fade_in, R.anim.fraginfo_fade_out).replace(R.id.fl_workoutInfo, fragment_workoutInfo).addToBackStack(null).commit();
@@ -194,7 +202,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         Intent intent = new Intent(context,_Page4_AthleteWorkout.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("tag",v.getTag().toString());
-        intent.putExtra("tableName",getTableName());
+        Log.i("TagNum",v.getTag().toString());
         context.startActivity(intent);
     }
 
@@ -211,6 +219,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         private Button startButton;
         private ImageButton info;
         private ImageButton star;
+        private TextView dietTextView;
         ProgressBar progressBar;
 
         SliderViewHolder(@NonNull View itemView) {
@@ -222,7 +231,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             star = itemView.findViewById(R.id.imageButton_star);
             info = itemView.findViewById(R.id.imageButton_info);
             progressBar = itemView.findViewById(R.id.startProgressBar);
-            progressBar.setVisibility(View.GONE);
+            dietTextView = itemView.findViewById(R.id.dietTV);
         }
         void setImage(_3_SliderItem sliderItem){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

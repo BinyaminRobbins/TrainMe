@@ -42,9 +42,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" >
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        </FrameLayout>
+        <ProgressBar
+            android:id="@+id/lagProBar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            android:foregroundGravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -56,7 +67,43 @@
         app:itemTextColor="@color/drawer_item"
         app:headerLayout="@layout/custom_layout_navigation_header"
         app:menu="@menu/navigation_menu_resources"
-        android:layout_gravity="start"/>
+        android:layout_gravity="start">
+        <LinearLayout
+            android:id="@+id/footerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:clickable="true"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/footer_item_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/yellowButton"
+            android:alpha="0.9"
+            android:fontFamily="@font/fox_font"
+            android:elevation="2dp"
+            android:text="TrainMe - By SyntApps"
+            android:layout_marginBottom="10dp"/>
+            <TextView
+                android:id="@+id/footer_item_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:alpha="0.7"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textSize="10sp"
+                android:elevation="2dp"
+                android:text="A Binyamin Robbins Production" />
+        </LinearLayout>
+
+    </com.google.android.material.navigation.NavigationView>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

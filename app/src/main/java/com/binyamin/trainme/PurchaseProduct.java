@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -50,12 +51,15 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
 
                 }
             } else if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
-                    Toast.makeText(context, "User Canceled - Try Purchasing Again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Canceled", Toast.LENGTH_SHORT).show();
                     prefs.edit().putBoolean("ProductIsOwned", false).apply();
+                    Fragment_GetPremium.premiumBar.setVisibility(View.GONE);
+
 
             } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
                     Toast.makeText(context, "Item Already Owned!", Toast.LENGTH_SHORT).show();
                     prefs.edit().putBoolean("ProductIsOwned", true).apply();
+                    Fragment_GetPremium.premiumBar.setVisibility(View.GONE);
 
             }
         }
@@ -74,6 +78,8 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
         @Override
         public void onBillingServiceDisconnected() {
             //Toast.makeText(context, "Disconnected from BillingClient", Toast.LENGTH_SHORT).show();
+            Fragment_GetPremium.premiumBar.setVisibility(View.GONE);
+
         }
     });
         skuList.add(product);
@@ -125,6 +131,7 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
                     };
                     billingClient.acknowledgePurchase(acknowledgePurchaseParams, acknowledgePurchaseResponseListener);
                 }
+                Fragment_GetPremium.premiumBar.setVisibility(View.GONE);
             }else{
                 prefs.edit().putBoolean("ProductIsOwned", false).apply();
             }

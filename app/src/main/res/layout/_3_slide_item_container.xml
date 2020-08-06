@@ -43,7 +43,7 @@ app:riv_corner_radius="20dp">
             android:id="@+id/locktv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="45dp"
+            android:layout_marginBottom="50dp"
             android:background="@color/colorAccentBlue"
             android:elevation="15dp"
             android:fontFamily="@font/graduate"
@@ -60,6 +60,26 @@ app:riv_corner_radius="20dp">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/dietTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4caf50"
+            android:elevation="15dp"
+            android:fontFamily="@font/graduate"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="Diet"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/startButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locktv" />
 
 
         <Button

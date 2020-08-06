@@ -154,4 +154,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewExclusiveContent" />
 
+    <ProgressBar
+        android:id="@+id/premiumBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:elevation="5dp"
+        android:indeterminateTint="@color/textButtonColor"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/premiumButton"
+        app:layout_constraintEnd_toEndOf="@+id/premiumButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/premiumButton"
+        app:layout_constraintTop_toTopOf="@+id/premiumButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

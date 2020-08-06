@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.billingclient.api.BillingClient;
@@ -30,13 +31,14 @@ import com.android.billingclient.api.SkuDetailsResponseListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Fragment_GetPremium extends Fragment {
-    private String product;
+    static ProgressBar premiumBar;
 
     public Fragment_GetPremium() {
         // Required empty public constructor
@@ -44,11 +46,11 @@ public class Fragment_GetPremium extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        final SharedPreferences prefs = getContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
+        requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        final SharedPreferences prefs = requireContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
 //        getActivity().getActionBar().hide();
 
-        product = getResources().getString(R.string.productId);
+        String product = getResources().getString(R.string.productId);
         final PurchaseProduct purchaseProduct = new PurchaseProduct(getContext(),getActivity(),product,prefs);
         purchaseProduct.setUp();
 
@@ -57,12 +59,15 @@ public class Fragment_GetPremium extends Fragment {
             @Override
             public void onClick(View v) {
                 if(prefs.getBoolean("ProductIsOwned", false)){
+                    premiumBar.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(),"Product Is Already Owned",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 purchaseProduct.query();
             }
         });
+
+        premiumBar = view.findViewById(R.id.premiumBar);
 
     }
 

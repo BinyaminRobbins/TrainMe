@@ -95,8 +95,8 @@ class SettingsListAdapter extends ArrayAdapter<SettingsItem> {
         switch(position){
             case 0:
                 if(prefs.getString("usergender","Man").equals("Man")){
-                    switch1.setChecked(true);
-                }else switch1.setChecked(false);
+                    switch1.setChecked(false);
+                }else switch1.setChecked(true);
                 break;
             case 1:
                 if(prefs.getBoolean("scrollOn",false)){

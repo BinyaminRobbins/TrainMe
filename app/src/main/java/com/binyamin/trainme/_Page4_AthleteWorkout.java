@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     ArrayList<_3_SliderItem> myList = new ArrayList<>();
@@ -40,17 +41,24 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_4_athlete_workout);
 
         Intent intent = getIntent();
-        tagNum = Integer.valueOf(intent.getStringExtra("tag"));
-        String tableName = intent.getStringExtra("tableName");
-        Log.i("tagnum", String.valueOf(tagNum));
+        tagNum = Integer.valueOf(Objects.requireNonNull(intent.getStringExtra("tag")));
+        Log.i("tag", String.valueOf(tagNum));
 
-        athleteWorkoutList.clear();
-        if(tableName.equals(getResources().getString(R.string.workoutsTable))) {
+        if(AthleteWorkoutsAndDietsFragment.tabPosition == 0) {
             //Workout ArrayList
-            athleteWorkoutList = _Page3_SelectWorkout.allAthleteWorkouts.get(tagNum).getAthleteWorkoutArrayList();
+            try {
+                athleteWorkoutList = _Page3_SelectWorkout.allAthleteWorkouts.get(tagNum).getAthleteWorkoutArrayList();
+            }catch(NullPointerException e){
+                e.printStackTrace();
+            }
         }else {
             //Diet ArrayList
-            athleteWorkoutList = _Page3_SelectWorkout.allAthleteDiets.get(tagNum).getAthleteWorkoutArrayList();
+            System.out.println(_Page3_SelectWorkout.allAthleteDiets.toString());
+            try {
+                athleteWorkoutList = _Page3_SelectWorkout.allAthleteDiets.get(tagNum).getAthleteWorkoutArrayList();
+            }catch(NullPointerException e){
+                e.printStackTrace();
+            }
         }
 
         adapter = new _4_RecyclerViewAdapter(athleteWorkoutList);
@@ -71,7 +79,7 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         SliderList sliderList = new SliderList(getApplicationContext(),prefs);
         ImageView imageViewHeader = findViewById(R.id.imageViewHeader);
 
-        if(tableName.equals(getResources().getString(R.string.workoutsTable))) {
+        if(AthleteWorkoutsAndDietsFragment.tabPosition == 0) {
             myList = sliderList.getWorkoutList();
         }else{
             myList = sliderList.getDietList();
@@ -95,23 +103,22 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
             backButton.setOnClickListener(this);
             spinner = findViewById(R.id.category_spinner);
 
-        if(tableName.equals(getResources().getString(R.string.workoutsTable))) {
+        TextView tvLink = findViewById(R.id.tv_link);
+        final String linkInfo;
+
+        if(AthleteWorkoutsAndDietsFragment.tabPosition == 0) {
             MyAdapter spinnerAdapter = new MyAdapter(this, R.layout.custom_spinner_4_, workoutCategories);
 
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(spinnerAdapter);
             spinner.setOnItemSelectedListener(this);
             spinnerAdapter.notifyDataSetChanged();
-        }else{
-            spinner.setVisibility(View.GONE);
-        }
 
-        TextView tvLink = findViewById(R.id.tv_link);
-        final String linkInfo;
-        if(tableName.equals(getResources().getString(R.string.workoutsTable))){
             tvLink.setText(name + " Workout List Source");
             linkInfo = sliderList.getWorkoutList().get(tagNum).getLink();
         }else{
+            spinner.setVisibility(View.GONE);
+
             tvLink.setText(name + " Workout List Source");
             linkInfo = sliderList.getDietList().get(tagNum).getLink();
         }
@@ -180,7 +187,6 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
 
                if(workoutCategories.size() > 0 && position < workoutCategories.size()) {
                    for (int i = 0; i < workoutCategories.size(); i++){
-                       Log.i("Spinner Position", String.valueOf(position));
                            categoryTXT.setText(workoutCategories.get(position));
                    }
                }

@@ -27,10 +27,10 @@ import java.util.Objects;
  * A simple {@link Fragment} subclass.
  */
 public class Fragment_Gender extends Fragment implements View.OnClickListener {
-    CardView cvMan;
-    CardView cvWoman;
-    SharedPreferences sharedPreferences;
-    ProgressBar progressBar;
+    private CardView cvMan;
+    private CardView cvWoman;
+    private SharedPreferences sharedPreferences;
+    private ProgressBar progressBar;
 
 
     public Fragment_Gender() {
@@ -65,7 +65,7 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
         sliderList.setUpDB();
 
         _Page2_UserDetails.constraintLayout.setAlpha(0.4f);
-        getActivity().getWindow().
+        requireActivity().getWindow().
                 setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
 
@@ -75,9 +75,9 @@ public class Fragment_Gender extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(getContext(),_Page3_SelectWorkout.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                getActivity().finish();
+                requireActivity().finish();
                 sharedPreferences.edit().putBoolean("hasOpenedBefore",true).apply();
-                getActivity().overridePendingTransition( R.anim.intent_slide_out, R.anim.intent_slide_in );
+                requireActivity().overridePendingTransition( R.anim.intent_slide_out, R.anim.intent_slide_in );
                 //Fragment added to Frame Layout
 
         switch(v.getId()){

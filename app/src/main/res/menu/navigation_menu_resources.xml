@@ -24,11 +24,6 @@
                 android:title="YouTube Home-Workouts"/>
 
             <item
-                android:id="@+id/menuNavigation_women"
-                android:icon="@drawable/woman"
-                android:title="Female Athletes"/>
-
-            <item
                 android:id="@+id/menuNavigation_settings"
                 android:icon="@drawable/ic_action_settings_wheel"
                 android:title="Settings"/>

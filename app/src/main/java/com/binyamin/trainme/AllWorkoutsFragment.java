@@ -16,8 +16,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,7 @@ public class AllWorkoutsFragment extends Fragment {
     private short delay;
     private boolean scrollOn;
     private PurchaseProduct product;
+    private SharedPreferences sharedPreferences;
 
     public AllWorkoutsFragment(PurchaseProduct purchaseProduct) {
         // Required empty public constructor
@@ -41,9 +44,7 @@ public class AllWorkoutsFragment extends Fragment {
 
         delay = 2500;
 
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
         viewPager2 = view.findViewById(R.id.ImageSlider);
-        scrollOn = sharedPreferences.getBoolean("scrollOn",false);
 
         sliderHandler = new Handler();
 
@@ -51,7 +52,7 @@ public class AllWorkoutsFragment extends Fragment {
         SliderList sliderList = new SliderList(getContext(),sharedPreferences);
         sliderItems = sliderList.getWorkoutList();
 
-        viewPager2.setAdapter(new _3_SliderAdapter(sliderList,sliderItems,product));
+        viewPager2.setAdapter(new _3_SliderAdapter(sliderList,sliderItems,product,true));
         viewPager2.setClipToPadding(false);
 
         viewPager2.setElevation(40);
@@ -86,7 +87,12 @@ public class AllWorkoutsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_workouts, container, false);
+        View view = inflater.inflate(R.layout.fragment_all_workouts, container, false);
+        sharedPreferences = requireContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+        scrollOn = sharedPreferences.getBoolean("scrollOn",false);
+        Toast.makeText(getContext(), "You Can Disable Auto-Scroll in Settings", Toast.LENGTH_LONG).show();
+
+        return view;
     }
 
     //Automate Scrolling:
@@ -106,12 +112,15 @@ public class AllWorkoutsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        sliderHandler.postDelayed(sliderRunnable,delay);
+
+        if(scrollOn)
+            sliderHandler.postDelayed(sliderRunnable,delay);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        sliderHandler.removeCallbacks(sliderRunnable);
+        if(scrollOn)
+            sliderHandler.removeCallbacks(sliderRunnable);
     }
 }

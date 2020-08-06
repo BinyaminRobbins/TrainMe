@@ -31,6 +31,7 @@ public class AllDietsFragment extends Fragment {
     private Handler sliderHandler;
     private short delay;
     private boolean scrollOn;
+    private SharedPreferences sharedPreferences;
 
 
     public AllDietsFragment(PurchaseProduct purchaseProduct) {
@@ -46,16 +47,13 @@ public class AllDietsFragment extends Fragment {
         delay = 2500;
         sliderHandler = new Handler();
 
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
         viewPager2 = view.findViewById(R.id.Diets_ImageSlider);
-        scrollOn = sharedPreferences.getBoolean("scrollOn",false);
-
 
         SliderList sliderList = new SliderList(getContext(),sharedPreferences);
         sliderItems = sliderList.getDietList();
         Log.i("SliderItems",sliderItems.toString());
 
-        viewPager2.setAdapter(new _3_SliderAdapter(sliderList,sliderItems,product));
+        viewPager2.setAdapter(new _3_SliderAdapter(sliderList,sliderItems,product,false));
 
         viewPager2.setClipToPadding(false);
         viewPager2.setElevation(40);
@@ -89,7 +87,11 @@ public class AllDietsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_diets,container,false);
+        View view = inflater.inflate(R.layout.fragment_all_diets,container,false);
+        sharedPreferences = requireContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
+        scrollOn = sharedPreferences.getBoolean("scrollOn",false);
+
+        return view;
     }
 
     //Automate Scrolling:
@@ -109,13 +111,15 @@ public class AllDietsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        sliderHandler.postDelayed(sliderRunnable,delay);
+        if(scrollOn)
+            sliderHandler.postDelayed(sliderRunnable,delay);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        sliderHandler.removeCallbacks(sliderRunnable);
+        if(scrollOn)
+            sliderHandler.removeCallbacks(sliderRunnable);
     }
 
 }
