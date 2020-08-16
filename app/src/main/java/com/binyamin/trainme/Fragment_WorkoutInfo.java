@@ -13,15 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import static com.binyamin.trainme._3_SliderAdapter.detailsArray;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Fragment_WorkoutInfo extends Fragment {
     int position;
-    String[] detailsArray;
+    private String[] detailsArray;
 
     Fragment_WorkoutInfo(int position, String[] detailsArray) {
         // Required empty public constructor
@@ -36,6 +34,13 @@ public class Fragment_WorkoutInfo extends Fragment {
         TextView workoutInfoTxt = view.findViewById(R.id.workout_infoTxt);
         workoutInfoTxt.setText(detailsArray[position]);
         workoutInfoTxt.setTextColor(Color.WHITE);
+        if(AthleteWorkoutsAndDietsFragment.tabPosition == 1) {
+            workoutInfoTxt.setTextSize(25);
+            workoutInfoTxt.setEms(40);
+        }else{
+            workoutInfoTxt.setTextSize(22);
+            workoutInfoTxt.setEms(40);
+        }
 
         ImageButton closeButton = view.findViewById(R.id.closeInfoButton);
         closeButton.setOnClickListener(new View.OnClickListener() {

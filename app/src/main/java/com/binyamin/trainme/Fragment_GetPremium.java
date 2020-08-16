@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +51,7 @@ public class Fragment_GetPremium extends Fragment {
         final SharedPreferences prefs = requireContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
 //        getActivity().getActionBar().hide();
 
-        String product = getResources().getString(R.string.productId);
+        String product = getResources().getString(R.string.inapp_productId);
         final PurchaseProduct purchaseProduct = new PurchaseProduct(getContext(),getActivity(),product,prefs);
         purchaseProduct.setUp();
 
@@ -58,9 +59,15 @@ public class Fragment_GetPremium extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                premiumBar.setVisibility(View.VISIBLE);
                 if(prefs.getBoolean("ProductIsOwned", false)){
-                    premiumBar.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(),"Product Is Already Owned",Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            premiumBar.setVisibility(View.GONE);
+                        }
+                    },2000);
                     return;
                 }
                 purchaseProduct.query();

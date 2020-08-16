@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
-import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    ArrayList<_3_SliderItem> sliderItems;
+    private ArrayList<_3_SliderItem> sliderItems;
     Context context;
-    SliderList list;
-    SharedPreferences prefs;
-    String currentTableName;
+    private SliderList list;
+    private SharedPreferences prefs;
+    private String currentTableName;
     public FavoritesFragmentRecyclerViewAdapter(Context context,SharedPreferences prefs,SliderList list, ArrayList<_3_SliderItem> sliderItems, String currentTableName){
         this.prefs = prefs;
         this.context = context;
@@ -39,8 +36,8 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_favorites_fragment_rv,parent,false);
-        RecyclerView.ViewHolder viewHolder = new ViewHolderClass (view);
-        return viewHolder;
+        ViewHolderClass viewHolderClass = new ViewHolderClass(view);
+        return viewHolderClass;
     }
 
     @Override
@@ -48,6 +45,9 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
         final ViewHolderClass viewHolderClass = (ViewHolderClass) holder;
 
         viewHolderClass.athleteTextView.setText(sliderItems.get(position).getAthleteName());
+        if(FavoritesFragment.favoritesTabPostion == 1){
+            viewHolderClass.button.setText("See Diet");
+        }
 
         viewHolderClass.athleteImageView.setImageResource(sliderItems.get(position).getFavoriteImage());
         switch (sliderItems.get(position).getFavoriteImage()){
@@ -55,6 +55,9 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
                 viewHolderClass.athleteImageView.setScrollY(-30);
                 break;
             case R.drawable.jamesharrison_favorites:
+            case R.drawable.jimmybutler_favorites:
+            case R.drawable.homescreen_julianedelman:
+            case R.drawable.antoniobrown_favorites:
                 viewHolderClass.athleteImageView.setScrollY(-45);
                 break;
             case R.drawable.jjwatt_favorites:
@@ -62,6 +65,8 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
                 break;
 
         }
+
+
 
         viewHolderClass.star.setImageResource(R.drawable.ic_action_star_clicked_border);
         viewHolderClass.star.setOnClickListener(new View.OnClickListener() {

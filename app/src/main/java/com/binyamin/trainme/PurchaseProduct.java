@@ -68,7 +68,6 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
         billingClient.startConnection(new BillingClientStateListener() {
         @Override
         public void onBillingSetupFinished(BillingResult billingResult) {
-            final String TAG = "OnBillingSetup";
             if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                 //Toast.makeText(context, "Successfully connected to BillingClient", Toast.LENGTH_SHORT).show();
                 checkIfOwned();
@@ -88,7 +87,7 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
 
     public void query(){
         final SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
-        params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS); // Subscription vs 1-Time Purchase
+        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP); // Subscription vs 1-Time Purchase
         billingClient.querySkuDetailsAsync(params.build(), new SkuDetailsResponseListener() {
             @Override
             public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
@@ -150,7 +149,7 @@ public class PurchaseProduct implements PurchasesUpdatedListener {
 
     boolean checkIfOwned() {
         prefs = context.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
-        Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(BillingClient.SkuType.SUBS); //Or SkuType.INAPP
+        Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(BillingClient.SkuType.INAPP); //Or SkuType.INAPP
 
         if (purchasesResult.getPurchasesList() != null) {
             for (Purchase purchase : purchasesResult.getPurchasesList()) {

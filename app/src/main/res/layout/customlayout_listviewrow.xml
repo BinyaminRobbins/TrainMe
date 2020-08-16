@@ -39,7 +39,7 @@
         android:foregroundGravity="center_horizontal"
         android:text="Title"
         android:textColor="@android:color/black"
-        android:textSize="19sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvRepCount"

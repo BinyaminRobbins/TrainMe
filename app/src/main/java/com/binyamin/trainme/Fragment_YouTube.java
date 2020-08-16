@@ -89,8 +89,36 @@ public class Fragment_YouTube extends Fragment {
             videoItemJeremy_Ethier.youtubePageUrl = "https://www.youtube.com/c/JeremyEthier/videos";
             videoItems.add(videoItemJeremy_Ethier);
 
-            videoViewPager.setAdapter(new VideosAdapter(videoItems));
+            VideoItem videoItemBodybuildingCom = new VideoItem();
+            videoItemBodybuildingCom.videoTitle = "Bodybuilding.com";
+            videoItemBodybuildingCom.videoDescription = "Bodybuilders.com Is Meant To Help Users Reach Their Health, Fitness And Appearance Goals Through Information, Motivation, And Supplementation.";
+            videoItemBodybuildingCom.videoUrl = "https://youtu.be/wDPND0ejH50";
+            videoItemBodybuildingCom.youtubePageUrl = "https://www.youtube.com/c/bodybuildingcom/videos";
+            videoItems.add(videoItemBodybuildingCom);
 
+            VideoItem videoItemBuffDudes = new VideoItem();
+            videoItemBuffDudes.videoTitle = "Buff Dudes";
+            videoItemBuffDudes.videoDescription = "Healthy Food Recipes & Gym Workout Routines. Lose Fat, Gain Muscle.";
+            videoItemBuffDudes.videoUrl = "https://youtu.be/_ZeUlqJwNmw";
+            videoItemBuffDudes.youtubePageUrl = "https://www.youtube.com/c/BuffDudesOfficial/videos";
+            videoItems.add(videoItemBuffDudes);
+
+            VideoItem videoItemTheRock = new VideoItem();
+            videoItemTheRock.videoTitle = "The Rock";
+            videoItemTheRock.videoDescription = "The official YouTube channel for Dwayne \"The Rock\" Johnson & Seven Bucks Digital Studios.";
+            videoItemTheRock.videoUrl = "https://youtu.be/24fdcMw0Bj0";
+            videoItemTheRock.youtubePageUrl = "https://www.youtube.com/user/therock/videos";
+            videoItems.add(videoItemTheRock);
+
+
+            VideoItem videoItemMikeThurston = new VideoItem();
+            videoItemMikeThurston.videoTitle = "Mike Thurston";
+            videoItemMikeThurston.videoDescription = "This channel was created to educate, motivate, and to help viewers optimise their body composition, whilst making the process as enjoyable and sustainable as possible.";
+            videoItemMikeThurston.videoUrl = "https://youtu.be/Uerf4Mj60Ug";
+            videoItemMikeThurston.youtubePageUrl = "https://www.youtube.com/c/MikeThurston/videos";
+            videoItems.add(videoItemMikeThurston);
+
+            videoViewPager.setAdapter(new VideosAdapter(videoItems));
             isSetUp = true;
         }
 

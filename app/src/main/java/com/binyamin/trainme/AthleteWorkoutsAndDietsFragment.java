@@ -1,6 +1,7 @@
 package com.binyamin.trainme;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,12 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -28,22 +28,29 @@ public class AthleteWorkoutsAndDietsFragment extends Fragment{
     private PurchaseProduct purchaseProduct;
     static TabLayout tabLayout;
     private ViewPager viewPager;
-    private ViewPagerAdapter adapter;
     static int tabPosition;
 
     public AthleteWorkoutsAndDietsFragment() {
         // Required empty public constructor
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         setUpPurchaseProduct();
-        adapter = new ViewPagerAdapter(getChildFragmentManager(), 0);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager(), 0);
         adapter.addFragment(new AllWorkoutsFragment(purchaseProduct), "Athlete Workouts");
         adapter.addFragment(new AllDietsFragment(purchaseProduct), "All Diets");
         viewPager.setAdapter(adapter);
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem());
+                return true;
+            }
+        });
         tabLayout.setupWithViewPager(viewPager);
         adapter.notifyDataSetChanged();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -77,7 +84,7 @@ public class AthleteWorkoutsAndDietsFragment extends Fragment{
     }
 
     private void setUpPurchaseProduct() {
-        purchaseProduct = new PurchaseProduct(getContext(), getActivity(), getResources().getString(R.string.productId), sharedPreferences);
+        purchaseProduct = new PurchaseProduct(getContext(), getActivity(), getResources().getString(R.string.inapp_productId), sharedPreferences);
         purchaseProduct.setUp();
     }
 

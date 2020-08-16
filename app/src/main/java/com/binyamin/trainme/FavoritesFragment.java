@@ -5,12 +5,10 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -20,6 +18,7 @@ import com.google.android.material.tabs.TabLayout;
  */
 public class FavoritesFragment extends Fragment {
     View view;
+    static int favoritesTabPostion;
 
 
     public FavoritesFragment() {
@@ -32,26 +31,43 @@ public class FavoritesFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_favorites, container, false);
 
-        TabLayout tabLayout = view.findViewById(R.id.tabLayout_favorites);
+        TabLayout favoritesTabLayout = view.findViewById(R.id.tabLayout_favorites);
+        favoritesTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                favoritesTabPostion = tab.getPosition();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        favoritesTabPostion = 0;
         ViewPager viewPager = view.findViewById(R.id.favorites_viewpager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager(),0);
         adapter.addFragment(new WorkoutsFavoritesFragment(), "Favorite Workouts");
         adapter.addFragment(new DietsFavoritesFragment(), "Favorite Diets");
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        favoritesTabLayout.setupWithViewPager(viewPager);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle("Your Favorites");
+        requireActivity().setTitle("Your Favorites");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        getActivity().setTitle(R.string.app_name);
+        requireActivity().setTitle(R.string.app_name);
     }
 
 }

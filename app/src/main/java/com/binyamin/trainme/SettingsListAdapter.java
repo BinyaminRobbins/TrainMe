@@ -2,7 +2,6 @@ package com.binyamin.trainme;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,10 +18,10 @@ import java.util.ArrayList;
 
 class SettingsListAdapter extends ArrayAdapter<SettingsItem> {
     Context context;
-    ArrayList<SettingsItem> settingItems;
-    int resource;
-    boolean switches;
-    Switch switch1;
+    private ArrayList<SettingsItem> settingItems;
+    private int resource;
+    private boolean switches;
+    private Switch switch1;
 
     public SettingsListAdapter(Context context, int resource,ArrayList<SettingsItem> settingItems,boolean switches){
         super(context,resource,settingItems);
@@ -99,7 +97,7 @@ class SettingsListAdapter extends ArrayAdapter<SettingsItem> {
                 }else switch1.setChecked(true);
                 break;
             case 1:
-                if(prefs.getBoolean("scrollOn",false)){
+                if(prefs.getBoolean("scrollOn",true)){
                     switch1.setChecked(true);
                 }else switch1.setChecked(false);
                 break;

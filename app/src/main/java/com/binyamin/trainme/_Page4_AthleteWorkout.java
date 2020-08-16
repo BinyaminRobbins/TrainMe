@@ -11,15 +11,16 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -40,23 +41,26 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_4_athlete_workout);
 
+        String TAG = "Activity 4";
+
         Intent intent = getIntent();
         tagNum = Integer.valueOf(Objects.requireNonNull(intent.getStringExtra("tag")));
-        Log.i("tag", String.valueOf(tagNum));
 
-        if(AthleteWorkoutsAndDietsFragment.tabPosition == 0) {
+        int tabPosition = AthleteWorkoutsAndDietsFragment.tabPosition;
+        if(tabPosition == 0) {
             //Workout ArrayList
             try {
                 athleteWorkoutList = _Page3_SelectWorkout.allAthleteWorkouts.get(tagNum).getAthleteWorkoutArrayList();
+
             }catch(NullPointerException e){
                 e.printStackTrace();
             }
         }else {
             //Diet ArrayList
-            System.out.println(_Page3_SelectWorkout.allAthleteDiets.toString());
             try {
                 athleteWorkoutList = _Page3_SelectWorkout.allAthleteDiets.get(tagNum).getAthleteWorkoutArrayList();
             }catch(NullPointerException e){
+                Toast.makeText(this,e.getMessage(),Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
@@ -67,19 +71,18 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
-        workoutCategories.clear();
-        for (AthleteWorkouts workout : athleteWorkoutList) {
-            String category = workout.getCategory();
-            if (!workoutCategories.contains(category)) {
-                workoutCategories.add(category);
-            }
-        }
-
         SharedPreferences prefs = getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
         SliderList sliderList = new SliderList(getApplicationContext(),prefs);
         ImageView imageViewHeader = findViewById(R.id.imageViewHeader);
 
-        if(AthleteWorkoutsAndDietsFragment.tabPosition == 0) {
+        if(tabPosition == 0) {
+            workoutCategories.clear();
+            for (AthleteWorkouts workout : athleteWorkoutList) {
+                String category = workout.getCategory();
+                if (!workoutCategories.contains(category)) {
+                    workoutCategories.add(category);
+                }
+            }
             myList = sliderList.getWorkoutList();
         }else{
             myList = sliderList.getDietList();
@@ -106,7 +109,7 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         TextView tvLink = findViewById(R.id.tv_link);
         final String linkInfo;
 
-        if(AthleteWorkoutsAndDietsFragment.tabPosition == 0) {
+        if(tabPosition == 0) {
             MyAdapter spinnerAdapter = new MyAdapter(this, R.layout.custom_spinner_4_, workoutCategories);
 
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -119,7 +122,7 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         }else{
             spinner.setVisibility(View.GONE);
 
-            tvLink.setText(name + " Workout List Source");
+            tvLink.setText(name + " Diet List Source");
             linkInfo = sliderList.getDietList().get(tagNum).getLink();
         }
 
@@ -151,13 +154,10 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
         public void onItemSelected (AdapterView <?> parent, View view,int position, long id){
         selectWorkoutList.clear();
 
-            Log.i("Item Selected", parent.getItemAtPosition(position).toString());
             String currentItem = workoutCategories.get(position);
             for (AthleteWorkouts workout : athleteWorkoutList) {
                 if (workout.getCategory().equals(currentItem)) {
-                    Log.i("CurrentWorkoutCategory", workout.getCategory());
                     selectWorkoutList.add(workout);
-                    //adapter.notifyDataSetChanged();
                 }
             }
             adapter = new _4_RecyclerViewAdapter(selectWorkoutList);
@@ -178,7 +178,7 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
 
             }
 
-            public View getCustomView(int position, View convertView, ViewGroup parent) {
+            private View getCustomView(int position, View convertView, ViewGroup parent) {
                 LayoutInflater inflater = getLayoutInflater();
                 View layout = inflater.inflate(R.layout.custom_spinner_4_, parent, false);
 
@@ -205,4 +205,27 @@ public class _Page4_AthleteWorkout extends AppCompatActivity implements View.OnC
                 return getCustomView(position, convertView, parent);
             }
         }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        boolean screenOn = getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE).getBoolean("screenOn", true);
+        if (screenOn) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+    }
+}

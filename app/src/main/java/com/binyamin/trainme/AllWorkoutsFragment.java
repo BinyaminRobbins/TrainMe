@@ -89,8 +89,14 @@ public class AllWorkoutsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_workouts, container, false);
         sharedPreferences = requireContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
-        scrollOn = sharedPreferences.getBoolean("scrollOn",false);
-        Toast.makeText(getContext(), "You Can Disable Auto-Scroll in Settings", Toast.LENGTH_LONG).show();
+        scrollOn = sharedPreferences.getBoolean("scrollOn",true);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(scrollOn)
+                    Toast.makeText(getContext(), "You Can Disable Auto-Scroll in Settings", Toast.LENGTH_LONG).show();
+            }
+        },2000);
 
         return view;
     }
@@ -112,7 +118,6 @@ public class AllWorkoutsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         if(scrollOn)
             sliderHandler.postDelayed(sliderRunnable,delay);
     }

@@ -1,23 +1,16 @@
 package com.binyamin.trainme;
 
-import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
-import android.service.notification.StatusBarNotification;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.File;
-import java.util.ArrayList;
 
 public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClickListener {
     View myView;
@@ -26,15 +19,20 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
     static ProgressButton progressButton;
     boolean buttonPressed;
     SharedPreferences sharedPreferences;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout._1_homescreen_layout);
 
-        /*deleteDatabase("Workouts");
-        getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE).edit().clear().commit();*/
-        sharedPreferences = getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+        if(!sharedPreferences.getBoolean("hasOpenedBefore",false)){
+            try {
+                deleteDatabase("TrainMeDatabase");
+            }catch (Exception e){
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        }
 
         myView = findViewById(R.id.include);
         myView.setOnClickListener(this);
@@ -57,17 +55,13 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
                 }
             }
         }, delay);
-
-
-
         progressButton = new ProgressButton(_Page1_HomeScreen.this,myView);
-
     }
 
     @Override
     public void onClick(View v) {
-        buttonPressed = true;
         progressButton.buttonActivated();
+        buttonPressed = true;
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -83,6 +77,6 @@ public class _Page1_HomeScreen extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
                 finish();
             }
-        }, 100);
+       }, 100);
     }
 }

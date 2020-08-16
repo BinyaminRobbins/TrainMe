@@ -26,7 +26,7 @@ import java.util.ArrayList;
  */
 public class AllDietsFragment extends Fragment {
     private PurchaseProduct product;
-    private ViewPager2 viewPager2;
+    static ViewPager2 viewPager2;
     private ArrayList<_3_SliderItem> sliderItems;
     private Handler sliderHandler;
     private short delay;
@@ -89,7 +89,7 @@ public class AllDietsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_diets,container,false);
         sharedPreferences = requireContext().getSharedPreferences("com.binyamin.trainme", Context.MODE_PRIVATE);
-        scrollOn = sharedPreferences.getBoolean("scrollOn",false);
+        scrollOn = sharedPreferences.getBoolean("scrollOn",true);
 
         return view;
     }

@@ -1,6 +1,5 @@
 package com.binyamin.trainme;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -11,9 +10,8 @@ import java.util.ArrayList;
 public class SliderList {
     private SharedPreferences sharedPreferences;
     Context context;
-    private int image;
-    private int bradyLocation,lebronLocation,mcgregorLocation,zlatanLocation,judgeLocation,ronaldoLocation, jamesHarrisonLocation, paulGeorgeLocation,jjwattLocation, dkmetcalfLocation;
-    private int bradyFavoriteLocation,lebronFavoriteLocation,mcgregorFavoriteLocation,zlatanFavoriteLocation,judgeFavoriteLocation,ronaldoFavoriteLocation, jamesHarrisonFavoriteLocation, paulGeorgeFavoritesLocation, jjwattFavoritesLocation, dkmetcalfFavoritesLocation;
+    private int bradyLocation,lebronLocation,mcgregorLocation,zlatanLocation,judgeLocation,ronaldoLocation, jamesHarrisonLocation, paulGeorgeLocation,jjwattLocation, dkmetcalfLocation, julianEdelmanLocation, jimmyButlerLocation, neymarLocation, antonioBrownLocation;
+    private int bradyFavoriteLocation,lebronFavoriteLocation,mcgregorFavoriteLocation,zlatanFavoriteLocation,judgeFavoriteLocation,ronaldoFavoriteLocation, jamesHarrisonFavoriteLocation, paulGeorgeFavoritesLocation, jjwattFavoritesLocation, dkmetcalfFavoritesLocation,julianEdelmanFavoritesLocation, jimmyButlerFavoritesLocation, neymarFavoritesLocation,antonioBrownFavoritesLocation;
 
     public SliderList(Context context,SharedPreferences preferences){
         this.context = context;
@@ -24,37 +22,46 @@ public class SliderList {
         SQLiteDatabase database = getDB();
 
         fillData();
-        int i = 0;
         database.execSQL("CREATE TABLE IF NOT EXISTS workouts (image INTEGER,favoritesImage INTEGER, athleteName VARCHAR, requiresPremium VARCHAR, isFavorite VARCHAR, link VARCHAR, tagNum INT(2),id INTEGER PRIMARY KEY)");
     //Featured
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + bradyLocation + "','"+bradyFavoriteLocation+"','Tom Brady','false', 'false','https://tb12sports.com/blog/tom-brady-workout', '"+i+"')");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + lebronLocation + "','"+lebronFavoriteLocation+"','Lebron James','false', 'false','https://www.jumpropedudes.com/workouts/lebron-james-body-breakdown', '"+i+++"')");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + mcgregorLocation + "','"+mcgregorFavoriteLocation+"','Connor McGregor','false','https://manofmany.com/lifestyle/fitness/conor-mcgregor-diet-workout-plan', 'false','"+i+++"')");
-    //NBA
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + paulGeorgeLocation + "','"+paulGeorgeFavoritesLocation+"','Paul George','true', 'false','https://www.health-yogi.com/paul-george-diet-plan-workout-routine/','"+i+++"')");
-    //NFL
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + jamesHarrisonLocation + "','"+jamesHarrisonFavoriteLocation+"','James Harrison','true', 'false','https://www.borntoworkout.com/james-harrison-workout-routine-diet-plan-body-statistics/','"+i+++"')");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + jjwattLocation + "','"+jjwattFavoritesLocation+"','J.J. Watt','true', 'false','https://fitnessclone.com/jj-watt/','"+i+++"')");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + dkmetcalfLocation + "','"+dkmetcalfFavoritesLocation+"','DK Metcalf','true', 'false','https://www.health-yogi.com/dk-metcalf/','"+i+++"')");
-    //Soccer
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + zlatanLocation + "','"+zlatanFavoriteLocation+"','Zlatan  Ibrahim.','true', 'false','https://www.fourfourtwo.com/performance/training/zlatan-workout','"+i+++"')");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + ronaldoLocation + "','"+ronaldoFavoriteLocation+"','Cristiano Ronaldo','true', 'false','https://manofmany.com/lifestyle/fitness/cristiano-ronaldos-football-diet-workout-plan','"+i+++"')");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + bradyLocation + "','"+bradyFavoriteLocation+"','Tom Brady','false', 'false','https://tb12sports.com/blog/tom-brady-workout', 0)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + lebronLocation + "','"+lebronFavoriteLocation+"','Lebron James','false', 'false','https://www.jumpropedudes.com/workouts/lebron-james-body-breakdown', 1)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + mcgregorLocation + "','"+mcgregorFavoriteLocation+"','Connor McGregor','false','false','https://manofmany.com/lifestyle/fitness/conor-mcgregor-diet-workout-plan',2)");
+        //NBA
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + paulGeorgeLocation + "','"+paulGeorgeFavoritesLocation+"','Paul George','true', 'false','https://www.health-yogi.com/paul-george-diet-plan-workout-routine/',3)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + jimmyButlerLocation + "','"+jimmyButlerFavoritesLocation+"','Jimmy Butler','true', 'false','https://www.health-yogi.com/jimmy-butler-diet-plan-workout-routine/',4)");
+        //NFL
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + antonioBrownLocation + "','"+antonioBrownFavoritesLocation+"','Antonio Brown','true', 'false','https://fitnessclone.com/antonio-brown/',5)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + dkmetcalfLocation + "','"+dkmetcalfFavoritesLocation+"','DK Metcalf','true', 'false','https://www.health-yogi.com/dk-metcalf/',6)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + jamesHarrisonLocation + "','"+jamesHarrisonFavoriteLocation+"','James Harrison','true', 'false','https://www.borntoworkout.com/james-harrison-workout-routine-diet-plan-body-statistics/',7)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + jjwattLocation + "','"+jjwattFavoritesLocation+"','J.J. Watt','true', 'false','https://fitnessclone.com/jj-watt/',8)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + julianEdelmanLocation + "','"+julianEdelmanFavoritesLocation+"','Julian Edelman','true', 'false','https://www.health-yogi.com/dk-metcalf/',9)");
+
+        //Soccer
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + ronaldoLocation + "','"+ronaldoFavoriteLocation+"','Cristiano Ronaldo','true', 'false','https://manofmany.com/lifestyle/fitness/cristiano-ronaldos-football-diet-workout-plan',10)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + neymarLocation + "','"+neymarFavoritesLocation+"','Neymar','true', 'false','https://www.health-yogi.com/neymar/',11)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + zlatanLocation + "','"+zlatanFavoriteLocation+"','Zlatan  Ibrahim.','true', 'false','https://www.fourfourtwo.com/performance/training/zlatan-workout',12)");
     //MLB
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + judgeLocation + "','"+judgeFavoriteLocation+"','Aaron Judge','true', 'false','https://www.mensjournal.com/sports/8-ways-aaron-judge-trains-mlb-domination/6-yoga-and-pilates/','"+i+++"')");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + judgeLocation + "','"+judgeFavoriteLocation+"','Aaron Judge','true', 'false','https://www.mensjournal.com/sports/8-ways-aaron-judge-trains-mlb-domination/6-yoga-and-pilates/',13)");
         //NHL
     //MMA
 
     //Diets Table
-        i = 0;
         database.execSQL("CREATE TABLE IF NOT EXISTS diets (image INTEGER, favoritesImage INTEGER,athleteName VARCHAR, requiresPremium VARCHAR, isFavorite VARCHAR, link VARCHAR, tagNum INT(2),id INTEGER PRIMARY KEY)");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + ronaldoLocation + "','"+ronaldoFavoriteLocation+"','C. Ronaldo','false', 'false','https://manofmany.com/lifestyle/fitness/cristiano-ronaldos-football-diet-workout-plan', '"+i+"')");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + mcgregorLocation + "','"+ mcgregorFavoriteLocation +"','C. Mcgregor','false', 'false', 'https://manofmany.com/lifestyle/fitness/conor-mcgregor-diet-workout-plan','"+i+++"')");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + jjwattLocation + "','"+jjwattFavoritesLocation+"','J.J. Watt','false', 'false','https://fitnessclone.com/jj-watt/','"+i+++"')");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#1','true', 'false','DietLink','"+i+++"')");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#2','true', 'false','DietLink','"+i+++"')");
-        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + image + "','"+image+"','Diet Plan#3','true', 'false','DietLink','"+i+++"')");
+        //featured
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + mcgregorLocation + "','"+ mcgregorFavoriteLocation +"','C. Mcgregor','false', 'false', 'https://manofmany.com/lifestyle/fitness/conor-mcgregor-diet-workout-plan',0)");
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + jjwattLocation + "','"+jjwattFavoritesLocation+"','J.J. Watt','false', 'false','https://fitnessclone.com/jj-watt/',1)");
+        //Soccer
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + neymarLocation + "','"+neymarFavoritesLocation+"','Neymar','true', 'false','https://www.health-yogi.com/neymar/',2)");
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + ronaldoLocation + "','"+ronaldoFavoriteLocation+"','C. Ronaldo','true', 'false','https://manofmany.com/lifestyle/fitness/cristiano-ronaldos-football-diet-workout-plan', 3)");
+        //Basketball
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + jimmyButlerLocation + "','"+jimmyButlerFavoritesLocation+"','Jimmy Butler','true', 'false','https://www.health-yogi.com/jimmy-butler-diet-plan-workout-routine/',4)");
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + paulGeorgeLocation + "','"+paulGeorgeFavoritesLocation+"','Paul George','true', 'false','https://www.health-yogi.com/paul-george-diet-plan-workout-routine/',5)");
+        //UFC
+        //Football
+        database.execSQL("INSERT INTO diets (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + antonioBrownLocation + "','"+antonioBrownFavoritesLocation+"','Antonio Brown','true', 'false','https://fitnessclone.com/jj-watt/',6)");
 
-        sharedPreferences.edit().putInt("openedBefore",1).apply();
+        sharedPreferences.edit().putBoolean("hasOpenedBefore",true).apply();
     }
 
     SQLiteDatabase getDB() {
@@ -73,6 +80,10 @@ public class SliderList {
         paulGeorgeLocation = R.drawable.homepage_paulgeorge;
         jjwattLocation = R.drawable.jjwatt_homescreen;
         dkmetcalfLocation = R.drawable.homescreen_dkmetcalf;
+        julianEdelmanLocation = R.drawable.homescreen_julianedelman;
+        jimmyButlerLocation = R.drawable.homescreen_jimmybutler;
+        neymarLocation = R.drawable.homescreen_neymar;
+        antonioBrownLocation = R.drawable.homescreen_antoniobrown;
         //Athlete Favorites Page Image Locations:
         bradyFavoriteLocation = R.drawable.brady_favorites;
         lebronFavoriteLocation = R.drawable.lebron_favorites;
@@ -84,9 +95,10 @@ public class SliderList {
         paulGeorgeFavoritesLocation = R.drawable.paulgeorge_favorites;
         jjwattFavoritesLocation = R.drawable.jjwatt_favorites;
         dkmetcalfFavoritesLocation = R.drawable.dkmetcalf_favorites;
-
-        //Diet Images
-        image = R.drawable.healthy_diet;
+        julianEdelmanFavoritesLocation = R.drawable.edelman_favorites;
+        jimmyButlerFavoritesLocation = R.drawable.jimmybutler_favorites;
+        neymarFavoritesLocation = R.drawable.neymar_favorites;
+        antonioBrownFavoritesLocation = R.drawable.antoniobrown_favorites;
     }
 
 
@@ -95,7 +107,7 @@ public class SliderList {
         ArrayList<_3_SliderItem> workoutItems = new ArrayList<>();
         workoutItems.clear();
 
-            @SuppressLint("Recycle") Cursor c = getDB().rawQuery("SELECT * FROM workouts",null);
+            Cursor c = getDB().rawQuery("SELECT * FROM workouts",null);
 
             int imageIndex = c.getColumnIndex("image");
             int favoritesImageIndex = c.getColumnIndex("favoritesImage");
@@ -118,7 +130,7 @@ public class SliderList {
         Log.i("TAG","Diet Called");
         ArrayList<_3_SliderItem> dietItems = new ArrayList<>();
         dietItems.clear();
-            @SuppressLint("Recycle") Cursor c = getDB().rawQuery("SELECT * FROM diets",null);
+            Cursor c = getDB().rawQuery("SELECT * FROM diets",null);
 
             int imageIndex = c.getColumnIndex("image");
             int favoritesImageIndex = c.getColumnIndex("favoritesImage");

@@ -2,6 +2,7 @@ package com.binyamin.trainme;
 
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,25 +12,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.google.android.play.core.review.ReviewManagerFactory;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Fragment_Settings extends Fragment implements View.OnClickListener {
+    //ReviewManager manager;
 
     public Fragment_Settings() {
         // Required empty public constructor
@@ -56,21 +56,6 @@ public class Fragment_Settings extends Fragment implements View.OnClickListener 
 
         SettingsListAdapter generalListAdapter = new SettingsListAdapter(getContext(),R.layout.adapter_view_settings_general,generalItems,true);
         generalListView.setAdapter(generalListAdapter);
-        generalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                Toast.makeText(getContext(),"Touched",Toast.LENGTH_SHORT).show();
-                Handler handler = new Handler();
-                view.setBackgroundColor(Color.parseColor("#b0bec5"));
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        view.setBackgroundColor(getResources().getColor(android.R.color.white));
-                    }
-                },200);
-
-            }
-        });
 
         //SupportUs List View
         ListView listViewSupportUs = view.findViewById(R.id.listViewSupportUs);
@@ -79,6 +64,7 @@ public class Fragment_Settings extends Fragment implements View.OnClickListener 
         SettingsItem supportItem3 = new SettingsItem(R.drawable.ic_app_icon_feedback,"Feedback by Mail");
         SettingsItem supportItem4 = new SettingsItem(R.drawable.ic_app_icon_more,"More By SyntApps");
         SettingsItem supportItem5 = new SettingsItem(R.drawable.ic_app_icon_share,"Share with friends");
+        SettingsItem supportItem6 = new SettingsItem(R.drawable.ic_app_icon_instagram,"Instagram");
 
         ArrayList<SettingsItem> supportItems = new ArrayList<>();
         supportItems.add(supportItem1);
@@ -86,16 +72,26 @@ public class Fragment_Settings extends Fragment implements View.OnClickListener 
         supportItems.add(supportItem3);
         supportItems.add(supportItem4);
         supportItems.add(supportItem5);
+        supportItems.add(supportItem6);
+
 
         SettingsListAdapter supportItemAdapter = new SettingsListAdapter(getContext(),R.layout.adapter_view_settings_general,supportItems,false);
         listViewSupportUs.setAdapter(supportItemAdapter);
         listViewSupportUs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                Handler handler = new Handler();
+                view.setBackgroundColor(Color.parseColor("#b0bec5"));
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                    }
+                },200);
                 Toast.makeText(getContext(),"Loading...",Toast.LENGTH_SHORT).show();
                 switch (position) {
                     case 0:
-                        final String appPackageName = getActivity().getPackageName(); // getPackageName() from Context or Activity object
+                        final String appPackageName = requireActivity().getPackageName(); // getPackageName() from Context or Activity object
                         try {
                             Intent launchIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName));
                             launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -141,26 +137,71 @@ public class Fragment_Settings extends Fragment implements View.OnClickListener 
                         } catch(Exception e) {
                             Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
                         }
+                    case 5:
+                        startActivity(newInstagramProfileIntent(requireContext().getPackageManager(),"syntapps"));
                 }
             }
         });
 
-
+       /* Task<ReviewInfo> request = manager.requestReviewFlow();
+        request.addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.i("Review","Task Successful");
+                // We can get the ReviewInfo object
+                ReviewInfo reviewInfo = task.getResult();
+                Task<Void> flow = manager.launchReviewFlow(requireActivity(), reviewInfo);
+                flow.addOnCompleteListener(task2 -> {
+                    Log.i("Review","Flow Finished");
+                    // The flow has finished. The API does not indicate whether the user
+                    // reviewed or not, or even whether the review dialog was shown. Thus, no
+                    // matter the result, we continue our app flow.
+                });
+            } else {
+                // There was some problem, continue regardless of the result.
+                Log.i("review","A Problem Occurred");
+            }
+        });*/
 
     }
+
+    //from https://stackoverflow.com/questions/15497261/open-instagram-user-profile
+    private Intent newInstagramProfileIntent(PackageManager pm, String url) {
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
+        try {
+            if (pm.getPackageInfo("com.instagram.android", 0) != null) {
+                if (url.endsWith("/")) {
+                    url = url.substring(0, url.length() - 1);
+                }
+                final String username = url.substring(url.lastIndexOf("/") + 1);
+                // http://stackoverflow.com/questions/21505941/intent-to-open-instagram-user-profile-on-android
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse("http://instagram.com/_u/" + username));
+                intent.setPackage("com.instagram.android");
+                return intent;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        intent.setData(Uri.parse(url));
+        return intent;
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+       // manager = ReviewManagerFactory.create(requireContext());
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getActivity().setTitle(R.string.app_name);
+        requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        requireActivity().setTitle(R.string.app_name);
     }
 
     @Override

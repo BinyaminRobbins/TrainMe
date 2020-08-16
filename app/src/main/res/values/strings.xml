@@ -1,20 +1,58 @@
 <resources>
     <string name="app_name">TrainMe</string>
-    <string name="productId">premium_features_sub_2</string>
+    <string name="sub_productId">premium_features_sub_2</string>
+    <string name="inapp_productId">singlepurchase_premium_features</string>
     <string name="dbName">TrainMeDatabase</string>
     <string name="workoutsTable">workouts</string>
     <string name="dietsTable">diets</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="workoutDescriptions">
-        <item><![CDATA[>\t\t\tOne\, 9–Part, Band Workout - developed by Tom Brady\'s trainer and the team at TB12.\n\n>\t\t\tThis workout is meant to be done 3 - 4 days a week. Each excersise should comprise of 3 sets.\n\n>\t\t\tDifficulty :\tModerate]]></item>
-        <item><![CDATA[>\t\t\tThis workout is used by Lebron to gain muscle mass and weight by lifting heavy and eating right.\n\n>\t\t\tWORKOUT BASICS:\n\n\t\t–\t Lifting Weights 3x Per Week\n\n\t\t-\tYoga 30 Minutes Per Day\n\n\t\t-\tBodyweight + Plyometric Exercises 5-6x Per Week]]></item>
+        <!--Tom Brady-->
+        <item><![CDATA[>\t\t\tOne\, 9–Part, Band Workout – developed by Tom Brady\'s trainer and the team at TB12.\n\n>\t\t\tThis workout is meant to be done 3 – 4 days a week. Each excersise should comprise of 3 sets.\n\n>\t\t\tDifficulty :\tModerate]]></item>
+        <!--Lebron James-->
+        <item><![CDATA[>\t\t\tThis workout is used by Lebron to gain muscle mass and weight by lifting heavy and eating right.\n\n>\t\t\tWORKOUT BASICS:\n\n\t\t–\t Lifting Weights 3x Per Week\n\n\t\t–\tYoga 30 Minutes Per Day\n\n\t\t–\tBodyweight + Plyometric Exercises 5–6x Per Week]]></item>
+        <!--Connor McGregor-->
         <item>>\t\t\tThis workout is used by Connor McGregor - \"The Notorious\" to keep in shape for power and endurance in the octagon.\n\n>\t\t\tSome of McGregor\'s Tips:\n\n\t\t-\t Change up your workout from time to time.\n\n\t\t-\tAlways Stretch &amp; Get Proper Rest\n\n\t\t-\tPractice Bodyweight Exercises - "Machines don\'t use machines; and I am a machine\".</item>
-    </string-array>
+        <!--Paul George-->
+        <item>\tThe Paul George workout routine is quite intense. George follows intense routines to maintain his physique and stamina &amp; likes to divide his workouts according to body type and day. George mostly uses a 3-day-split of Upper Body, Lower Body, and Cardio</item>
+        <!--Jimmy Butler-->
+        <item>\tJimmy is very focused during his workout days. He works out at the gym for 2 hours 5 times a week. His gym workout is focused mainly on building muscle strength and flexibility. In addition to his regular gym workouts, Jimmy trains by sprinting and biking on off days.</item>
+        <!--Antonio Brown-->
+        <item>\tAntonio Brown is a footballer player - he needs strong legs, and that\’s why he focuses mainly on lower body exercises. Three-time professional Bowler Antonio Brown encompasses a nice exercise designed to meet the biggest needs for football players. Antonio Brown\’s trainer says the key to getting quickness is lies in spending time practicing with weight. Together, they mainly work on lower body strength, agility , and explosiveness off the line. Brown uses just 3 main exercises to keep his body above par.\nBrown\'s Tips:\n\n1. Core is #1\n\n2. Exercises With High Reps - Low Weight\n\n3. Endurance - Brown is constantly running and swimming to train his lungs to keep up with the rest of his body.</item>
+        <!--DK Metcalf-->
+        <item>\tTo build the body of a professional athlete, you must allow yourself lots of time to recover. Therefore, DK trains 3 days every week, alternating on a daily basis with a day of rest. That’s why reverse pyramid coaching and intermittent fasting work so well ; they compliment each other by building strength (reverse pyramid training) and trimming the fat (intermittent fasting) at a constant pace and at the same time.</item>
+        <!--James Harrison-->
+        <item>\tHarrison hits the gym six days each week and works out in the offseason on the field He uses coach Mike Tomlin as his spotter and performs 1,100 lb leg presses, dips with 200 lbs of added weight, one-armed shoulder press, 700-lb squats, and challenging weighted pull-ups.</item>
+        <!--Watt-->
+        <item></item>
+        <!--Edleman-->
+        <item></item>
+        <!--Ronaldo-->
+        <item></item>
+        <!--Neymar-->
+        <item>\tNeymar\'s workout routine is divided according to his body. In addition to his workout sessions, Neymar also practices\n\n1. Yoga\n\n2. Boxing\n\n3. Hiking\n\n4. Tennis\n\n</item>
+        <!--Zlatan-->
+        <item></item>
+        <!--Judge-->
+        <item></item>
+         </string-array>
 
     <string-array name="dietDescriptions">
-        <item>empty text</item>
+        <!--McGregor-->
+        <item>>\tUltimately, the Conor McGregor diet plan goes big on protein and sticks to very specific types of carbs, namely fruit, green veggies, sweet potatoes, and butternut squash. He avoids takeaway food like the plague but does confess to having a sweet tooth. At the end of the day, however, he’s all about a “clean” diet, which in his words means “good-quality meats, good-quality greens, good-quality carbohydrates like sweet potato and butternut squash, and that is it.”</item>
+        <!--JJ Watt-->
+        <item>> Watt eats a massive amount of food each day. So much so, he considers eating to be a chore. He has 2 breakfasts, 2 lunches, and 2 dinners and they’re all huge. Still, he eats clean, whole, natural foods, like oatmeal, eggs, chicken breasts and plenty of veggies. His diet today is around 5,000 calories, but a few years back, he ate even more after his trainer said something was missing from his workouts. That something was an additional 4,000 calories. While on his 9,000 calorie diet, he followed a semi-keto, semi-Paleo diet, consuming lots of fats in the form of avocados, olive oil, and bacon, and going low on carbs and eating only whole, natural ones, such as from sweet potatoes.</item>
+        <!--Neymar-->
+        <item>>\tNeymar takes very good care of his body through his DIET PLAN. He mostly eats lean meats such as turkey, while also always getting a dose of greens at mealtime (spinach, cabbage, kale, etc.). Neymar also incorporates a cheat meal once a week to keep things interesting</item>
+        <!--Ronaldo-->
+        <item><![CDATA[> Despite his seemingly bottomless appetite, Cristiano Ronaldo nevertheless takes a hard line when it comes to diet and nutrition, especially whilst training. For example, he typically divides his daily food intake into six smaller meals, which he consumes at intervals of 2–4 hours. This not only sustains a consistent and optimal rate of metabolism, but it prevents the body from experiencing weakness and hunger throughout the day]]></item>
+        <!--Jimmy Butler-->
+        <item>>\tFor a fit body, you have to take care of what you eat. Feeding your body with the right foods determines how active the body is throughout the day. Jimmy’s diet included a lot of fruits and vegetables, a lot of water, a lot of protein and no junk. Jimmy starts his day at 6 AM and sometimes even 4:30. That leads to him having more time - sometimes consuming 6 meals per day</item>
+        <!--Paul George-->
+        <item>>\tAs fast and good players practice so much and with so much intensity, they are well aware that their body is in great need of protein and carbs. Their food philosophy is to eat healthy and clean food. Paul George believes in eating 3 enough meals a day and it works best with his busy schedule.</item>
+        <!--Antonio Brown-->
+        <item>>\tBrown says he was skinny in high school, and that he could run fast but he didn’t understand the importance of nutrition. These days, he takes his health and diet seriously. He eats only food that are ‘alive,’ meaning nothing that comes from a cellophane wrapper. He has a personal chef who prepares all his meals and snacks, and is also a close friend. </item>
     </string-array>
 </resources>

@@ -1,9 +1,5 @@
 package com.binyamin.trainme;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Paint;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +12,7 @@ import java.util.ArrayList;
 import pl.droidsonroids.gif.GifImageView;
 
 public class _4_RecyclerViewAdapter extends RecyclerView.Adapter<_4_RecyclerViewAdapter.ViewHolder> {
-    ArrayList<AthleteWorkouts> arrayName;
+    private ArrayList<AthleteWorkouts> arrayName;
     public _4_RecyclerViewAdapter(ArrayList<AthleteWorkouts> arrayName){
         this.arrayName = arrayName;
     }

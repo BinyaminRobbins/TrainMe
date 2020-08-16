@@ -7,27 +7,39 @@ android {
         applicationId "com.binyamin.trainme"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.0.4"
+        versionCode 5
+        versionName "1.0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            minifyEnabled true
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+
+            // Includes the default ProGuard rules files that are packaged with
+            // the Android Gradle plugin. To learn more, go to the section about
+            // R8 configuration files.
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     implementation 'androidx.cardview:cardview:1.0.0'
 
@@ -39,14 +51,17 @@ dependencies {
     //Rounded Image View (so as not to create custom layout)
     implementation 'com.makeramen:roundedimageview:2.3.0'
     //Bottom Tool Bar
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.2.0'
     //Navigation Components
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0-rc01'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0-rc01'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     //in-app purchases
-    implementation 'com.android.billingclient:billing:2.2.0'
+    implementation 'com.android.billingclient:billing:3.0.0'
 
     //tiktok layout
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.2.0'
+    //Ask for Review
+    implementation 'com.google.android.play:core:1.8.0'
+
 
 }

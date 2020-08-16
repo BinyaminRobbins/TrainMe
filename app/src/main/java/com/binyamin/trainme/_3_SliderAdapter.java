@@ -73,6 +73,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
     @Override
     public void onBindViewHolder(@NonNull final SliderViewHolder holder, final int position) {
+        System.out.println("Position = " + position);
         holder.startButton.setTag(position);
         holder.setImage(sliderItems.get(position));
         holder.setLockedImage(sliderItems.get(position));
@@ -84,9 +85,9 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             holder.startButton.setText("See Workouts");
             getDetailsArray();
         }else {
-            holder.startButton.setText("See More");
+            holder.startButton.setText("See Diet");
             holder.startButton.setTextSize(16f);
-            holder.dietTextView.setVisibility(View.VISIBLE);
+            holder.startButton.setBackgroundResource(R.drawable.button_custom_selectdiet);
             //Diets Info:
             getDetailsArray();
         }
@@ -104,7 +105,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                          if(AthleteWorkoutsAndDietsFragment.tabPosition == 0){
                              holder.startButton.setText("See Workouts");
                          }else{
-                             holder.startButton.setText("See More");
+                             holder.startButton.setText("See Diet");
                          }
                      }else if(sliderItems.get(position).getIfRequiresPremium()){
                          if(purchaseProduct.checkIfOwned()){
@@ -113,14 +114,14 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                              if(AthleteWorkoutsAndDietsFragment.tabPosition == 0){
                                  holder.startButton.setText("See Workouts");
                              }else{
-                                 holder.startButton.setText("See More");
+                                 holder.startButton.setText("See Diet");
                              }
                          }else{
                              holder.progressBar.setVisibility(View.GONE);
                              if(AthleteWorkoutsAndDietsFragment.tabPosition == 0){
                                  holder.startButton.setText("See Workouts");
                              }else{
-                                 holder.startButton.setText("See More");
+                                 holder.startButton.setText("See Diet");
                              }
                              builder = new AlertDialog.Builder(v.getContext());
                              builder.setTitle("Upgrade to Premium");
@@ -156,6 +157,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         holder.star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (!colorChanged) {
                     holder.star.setImageResource(R.drawable.ic_action_star_clicked);
                     colorChanged = true;
@@ -164,6 +166,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                         cv.put("isFavorite","true"); //These Fields should be your String values of actual column names
 
                         sliderList.getDB().update(getTableName(), cv, "tagNum ="+sliderItems.get(position).getTagNum(), null);
+                        System.out.println(sliderItems.get(position).getAthleteName() + " Added to favorites (tagnum = " + sliderItems.get(position).getTagNum() + ")");
 
                     }catch(Exception e){
                         e.printStackTrace();
@@ -179,6 +182,8 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
                         cv.put("isFavorite","false"); //These Fields should be your String values of actual column names
 
                         sliderList.getDB().update(getTableName(), cv, "tagNum ="+sliderItems.get(position).getTagNum(), null);
+                        System.out.println(sliderItems.get(position).getAthleteName() + " Removed from favorites");
+
 
                     }catch(Exception e){
                         e.printStackTrace();
@@ -219,7 +224,6 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         private Button startButton;
         private ImageButton info;
         private ImageButton star;
-        private TextView dietTextView;
         ProgressBar progressBar;
 
         SliderViewHolder(@NonNull View itemView) {
@@ -231,7 +235,6 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
             star = itemView.findViewById(R.id.imageButton_star);
             info = itemView.findViewById(R.id.imageButton_info);
             progressBar = itemView.findViewById(R.id.startProgressBar);
-            dietTextView = itemView.findViewById(R.id.dietTV);
         }
         void setImage(_3_SliderItem sliderItem){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

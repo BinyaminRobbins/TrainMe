@@ -43,6 +43,7 @@ public class WorkoutsFavoritesFragment extends Fragment {
 
         for(_3_SliderItem item : sliderItems){
             if(item.getIsFavorite()){
+                Log.i("FavoriteList","Item Added with tagnum = " + item.getTagNum());
                 favoritesList.add(item);
             }
         }
@@ -56,7 +57,7 @@ public class WorkoutsFavoritesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rv = view.findViewById(R.id.favorites_rv);
-        prefs = getContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
+        prefs = requireContext().getSharedPreferences("com.binyamin.trainme",Context.MODE_PRIVATE);
         updateList(getContext());
     }
 
