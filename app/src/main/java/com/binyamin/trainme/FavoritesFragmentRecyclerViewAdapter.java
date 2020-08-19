@@ -25,7 +25,8 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
     private SliderList list;
     private SharedPreferences prefs;
     private String currentTableName;
-    public FavoritesFragmentRecyclerViewAdapter(Context context,SharedPreferences prefs,SliderList list, ArrayList<_3_SliderItem> sliderItems, String currentTableName){
+
+    FavoritesFragmentRecyclerViewAdapter(Context context,SharedPreferences prefs,SliderList list, ArrayList<_3_SliderItem> sliderItems, String currentTableName){
         this.prefs = prefs;
         this.context = context;
         this.list = list;
@@ -36,17 +37,18 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_favorites_fragment_rv,parent,false);
-        ViewHolderClass viewHolderClass = new ViewHolderClass(view);
-        return viewHolderClass;
+        return new ViewHolderClass(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        final ViewHolderClass viewHolderClass = (ViewHolderClass) holder;
 
+        final ViewHolderClass viewHolderClass = (ViewHolderClass) holder;
         viewHolderClass.athleteTextView.setText(sliderItems.get(position).getAthleteName());
-        if(FavoritesFragment.favoritesTabPostion == 1){
-            viewHolderClass.button.setText("See Diet");
+        if(currentTableName.equals(context.getResources().getString(R.string.workoutsTable))){
+            viewHolderClass.button.setText("See Workouts");
+        }else if(currentTableName.equals(context.getResources().getString(R.string.workoutsTable))){
+            viewHolderClass.button.setText("See Diets");
         }
 
         viewHolderClass.athleteImageView.setImageResource(sliderItems.get(position).getFavoriteImage());
@@ -63,10 +65,7 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
             case R.drawable.jjwatt_favorites:
                 viewHolderClass.athleteImageView.setScrollY(-40);
                 break;
-
         }
-
-
 
         viewHolderClass.star.setImageResource(R.drawable.ic_action_star_clicked_border);
         viewHolderClass.star.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +122,7 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
 
 
     }
-    public void toAct4(Context context,int position){
+    private void toAct4(Context context,int position){
         Intent intent = new Intent(context, _Page4_AthleteWorkout.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("tag", String.valueOf(sliderItems.get(position).getTagNum()));
@@ -135,13 +134,13 @@ public class FavoritesFragmentRecyclerViewAdapter extends RecyclerView.Adapter<R
         return sliderItems.size();
     }
 
-    public class ViewHolderClass extends RecyclerView.ViewHolder{
+    private class ViewHolderClass extends RecyclerView.ViewHolder{
         private ImageView athleteImageView;
         private TextView athleteTextView;
         private ImageButton star;
         private Button button;
 
-        public ViewHolderClass(@NonNull View itemView) {
+        ViewHolderClass(@NonNull View itemView) {
             super(itemView);
 
             athleteImageView = itemView.findViewById(R.id.athleteImageView);

@@ -33,7 +33,7 @@ public class AllWorkoutsFragment extends Fragment {
     private PurchaseProduct product;
     private SharedPreferences sharedPreferences;
 
-    public AllWorkoutsFragment(PurchaseProduct purchaseProduct) {
+    AllWorkoutsFragment(PurchaseProduct purchaseProduct) {
         // Required empty public constructor
         this.product = purchaseProduct;
     }

@@ -307,217 +307,224 @@ public class _Page3_SelectWorkout extends AppCompatActivity implements Runnable,
             allAthleteWorkouts.add(new AllWorkouts("Aaron Judge", judgeWorkouts));
 
 
-            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Standing Band Rows", R.drawable.workout_pushup, "10 Reps", "3 Sets (30s Rest)")); //Need GIF for "Standing Resistance Band Row";
-            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Push-Up", R.drawable.workout_pullup, "7 Reps", "3 Sets (30s Rest)"));//Gif for "BANDED push-up"
-            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Core Rotations", R.drawable.workout_pullup, "7 Reps (Each Side)", "3 Sets (10s Rest)"));//"Banded core rotations" gif
-            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Deadlifts", R.drawable.workout_pushup, "8 Reps", "3 Sets (15s Rest)"));//Banded DeadLift Gif
+            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Sitting Band Rows", R.drawable.sitting_band_rows, "10 Reps", "3 Sets (30s Rest)"));
+            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Push-Up", R.drawable.banded_pushup, "7 Reps", "3 Sets (30s Rest)"));
+            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Core Rotations", R.drawable.band_rotations, "7 Reps (Each Side)", "3 Sets (10s Rest)"));
+            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Squats", R.drawable.banded_squats, "8 Reps", "3 Sets (15s Rest)"));
             bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Bicep Curl", R.drawable.workout_bandedbicepcurls, "12 Reps", "3 Sets (10s Rest)"));
-            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Tricep Extension", R.drawable.workout_bandedbicepcurls, "10 Reps", "3 Sets (15s Rest)"));//need gif
-            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Deceleration Lunges", R.drawable.workout_pullup, "10 Reps", "3 Sets (30s Rest)")); //need gif
-            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Shoulder Press", R.drawable.workout_pullup, "10 Reps", "3 Sets (10s Rest)")); //need Gif
-            bradyWorkouts.add(new AthleteWorkouts("Full Body", "X Band Squat", R.drawable.workout_pullup, "10 Reps", "3 Sets (10s Rest)")); //Need Gif
+            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Tricep Extension", R.drawable.banded_tricep_extension, "10 Reps", "3 Sets (15s Rest)"));
+            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Cable Crossovers", R.drawable.banded_cable_crossovers, "10 Reps", "3 Sets (10s Rest)"));
+            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Deceleration Lunges", R.drawable.forward_lunges, "10 Reps", "3 Sets (30s Rest)"));
+            bradyWorkouts.add(new AthleteWorkouts("Full Body", "Banded Shoulder Press", R.drawable.band_shoulder_press, "10 Reps", "3 Sets (10s Rest)"));
 
             lebronWorkouts.add(new AthleteWorkouts("Mixed", "Push-Ups", R.drawable.workout_pushup, "Till-Failure", "3 Sets (45s Rest)"));
-            lebronWorkouts.add(new AthleteWorkouts("Mixed", "Pull-Ups", R.drawable.workout_pullup, "10 Reps", "3 Sets (45s Rest)"));
-            lebronWorkouts.add(new AthleteWorkouts("Mixed", "KettleBell Snatches", R.drawable.dumbbell_snatch, "5 Reps (Per Arm)", "3 Sets (45s Rest)")); //need to get gif resource for "Dumbbell Snatches"
-            lebronWorkouts.add(new AthleteWorkouts("Mixed", "Single-Arm Cable Rows", R.drawable.workout_pullup, "10 Reps (Per Arm)", "3 Sets (45s Rest)")); //need gif resource for "single arm cable rows"
-            lebronWorkouts.add(new AthleteWorkouts("Lower Body", "Dumbbell Squats", R.drawable.workout_squat, "8-14 Reps", "3 Sets (40s Rest)")); //need gid for "DUMBBELL squats"
-            lebronWorkouts.add(new AthleteWorkouts("Lower Body", "Swiss Ball Hip Raises", R.drawable.workout_pullup, "10-12 Reps", "3 Sets (40s Rest)")); //need gif for "Swiss Ball Hip Raises"
-            lebronWorkouts.add(new AthleteWorkouts("Lower Body", "Leg Curls", R.drawable.workout_pullup, "10 - 12 Reps", "3 Sets (40s Rest)")); //need gif for "Leg Curls"
-            lebronWorkouts.add(new AthleteWorkouts("Lower Body", "Dumbbell Step-Ups", R.drawable.workout_pullup, "10 Reps", "3 Sets (40s Rest)")); //need gif for "Dumbell StepUps"
-            lebronWorkouts.add(new AthleteWorkouts("Lower Body", "Dumbbell Calf Raises", R.drawable.workout_pullup, "12 Reps (Per Leg)", "3 Sets (40s Rest)")); //need gif for Dumbell Calf Raises
-            lebronWorkouts.add(new AthleteWorkouts("Cardio", "Versa-Climber/Jump Rope", R.drawable.workout_pullup, "30 min", "Once")); //need gif for "Versaclimber Machine OR Jump Rope"
+            lebronWorkouts.add(new AthleteWorkouts("Mixed", "Pull-Ups", R.drawable.pullup, "10 Reps", "3 Sets (45s Rest)"));
+            lebronWorkouts.add(new AthleteWorkouts("Mixed", "KettleBell Snatches", R.drawable.kettlebell_snathes, "5 Reps (Per Arm)", "3 Sets (45s Rest)"));
+            lebronWorkouts.add(new AthleteWorkouts("Mixed", "Seated Cable Rows", R.drawable.cable_rows, "10 Reps (Per Arm)", "3 Sets (45s Rest)"));
+            lebronWorkouts.add(new AthleteWorkouts("Lower Body", "Goblet Squats", R.drawable.goblet_squats, "8-14 Reps", "3 Sets (40s Rest)"));
+            lebronWorkouts.add(new AthleteWorkouts("Lower Body", "Swiss Ball Hip Raises", R.drawable.ball_hip_raises, "10-12 Reps", "3 Sets (40s Rest)"));
+            lebronWorkouts.add(new AthleteWorkouts("Lower Body", "Leg Curls", R.drawable.leg_curls, "10 - 12 Reps", "3 Sets (40s Rest)"));
+            lebronWorkouts.add(new AthleteWorkouts("Lower Body", "Dumbbell Step-Ups", R.drawable.dumbell_stepups, "10 Reps", "3 Sets (40s Rest)"));
+            lebronWorkouts.add(new AthleteWorkouts("Lower Body", "Dumbbell Calf Raises", R.drawable.calf_raises, "12 Reps (Per Leg)", "3 Sets (40s Rest)"));
+            lebronWorkouts.add(new AthleteWorkouts("Cardio", "Versa-Climber/Jump Rope", R.drawable.jump_rope, "30 min", "Once"));
             lebronWorkouts.add(new AthleteWorkouts("Upper Body", "Bench Press", R.drawable.workout_benchpress, "10 Reps", "3 Sets (1m Rest)"));
             lebronWorkouts.add(new AthleteWorkouts("Upper Body", "Lat Pull-Down", R.drawable.workout_latpulldown, "10 Reps", "3 Sets (1m Rest)"));
-            lebronWorkouts.add(new AthleteWorkouts("Upper Body", "Shoulder Press", R.drawable.workout_pullup, "6-10 Reps (Each Side)", "3 Sets (45s Rest)")); //Shoulder Press gif
+            lebronWorkouts.add(new AthleteWorkouts("Upper Body", "Shoulder Press", R.drawable.dumbell_overhead_press, "6-10 Reps (Each Side)", "3 Sets (45s Rest)"));
             lebronWorkouts.add(new AthleteWorkouts("Upper Body", "Dumbbell-Rows", R.drawable.workout_dubbell_row, "10 Reps (Each Side)", "3 Sets (40s Rest)"));
 
-            mcGregorWorkouts.add(new AthleteWorkouts("Body-Weight", "Chin-Ups", R.drawable.chin_ups, "1 - minute", "5 Sets (2 - 3 min Rest)")); //Gif
+            mcGregorWorkouts.add(new AthleteWorkouts("Body-Weight", "Chin-Ups", R.drawable.chin_ups, "1 - minute", "5 Sets (2 - 3 min Rest)"));
             mcGregorWorkouts.add(new AthleteWorkouts("Body-Weight", "Push-Ups", R.drawable.workout_pushup, "1 - minute", "5 Sets (2 - 3 min Rest)"));
-            mcGregorWorkouts.add(new AthleteWorkouts("Body-Weight", "Pull-Ups", R.drawable.workout_pullup, "1 - minute", "5 Sets (2 - 3 min Rest)"));
-            mcGregorWorkouts.add(new AthleteWorkouts("Body-Weight", "Squats", R.drawable.workout_squat, "1 - minute", "5 Sets (2 - 3 min Rest)")); //Gif (Air Squat)
-            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Back Roll", R.drawable.workout_squat, "1 - minute", "5 Sets (2 - 3 min Rest)"));
-            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Sitting Abdominal Stretch", R.drawable.workout_squat, "1", "Perform for 30s"));//Gif
-            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Sit-Back Shoulder Stretch", R.drawable.workout_squat, "1", "Perform for 30s"));//Gif
-            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Lying Leg Stretch", R.drawable.workout_squat, "1", "Perform for 30s"));//Gif
-            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Seated Butterfly", R.drawable.workout_squat, "1", "Perform for 30s"));//Gif
-            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Duck Walk", R.drawable.workout_squat, "1", "Perform till loose"));//Gif
-            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Horse Walk", R.drawable.workout_squat, "1", "Perform till loose"));//Gif
-            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Lizard Walk", R.drawable.workout_squat, "1", "Perform till loose"));//Gif
-            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Ostrich Walk", R.drawable.workout_squat, "1", "Perform till loose"));//Gif
+            mcGregorWorkouts.add(new AthleteWorkouts("Body-Weight", "Pull-Ups", R.drawable.pullup, "1 - minute", "5 Sets (2 - 3 min Rest)"));
+            mcGregorWorkouts.add(new AthleteWorkouts("Body-Weight", "Squats", R.drawable.workout_squat, "1 - minute", "5 Sets (2 - 3 min Rest)"));
+            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Back Roll", R.drawable.backroll, "1 - minute", "5 Sets (2 - 3 min Rest)"));
+            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Sitting Abdominal Stretch", R.drawable.cobra, "1", "Perform for 30s"));
+            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Sit-Back Shoulder Stretch", R.drawable.shoulder_stretch, "1", "Perform for 30s"));
+            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Lying Leg Stretch", R.drawable.leg_stretch_1, "1", "Perform for 30s"));
+            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Straight Leg Stretch", R.drawable.leg_stretch_2, "1", "Perform for 30s"));
+            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Seated Butterfly", R.drawable.butterfly, "1", "Perform for 30s"));
+            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Single Leg Stretch", R.drawable.leg_stretch_3, "1 (Each Side)", "Perform for 30s (each side)"));
+            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Duck Walk", R.drawable.duck_walk, "1", "Perform till loose"));
+            mcGregorWorkouts.add(new AthleteWorkouts("Stretches", "Lizard Walk", R.drawable.lizard_walk, "1", "Perform till loose"));
 
-            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Dead-lift", R.drawable.workout_squat, "5 Reps", "4 Sets (2 min rest)")); //Gif
-            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Barbell Squats", R.drawable.workout_squat, "3 Reps", "2 Sets (2 min rest)")); //Gif
-            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Push Press", R.drawable.workout_squat, "3 Reps", "3 Sets (1 min rest)")); //Gif
-            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Bench Press", R.drawable.workout_squat, "5 Reps", "4 Sets (2 min rest)")); //Gif
-            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Pull-Ups", R.drawable.workout_squat, "15 Reps", "2 Sets (90s rest)")); //Gif
-            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Weighted Floor Wipers", R.drawable.workout_squat, "15 Reps (each side)", "2 Sets (90s rest)")); //Gif
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Dead-lift", R.drawable.deadlift, "5 Reps", "4 Sets (2 min rest)"));
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Barbell Squats", R.drawable.workout_squat, "3 Reps", "2 Sets (2 min rest)"));
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Barbell Push Press", R.drawable.barbell_pushpress, "3 Reps", "3 Sets (1 min rest)"));
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Bench Press", R.drawable.workout_benchpress, "5 Reps", "4 Sets (2 min rest)"));
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Pull-Ups", R.drawable.pullup, "15 Reps", "2 Sets (90s rest)"));
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Weighted Floor Wipers", R.drawable.floor_wipers, "15 Reps (each side)", "2 Sets (90s rest)"));
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Leg Raises", R.drawable.leg_raises, "25 Reps", "2 Sets"));
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Ab Bicycles", R.drawable.ab_bycicle, "15 Reps (each side)", "2 Sets"));
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Hollow Body", R.drawable.hollow_body, "Hold 1 min", "2 Sets (90s rest)"));
+            zlatanWorkouts.add(new AthleteWorkouts("Daily Workout", "Plank", R.drawable.plank, "Hold 2 min", "2 Sets (90s rest)"));
 
-            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Tire Jumps", R.drawable.workout_squat, "Till Fatigued", "Till Fatigued")); //Gif
-            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Bench Press", R.drawable.workout_squat, "Limit", "3-4 Sets")); //Gif
-            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Sled Pushes", R.drawable.workout_squat, "Limit", "Limit")); //Gif
-            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Barbell Squats", R.drawable.workout_squat, "Limit", "3-4 Sets")); //Gif
-            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Box Jumps", R.drawable.workout_squat, "Till Fatigued", "Till Fatigued")); //Gif
-            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Yoga / Pilates", R.drawable.workout_squat, "30 min", "Every Day")); //Gif
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Box Jumps", R.drawable.workout_boxjump, "Till Fatigued", "Till Fatigued"));
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Bench Press", R.drawable.workout_benchpress, "Limit", "3-4 Sets"));
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Sled Pushes", R.drawable.sled_pushes, "Limit", "Limit"));
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Barbell Squats", R.drawable.workout_squat, "Limit", "3-4 Sets"));
+            judgeWorkouts.add(new AthleteWorkouts("Daily Workout", "Yoga / Pilates", R.drawable.yoga, "30 min", "Every Day"));
 
-            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Drop Squats", R.drawable.workout_squat, "40 seconds", "1 Set (20s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Dumbbell Reverse Lunges", R.drawable.workout_squat, "30 seconds (per side)", "1 Set (20s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Single-Leg Glute Bridge", R.drawable.workout_squat, "40 seconds (per side)", "1 Set (20s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Jump Squats", R.drawable.workout_squat, "30 seconds", "1 Set (20s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Side-lying Leg Raises", R.drawable.workout_squat, "50 seconds (per side)", "1 Set (20s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Bodyweight Squats", R.drawable.workout_squat, "30 seconds", "1 Set (20s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Barbell Squat", R.drawable.workout_squat, "30 seconds", "1 Set (20s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Box Jump", R.drawable.workout_squat, "8 Reps", "3 Sets (30s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Broad Jump", R.drawable.workout_squat, "10 Reps", "3 Sets (30s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Broad Jump", R.drawable.workout_squat, "8 Reps", "3 Sets (30s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Lateral Bound", R.drawable.workout_squat, "10 Reps", "3 Sets (30s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Burpee Pullups", R.drawable.workout_squat, "10-15 Reps", "3 Sets (30s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Bench Dips", R.drawable.workout_squat, "20 Reps", "3 Sets (30s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Push-Ups", R.drawable.workout_squat, "20-30 Reps", "3 Sets (30s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Medicine Ball Toss", R.drawable.workout_squat, "50 Reps", "3 Sets (30s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Push-Press", R.drawable.workout_squat, "10 Reps", "3 Sets (30s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Quads + Cardio", "Jump Rope", R.drawable.workout_squat, "1 min", "10 Sets (1m rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Quads + Cardio", "Power Cleans", R.drawable.workout_squat, "5 Reps", "5 Sets (20s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Quads + Cardio", "Sprints", R.drawable.workout_squat, "200 meters", "8 Sets (1m rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Abs + Core", "One-Arm Side Lifts", R.drawable.workout_squat, "5 Reps", "3 Sets (15s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Abs + Core", "Overhead Slams", R.drawable.workout_squat, "10-12 Reps", "3 Sets (15s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Abs + Core", "Knee Tuck Jump", R.drawable.workout_squat, "10-12 Reps", "3 Sets (15s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Abs + Core", "Hanging Leg Raises", R.drawable.workout_squat, "10-15 Reps", "3 Sets (25s rest)")); //Gif
-            ronaldoWorkouts.add(new AthleteWorkouts("Abs + Core", "Barbell Squats", R.drawable.workout_squat, "10-15 Reps", "3 Sets (25s rest)")); //Gif
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Drop Squats", R.drawable.drop_squats, "40 seconds", "1 Set (20s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Dumbbell Lunges", R.drawable.lunges, "30 seconds (per side)", "1 Set (20s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Single-Leg Glute Bridge", R.drawable.glute_bridge, "40 seconds (per side)", "1 Set (20s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Jump Squats", R.drawable.drop_squats, "30 seconds", "1 Set (20s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Hanging Leg Raises", R.drawable.leg_raises, "50 seconds (per side)", "1 Set (20s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Legs", "Goblet Squats", R.drawable.goblet_squats, "30 seconds", "1 Set (20s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Barbell Squat", R.drawable.workout_squat, "30 seconds", "1 Set (20s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Box Jump", R.drawable.workout_boxjump, "8 Reps", "3 Sets (30s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Broad Jump", R.drawable.broad_jump, "10 Reps", "3 Sets (30s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #1", "Lateral Bound", R.drawable.lateral_bound, "10 Reps", "3 Sets (30s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Burpees", R.drawable.burpees, "10-15 Reps", "3 Sets (30s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Bench Dips", R.drawable.bench_dips, "20 Reps", "3 Sets (30s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Push-Ups", R.drawable.workout_pushup, "20-30 Reps", "3 Sets (30s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Medicine Ball Slams", R.drawable.medicine_toss, "50 Reps", "3 Sets (30s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Circuit Training #2", "Push-Press", R.drawable.barbell_pushpress, "10 Reps", "3 Sets (30s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Quads + Cardio", "Jump Rope", R.drawable.jump_rope, "1 min", "10 Sets (1m rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Quads + Cardio", "Power Cleans", R.drawable.workout_powerclean, "5 Reps", "5 Sets (20s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Quads + Cardio", "Sprints", R.drawable.running_gif, "200 meters", "8 Sets (1m rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Core", "One-Arm Side Lifts", R.drawable.side_lifts, "5 Reps", "3 Sets (15s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Core", "Overhead Slams", R.drawable.medicine_toss, "10-12 Reps", "3 Sets (15s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Core", "Ab Bicycles", R.drawable.ab_bycicle, "10-12 Reps", "3 Sets (15s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Core", "Hanging Leg Raises", R.drawable.leg_raises, "10-15 Reps", "3 Sets (25s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Core", "Barbell Squats", R.drawable.workout_squat, "10-15 Reps", "3 Sets (25s rest)"));
+            ronaldoWorkouts.add(new AthleteWorkouts("Core", "Goblet Squats", R.drawable.goblet_squats, "10-15 Reps", "3 Sets (25s rest)"));
 
-            neymarWorkouts.add(new AthleteWorkouts("Warm-Up", "Stretch", R.drawable.workout_squat, "10 mins", "")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Warm-Up", "Jog", R.drawable.workout_run, "800 meters", "")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Circuit (Perform x4)", "Jog", R.drawable.workout_run, "400 meters", "")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Circuit (Perform x4)", "Jump Squats", R.drawable.workout_squat, "15 Reps", "")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Circuit (Perform x4)", "Jump Rope", R.drawable.workout_squat, "100 Jumps", "")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Circuit (Perform x4)", "Sprint", R.drawable.workout_run, "100 meters", "")); //Gif
+            neymarWorkouts.add(new AthleteWorkouts("Warm-Up", "Stretch", R.drawable.leg_stretch_3, "10 mins", ""));
+            neymarWorkouts.add(new AthleteWorkouts("Warm-Up", "Jog", R.drawable.workout_run, "800 meters", ""));
+            neymarWorkouts.add(new AthleteWorkouts("Circuit (Perform x4)", "Jog", R.drawable.workout_run, "400 meters", ""));
+            neymarWorkouts.add(new AthleteWorkouts("Circuit (Perform x4)", "Jump Squats", R.drawable.drop_squats, "15 Reps", ""));
+            neymarWorkouts.add(new AthleteWorkouts("Circuit (Perform x4)", "Jump Rope", R.drawable.jump_rope, "100 Jumps", ""));
+            neymarWorkouts.add(new AthleteWorkouts("Circuit (Perform x4)", "Sprint", R.drawable.running_gif, "100 meters", ""));
             neymarWorkouts.add(new AthleteWorkouts("Circuit (Perform x4)", "Box Jump", R.drawable.workout_boxjump, "15 Reps", ""));
-            neymarWorkouts.add(new AthleteWorkouts("Day #1", "Back Squats", R.drawable.workout_boxjump, "12 Reps", "4 Sets")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Day #1", "Weighted Lunges", R.drawable.workout_boxjump, "12 Reps", "4 Sets")); //Gif
+            neymarWorkouts.add(new AthleteWorkouts("Day #1", "Bar Squats", R.drawable.workout_squat, "12 Reps", "4 Sets"));
+            neymarWorkouts.add(new AthleteWorkouts("Day #1", "Weighted Lunges", R.drawable.lunges, "12 Reps", "4 Sets"));
             neymarWorkouts.add(new AthleteWorkouts("Day #1", "Mountain Climbers", R.drawable.workout_mountainclimbers, "25 Reps", "4"));
-            neymarWorkouts.add(new AthleteWorkouts("Day #1", "Plank Holds", R.drawable.workout_boxjump, "60s Each", "4 Sets")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Day #1", "Jog", R.drawable.workout_boxjump, "10 min", "1 (cool-down)")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Day #2", "Front Squats", R.drawable.workout_boxjump, "12 Reps", "4 Sets")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Day #2", "Leg Press", R.drawable.workout_boxjump, "12 Reps", "4 Sets")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Day #2", "Leg Raises", R.drawable.workout_boxjump, "25 Reps", "4 Sets")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Day #2", "Plank Holds", R.drawable.workout_boxjump, "60s Each", "4 Sets")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Day #2", "Jog", R.drawable.workout_boxjump, "10 min", "1 (cool-down)")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Day #3 (Cardio)", "Run", R.drawable.running_gif, "3 miles", ""));
-            neymarWorkouts.add(new AthleteWorkouts("Day #3 (Cardio)", "60min On/Off Cardio:", 0, "", "")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Day #3 (Cardio)", "ON - Run 6-9mph", R.drawable.running_gif, "1 Min", "")); //Gif
-            neymarWorkouts.add(new AthleteWorkouts("Day #3 (Cardio)", "OFF - Run 2.5-4mph", R.drawable.workout_run, "1 Min", "")); //Gif
+            neymarWorkouts.add(new AthleteWorkouts("Day #1", "Plank Holds", R.drawable.plank, "60s Each", "4 Sets"));
+            neymarWorkouts.add(new AthleteWorkouts("Day #1", "Jog", R.drawable.running_gif, "10 min", "1 (cool-down)"));
+            neymarWorkouts.add(new AthleteWorkouts("Day #2", "Front Squats", R.drawable.front_squats, "12 Reps", "4 Sets"));
+            neymarWorkouts.add(new AthleteWorkouts("Day #2", "Leg Curls", R.drawable.leg_curls, "12 Reps", "4 Sets"));
+            neymarWorkouts.add(new AthleteWorkouts("Day #2", "Hanging Leg Raises", R.drawable.leg_raises, "25 Reps", "4 Sets"));
+            neymarWorkouts.add(new AthleteWorkouts("Day #2", "Plank Holds", R.drawable.plank, "60s Each", "4 Sets"));
+            neymarWorkouts.add(new AthleteWorkouts("Day #2", "Jog", R.drawable.running_gif, "10 min", "1 (cool-down)"));
+            neymarWorkouts.add(new AthleteWorkouts("Day #3 (Cardio)", "Run", R.drawable.workout_run, "3 miles", ""));
+            neymarWorkouts.add(new AthleteWorkouts("Day #3 (Cardio)", "60min On/Off Cardio:", R.drawable.cardio, "", ""));
+            neymarWorkouts.add(new AthleteWorkouts("Day #3 (Cardio)", "ON - Run 6-9mph", R.drawable.workout_run, "1 Min", ""));
+            neymarWorkouts.add(new AthleteWorkouts("Day #3 (Cardio)", "OFF - Run 2.5-4mph", R.drawable.workout_run, "1 Min", ""));
 
             jamesHarrisonWorkouts.add(new AthleteWorkouts("Chest", "Bench Press", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
-            jamesHarrisonWorkouts.add(new AthleteWorkouts("Chest", "Incline Bench Press", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
-            jamesHarrisonWorkouts.add(new AthleteWorkouts("Chest", "No-Legs Bench Press", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
-            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Barbell Back Squats", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
-            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Barbell Deadlifts", R.drawable.workout_pullup, "10 Reps", "10 Sets"));
-            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Hip Thrusts", R.drawable.workout_benchpress, "10 Reps", "5 Sets"));
-            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Sled Push", R.drawable.workout_benchpress, "100 meters", "5-10 Sets"));
-            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Sumo Belt Squats", R.drawable.workout_benchpress, "10 Reps", "10 Sets"));
-            jamesHarrisonWorkouts.add(new AthleteWorkouts("Core", "Hanging Windshield Wipers", R.drawable.workout_benchpress, "30 Reps", "2 Sets"));
-            jamesHarrisonWorkouts.add(new AthleteWorkouts("Core", "Dragon Flags", R.drawable.workout_benchpress, "3-5 Reps", "5 Sets"));
-            jamesHarrisonWorkouts.add(new AthleteWorkouts("Core", "Ab Rollouts", R.drawable.workout_benchpress, "8-12 Reps", "3 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Chest", "Incline Bench Press", R.drawable.incline_benchpress, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Chest", "Decline Bench Press", R.drawable.decline_benchpress, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Barbell Back Squats", R.drawable.workout_squat, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Barbell Deadlifts", R.drawable.deadlift, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Hip Thrusts", R.drawable.hip_thrusts, "10 Reps", "5 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Sled Push", R.drawable.sled_pushes, "100 meters", "5-10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Legs", "Goblet Squats", R.drawable.goblet_squats, "10 Reps", "10 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Core", "Hanging Windshield Wipers", R.drawable.floor_wipers, "30 Reps", "2 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Core", "Dragon Flags", R.drawable.dragon_flags, "3-5 Reps", "5 Sets"));
+            jamesHarrisonWorkouts.add(new AthleteWorkouts("Core", "Ab Rollouts", R.drawable.ab_rollouts, "8-12 Reps", "3 Sets"));
 
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Shoulder Shrug", R.drawable.workout_benchpress, "6-10 Reps", "1 Set"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Incline Bench Press", R.drawable.workout_benchpress, "6-8 Reps", "3 Sets"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Flat Bench Press", R.drawable.workout_benchpress, "8-10 Reps", "3 Sets"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Pull-Ups", R.drawable.workout_benchpress, "8-10 Reps", "1 Set"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Machine Pullover", R.drawable.workout_benchpress, "6-10 Reps", "1 Set"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Dumbbell Lateral Raises", R.drawable.workout_benchpress, "6-10 Reps", "2 Sets"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Dumbbell Front Raises", R.drawable.workout_benchpress, "6-10 Reps", "2 Sets"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Seated Cable Row", R.drawable.workout_benchpress, "6-10 Reps", "1 Set"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Machine Chest Press", R.drawable.workout_benchpress, "6-10 Reps", "1 Set"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Lat Pull-Down", R.drawable.workout_benchpress, "6-10 Reps", "1 Set"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Machine Reverse Fly", R.drawable.workout_benchpress, "8-10 Reps", "1 Set"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Triceps Cable Press Downs", R.drawable.workout_benchpress, "6-8 Reps", "1 Set"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Cable Curls", R.drawable.workout_benchpress, "3-4 Reps", "2 Sets"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Dead Lifts", R.drawable.workout_benchpress, "6-8 Reps", "2 Sets"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Bar Squats", R.drawable.workout_benchpress, "6-8 Reps", "2 Sets"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Leg Press", R.drawable.workout_benchpress, "6-8 Reps", "2 Sets"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Leg Curls", R.drawable.workout_benchpress, "6-10 Reps", "1 Set"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Dumbbell Lunges", R.drawable.workout_benchpress, "6-8 Reps", "2 Sets"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Romanian Dead-Lifts", R.drawable.workout_benchpress, "8 Reps", "2 Sets"));//Gif
-            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Reverse Crunches", R.drawable.workout_benchpress, "12 Reps", "2 Sets"));//Gif
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Incline Bench Press", R.drawable.incline_benchpress, "6-8 Reps", "3 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Flat Bench Press", R.drawable.workout_benchpress, "8-10 Reps", "3 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Pull-Ups", R.drawable.pullup, "8-10 Reps", "1 Set"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Spartacus Row", R.drawable.spartacus_row, "6-10 Reps", "1 Set"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Dumbbell Lateral Raises", R.drawable.lateral_raises, "6-10 Reps", "2 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Dumbbell Front Raises", R.drawable.front_raise, "6-10 Reps", "2 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Seated Cable Row", R.drawable.cable_rows, "6-10 Reps", "1 Set"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Machine Chest Press", R.drawable.machine_chest_press, "6-10 Reps", "1 Set"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Lat Pull-Down", R.drawable.workout_latpulldown, "6-10 Reps", "1 Set"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Machine Reverse Fly", R.drawable.machine_rear_fly, "8-10 Reps", "1 Set"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Triceps Cable Press Downs", R.drawable.tricep_pushdowns, "6-8 Reps", "1 Set"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Barbell Curls", R.drawable.workout_barbellcurls, "10-12 Reps", "2-3 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Upper Body", "Hammer Curls", R.drawable.hammer_curl, "10-12 Reps", "2-3 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Dead Lifts", R.drawable.deadlift, "6-8 Reps", "2 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Bar Squats", R.drawable.workout_squat, "6-8 Reps", "2 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Drop Squats", R.drawable.drop_squats, "6-8 Reps", "2 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Leg Curls", R.drawable.leg_curls, "6-10 Reps", "1 Set"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Dumbbell Lunges", R.drawable.lunges, "6-8 Reps", "2 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Romanian Dead-Lifts", R.drawable.romanian_deadlift, "8 Reps", "2 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Leg Raises", R.drawable.leg_raises, "12 Reps", "2 Sets"));
+            paulGeorgeWorkouts.add(new AthleteWorkouts("Lower Body", "Ab Bicycles", R.drawable.ab_bycicle, "12 Reps", "2 Sets"));
 
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Neck Press", R.drawable.workout_benchpress, "10 Reps", "5 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Incline Dumbbell Press", R.drawable.workout_benchpress, "12 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Narrow Grip Bench Press", R.drawable.workout_benchpress, "15 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Cable Fly (low pulley)", R.drawable.workout_benchpress, "10 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Cable Fly (high pulley)", R.drawable.workout_benchpress, "10 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Seated Calf Raise", R.drawable.workout_benchpress, "10 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Wide Grip Pullups", R.drawable.workout_benchpress, "15 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Cable Pull Down", R.drawable.workout_benchpress, "12 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Seated Cable Rows", R.drawable.workout_benchpress, "10 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Chin Ups", R.drawable.chin_ups, "15 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Incline Sit-Ups", R.drawable.workout_benchpress, "10 Reps", "4 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Leg Curl", R.drawable.workout_benchpress, "10 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #3", "Treadmill Running", R.drawable.workout_benchpress, "20-30 minutes", ""));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #3", "Dumbbell Curls", R.drawable.workout_benchpress, "8 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #3", "Hammer Curls", R.drawable.workout_benchpress, "8 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #3", "Body Squats", R.drawable.workout_benchpress, "10 Reps", "5 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #3", "Weighted Dips", R.drawable.workout_benchpress, "10 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Incline Bench Press", R.drawable.workout_benchpress, "12 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Narrow Grip Bench Press", R.drawable.workout_benchpress, "15 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Bar Squats", R.drawable.workout_benchpress, "10 Reps", "5 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Cable Row", R.drawable.workout_benchpress, "10 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Dumbbell Bench Press", R.drawable.workout_benchpress, "10-12 Reps", "3 Sets"));//Gif
-            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Barbell Curls", R.drawable.workout_benchpress, "8-10 Reps", "4 Sets"));//Gif
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Incline Dumbbell Press", R.drawable.incline_benchpress, "12 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Narrow Grip Bench Press", R.drawable.closegrip_bench, "15 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Seated Chest Fly", R.drawable.chest_fly, "10 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Cable Fly (high pulley)", R.drawable.cable_fly_hi, "10 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #1", "Calf Raises", R.drawable.calf_raises, "10 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Wide Grip Pullups", R.drawable.pullup, "15 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Lat Pull Down", R.drawable.workout_latpulldown, "12 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Seated Cable Rows", R.drawable.cable_rows, "10 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Chin Ups", R.drawable.chin_ups, "15 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Sit-Ups", R.drawable.workout_situps, "10 Reps", "4 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Leg Raises", R.drawable.leg_raises, "12 Reps", "4 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #2", "Leg Curl", R.drawable.leg_curls, "10 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #3", "Treadmill Running", R.drawable.running_gif, "20-30 minutes", ""));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #3", "Barbell Curls", R.drawable.workout_barbellcurls, "8 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #3", "Hammer Curls", R.drawable.hammer_curl, "8 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #3", "Goblet Squats", R.drawable.goblet_squats, "10 Reps", "5 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #3", "Decline Pushups", R.drawable.decline_pushups, "10 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Incline Bench Press", R.drawable.incline_benchpress, "12 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Narrow Grip Bench Press", R.drawable.closegrip_bench, "15 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Decline Bench Press", R.drawable.decline_benchpress, "10-12 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Bar Squats", R.drawable.workout_squat, "10 Reps", "5 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Seated Cable Row", R.drawable.cable_rows, "10 Reps", "3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Barbell Push-Press", R.drawable.barbell_pushpress, "6-8 Reps", "2-3 Sets"));
+            jimmyButlerWorkouts.add(new AthleteWorkouts("Day #4", "Barbell Curls", R.drawable.barbell_pushpress, "8-10 Reps", "4 Sets"));
 
-            antonioBrownWorkouts.add(new AthleteWorkouts("Cardio","Run",R.drawable.wide_benchpress,"5 Miles","* 3 Days/Week"));
-            antonioBrownWorkouts.add(new AthleteWorkouts("Cardio","Swim",R.drawable.wide_benchpress,"Hold Breath For Lung Strength","1-2 days/week (when not running)"));
-            antonioBrownWorkouts.add(new AthleteWorkouts("Abs","Ab Exersises",R.drawable.workout_situps,"1000 per day","(v-ups, crunches, leg raises, etc.)"));
-            antonioBrownWorkouts.add(new AthleteWorkouts("Shoulders","Lateral Raises",R.drawable.wide_benchpress,"5 Reps","3 Sets"));
-            antonioBrownWorkouts.add(new AthleteWorkouts("Shoulders","Y-Raises",R.drawable.wide_benchpress,"5 Reps","3 Sets"));
-            antonioBrownWorkouts.add(new AthleteWorkouts("Shoulders","T-Raises",R.drawable.wide_benchpress,"5 Reps","3 Sets"));
-            antonioBrownWorkouts.add(new AthleteWorkouts("Lower Body","Box Squats",R.drawable.wide_benchpress,"20 Reps","2-3 Sets"));
-            antonioBrownWorkouts.add(new AthleteWorkouts("Lower Body","Barbell Lunges",R.drawable.wide_benchpress,"20 Reps","2-3 Sets"));
-            antonioBrownWorkouts.add(new AthleteWorkouts("Lower Body","Lateral Step-ups",R.drawable.wide_benchpress,"20 Reps","2-3 Sets"));
+            antonioBrownWorkouts.add(new AthleteWorkouts("Cardio","Run",R.drawable.workout_run,"5 Miles","* 3 Days/Week"));
+            antonioBrownWorkouts.add(new AthleteWorkouts("Cardio","Swim",R.drawable.swim,"Hold Breath For Lung Strength","1-2 days/week (when not running)"));
+            antonioBrownWorkouts.add(new AthleteWorkouts("Abs","Ab Exercises",R.drawable.workout_situps,"1000 per day","(v-ups, crunches, leg raises, etc.)"));
+            antonioBrownWorkouts.add(new AthleteWorkouts("Shoulders","Lateral Raises",R.drawable.lateral_raises,"5 Reps","3 Sets"));
+            antonioBrownWorkouts.add(new AthleteWorkouts("Shoulders","Y-Raises",R.drawable.y_rasies,"5 Reps","3 Sets"));
+            antonioBrownWorkouts.add(new AthleteWorkouts("Shoulders","T-Raises",R.drawable.t_rasies,"5 Reps","3 Sets"));
+            antonioBrownWorkouts.add(new AthleteWorkouts("Lower Body","Goblet Squats",R.drawable.goblet_squats,"20 Reps","2-3 Sets"));
+            antonioBrownWorkouts.add(new AthleteWorkouts("Lower Body","Dumbbell Lunges",R.drawable.lunges,"20 Reps","2-3 Sets"));
+            antonioBrownWorkouts.add(new AthleteWorkouts("Lower Body","Lateral Step-ups",R.drawable.dumbell_stepups,"20 Reps","2-3 Sets"));
 
-            jjWattWorkouts.add(new AthleteWorkouts("Lower Body", "Romanian Deadlift", R.drawable.workout_benchpress, "6 Reps", "5 Sets"));//Gif
-            jjWattWorkouts.add(new AthleteWorkouts("Lower Body", "Dumbbell Lunge", R.drawable.workout_benchpress, "12 Reps", "3 Sets"));//Gif
-            jjWattWorkouts.add(new AthleteWorkouts("Lower Body", "Weighted Planks", R.drawable.workout_benchpress, "45 seconds", "3 Sets"));//Gif
-            jjWattWorkouts.add(new AthleteWorkouts("Lower Body", "Box Squats", R.drawable.workout_benchpress, "3 Reps", "6 Sets"));//Gif
-            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Incline Bench Press", R.drawable.workout_benchpress, "10,5,3,5 Reps", "4 Sets (Super)"));//Gif
-            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Dumbbell Floor Press", R.drawable.workout_benchpress, "8 Reps", "8 Sets"));//Gif
-            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Y-bar Rows", R.drawable.workout_benchpress, "12 Reps", "3 Sets"));//Gif
-            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "T-bar Rows", R.drawable.workout_benchpress, "12 Reps", "3 Sets"));//Gif
-            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Lat Pulldown", R.drawable.workout_benchpress, "10 Reps", "3 Sets (Super)"));//Gif
-            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Fat-bar Pull-up", R.drawable.workout_benchpress, "10 Reps", "3 Sets"));//Gif
-            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Shoulder Pack Roll", R.drawable.workout_benchpress, "10 Reps", "2 Sets"));//Gif
+            jjWattWorkouts.add(new AthleteWorkouts("Lower Body", "Romanian Deadlift", R.drawable.romanian_deadlift, "6 Reps", "3 Sets"));
+            jjWattWorkouts.add(new AthleteWorkouts("Lower Body", "Deadlifts", R.drawable.deadlift, "6 Reps", "3 Sets"));
+            jjWattWorkouts.add(new AthleteWorkouts("Lower Body", "Dumbbell Lunge", R.drawable.lunges, "12 Reps", "3 Sets"));
+            jjWattWorkouts.add(new AthleteWorkouts("Lower Body", "Weighted Planks", R.drawable.plank, "45 seconds", "3 Sets"));
+            jjWattWorkouts.add(new AthleteWorkouts("Lower Body", "Goblet Squats", R.drawable.goblet_squats, "3 Reps", "6 Sets"));
+            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Incline Bench Press", R.drawable.incline_benchpress, "10,5,3,5 Reps", "4 Sets (Super)"));
+            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Decline Bench Press", R.drawable.decline_benchpress, "10,5,3,5 Reps", "4 Sets (Super)"));
+            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Decline Push-Ups", R.drawable.decline_pushups, "8 Reps", "6 Sets"));
+            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Barbell Rows", R.drawable.barbell_row, "12 Reps", "3 Sets"));
+            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Spartacus Rows", R.drawable.spartacus_row, "12 Reps", "3 Sets"));
+            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Lat Pulldown", R.drawable.workout_latpulldown, "10 Reps", "3 Sets (Super)"));
+            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Fat-bar Pull-up", R.drawable.pullup, "10 Reps", "3 Sets"));
+            jjWattWorkouts.add(new AthleteWorkouts("Upper Body", "Ab Rollout", R.drawable.ab_rollouts, "10 Reps", "4 Sets"));
 
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Incline Bench Press", R.drawable.workout_benchpress, "6,8 Reps", "2 Sets (Reverse Pyramid)"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Flat Bench Press", R.drawable.workout_benchpress, "6,8 Reps", "2 Sets (Reverse Pyramid)"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Incline Dumbbell Curls", R.drawable.workout_benchpress, "5,8,10 Reps", "3 Sets (Reverse Pyramid)"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Cable Rope Pushdowns", R.drawable.workout_benchpress, "6,10,12 Reps", "3 Sets (Reverse Pyramid)"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Wide-Grip Rows", R.drawable.workout_benchpress, "12,10,8,6 Reps", "4 Sets (Standard Pyramid)"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Face Pulls", R.drawable.workout_benchpress, "12-15,5,5,5 Reps", "4 Sets (Standard Pyramid)"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Split Squats", R.drawable.workout_benchpress, "6,8,10 Reps", "3 Sets (Reverse Pyramid)"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Romainian Deadlifts", R.drawable.workout_benchpress, "6,8,10 Reps", "3 Sets (Reverse Pyramid)"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Leg Extensions", R.drawable.workout_benchpress, "6,8,10 Reps", "3 Sets (Reverse Pyramid)"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Calf Raises", R.drawable.workout_benchpress, "10-15 Reps", "3 Sets"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Hanging Leg Raises", R.drawable.workout_benchpress, "15 Reps", "3 Sets"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Ab Wheel Rollouts", R.drawable.workout_benchpress, "15 Reps", "3 Sets"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Shoulder/Back", "Standing Weight Press", R.drawable.workout_benchpress, "6,8,10 Reps", "3 Sets"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Shoulder/Back", "Weighted Pullups", R.drawable.workout_benchpress, "6,8,10 Reps", "3 Sets"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Shoulder/Back", "Weighted Dips", R.drawable.workout_benchpress, "8,10 Reps", "2 Sets"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Shoulder/Back", "Cable Rows", R.drawable.workout_benchpress, "8,10 Reps", "2 Sets"));//Gif
-            dkMetcalfWorkouts.add(new AthleteWorkouts("Shoulder/Back", "Lateral Raises", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Incline Bench Press", R.drawable.incline_benchpress, "6,8 Reps", "2 Sets (Reverse Pyramid)"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Flat Bench Press", R.drawable.workout_benchpress, "6,8 Reps", "2 Sets (Reverse Pyramid)"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Barbell Curls", R.drawable.workout_barbellcurls, "5,8,10 Reps", "3 Sets (Reverse Pyramid)"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Tricep Cable Pushdowns", R.drawable.tricep_pushdowns, "6,10,12 Reps", "3 Sets (Reverse Pyramid)"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Wide-Grip Barbell Rows", R.drawable.barbell_row, "12,10,8,6 Reps", "4 Sets (Standard Pyramid)"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Chest", "Band/Cable Face Pulls", R.drawable.face_pull, "12-15,5,5,5 Reps", "4 Sets (Standard Pyramid)"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Bar Squats", R.drawable.workout_squat, "6,8,10 Reps", "3 Sets (Reverse Pyramid)"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Romainian Deadlifts", R.drawable.romanian_deadlift, "6,8,10 Reps", "3 Sets (Reverse Pyramid)"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Leg Curls", R.drawable.leg_curls, "6,8,10 Reps", "3 Sets (Reverse Pyramid)"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Calf Raises", R.drawable.calf_raises, "10-15 Reps", "3 Sets"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Hanging Leg Raises", R.drawable.hanging_leg_raises, "15 Reps", "3 Sets"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Lower Body + Abs", "Ab Wheel Rollouts", R.drawable.ab_rollouts, "15 Reps", "3 Sets"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Shoulder/Back", "Standing Weight Press", R.drawable.barbell_pushpress, "6,8,10 Reps", "3 Sets"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Shoulder/Back", "Weighted Pullups", R.drawable.pullup, "6,8,10 Reps", "3 Sets"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Shoulder/Back", "Weighted Dips", R.drawable.bench_dips, "8,10 Reps", "2 Sets"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Shoulder/Back", "Cable Rows", R.drawable.cable_rows, "8,10 Reps", "2 Sets"));
+            dkMetcalfWorkouts.add(new AthleteWorkouts("Shoulder/Back", "Lateral Raises", R.drawable.lateral_raises, "15,5,5,8 Reps", "4 Sets"));
 
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Bench Press", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Deadlift", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Bulgarian Single Leg Squat", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Romanian Deadlift", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Russian Twists", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Plyo Push-Ups", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Medicine Ball Sit-Ups", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Medicine Ball Sit-Ups", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Medicine Ball Sit-Ups", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Medicine Ball Sit-Ups", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Medicine Ball Sit-Ups", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Medicine Ball Sit-Ups", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Medicine Ball Sit-Ups", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
-            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Medicine Ball Sit-Ups", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));//Gif
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Bench Press", R.drawable.workout_benchpress, "15,5,5,8 Reps", "4 Sets"));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Deadlift", R.drawable.deadlift, "15,5,5,8 Reps", "4 Sets"));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Goblet Squats", R.drawable.goblet_squats, "15,5,5,8 Reps", "4 Sets"));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Romanian Deadlift", R.drawable.romanian_deadlift, "15,5,5,8 Reps", "4 Sets"));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Russian Twists", R.drawable.workout_russiantwist, "15,5,5,8 Reps", "4 Sets"));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Decline Push-Ups", R.drawable.decline_pushups, "15,5,5,8 Reps", "4 Sets"));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Strength", "Hanging Leg Raises", R.drawable.hanging_leg_raises, "15,5,5,8 Reps", "4 Sets"));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Ab Rollouts", R.drawable.ab_rollouts, "8 Reps", "3 Sets"));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Leg Stretch #1", R.drawable.leg_stretch_1, "30s", ""));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Leg Stretch #2", R.drawable.leg_stretch_2, "30s", ""));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Leg Stretch #3", R.drawable.leg_stretch_3, "30s", ""));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Shoulder Stretch", R.drawable.shoulder_stretch, "30s", ""));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Box Jumps", R.drawable.workout_boxjump, "8", "4 Sets"));
+            julianEdelmanWorkouts.add(new AthleteWorkouts("Conditioning", "Jump Rope", R.drawable.jump_rope, "10 min (1-on, 1-off)", ""));
 
         //Diets
             allAthleteDiets.clear();

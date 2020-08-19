@@ -73,7 +73,6 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
 
     @Override
     public void onBindViewHolder(@NonNull final SliderViewHolder holder, final int position) {
-        System.out.println("Position = " + position);
         holder.startButton.setTag(position);
         holder.setImage(sliderItems.get(position));
         holder.setLockedImage(sliderItems.get(position));
@@ -216,7 +215,7 @@ public class _3_SliderAdapter extends RecyclerView.Adapter<_3_SliderAdapter.Slid
         return sliderItems.size();
     }
 
-    public class SliderViewHolder extends RecyclerView.ViewHolder{
+    class SliderViewHolder extends RecyclerView.ViewHolder{
 
         private RoundedImageView imageView;
         private TextView textViewHeader;

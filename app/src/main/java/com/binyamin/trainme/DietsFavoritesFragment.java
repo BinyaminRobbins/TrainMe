@@ -33,7 +33,7 @@ public class DietsFavoritesFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static void updateList(Context context){
+    static void updateList(Context context){
         LinearLayoutManager manager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
         rv.setLayoutManager(manager);
 
@@ -68,7 +68,4 @@ public class DietsFavoritesFragment extends Fragment {
         rv = v.findViewById(R.id.diets_favorites_rv);
         return  v;
     }
-
-
-
 }

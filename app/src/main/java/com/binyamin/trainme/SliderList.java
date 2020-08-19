@@ -35,7 +35,7 @@ public class SliderList {
         database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + dkmetcalfLocation + "','"+dkmetcalfFavoritesLocation+"','DK Metcalf','true', 'false','https://www.health-yogi.com/dk-metcalf/',6)");
         database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + jamesHarrisonLocation + "','"+jamesHarrisonFavoriteLocation+"','James Harrison','true', 'false','https://www.borntoworkout.com/james-harrison-workout-routine-diet-plan-body-statistics/',7)");
         database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + jjwattLocation + "','"+jjwattFavoritesLocation+"','J.J. Watt','true', 'false','https://fitnessclone.com/jj-watt/',8)");
-        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + julianEdelmanLocation + "','"+julianEdelmanFavoritesLocation+"','Julian Edelman','true', 'false','https://www.health-yogi.com/dk-metcalf/',9)");
+        database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + julianEdelmanLocation + "','"+julianEdelmanFavoritesLocation+"','Julian Edelman','true', 'false','https://s3.amazonaws.com/coachup_s3storage_production/app/public/landing_pages/downloads/Julian_Edelman_Receiver_Workout.pdf',9)");
 
         //Soccer
         database.execSQL("INSERT INTO workouts (image,favoritesImage, athleteName, requiresPremium, isFavorite, link, tagNum) VALUES ('" + ronaldoLocation + "','"+ronaldoFavoriteLocation+"','Cristiano Ronaldo','true', 'false','https://manofmany.com/lifestyle/fitness/cristiano-ronaldos-football-diet-workout-plan',10)");
@@ -124,6 +124,7 @@ public class SliderList {
 
                 c.moveToNext();
             }
+            c.close();
         return workoutItems;
     }
     ArrayList<_3_SliderItem> getDietList(){
@@ -131,6 +132,7 @@ public class SliderList {
         ArrayList<_3_SliderItem> dietItems = new ArrayList<>();
         dietItems.clear();
             Cursor c = getDB().rawQuery("SELECT * FROM diets",null);
+
 
             int imageIndex = c.getColumnIndex("image");
             int favoritesImageIndex = c.getColumnIndex("favoritesImage");
@@ -146,6 +148,7 @@ public class SliderList {
                 dietItems.add(item);
                 c.moveToNext();
             }
+        c.close();
         return dietItems;
     }
 }
